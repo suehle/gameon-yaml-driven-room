@@ -1,0 +1,207 @@
+##Built in vars. 
+## {id} unique id for user that executed a command (eg, twitter:5849640)
+## {name} the character name chosen by the player executing the command (eg, Fred)
+## {arg} the argument(s) to a command, 
+## eg /use fish, {arg}==fish, /use fish with donut {arg}==with donut (or {arg}==donut if we auto trim link words)
+## (autotrimming link words would collapse /use flashlight with floor to just /use flashlight floor before processing..) TODO!!
+
+## all input, including args is dropped to lower case before processing.
+
+## Command:
+## name: commandname
+## aliases: (list of alternate names for the command (eg get & take))
+##  - examplealias
+## actions: (list of <Action>)
+##  - <Action> 
+## for zero args, use an action with condition {arg}=""
+## to match an arg, use an action with condition {arg}="myvalue"
+## to match all args not covered by other Actions,..   condition: unmatched
+
+## Action:
+## condition: (optional) a <Condition> that must be true for this action to be considered
+## do: (optional) a list of <Instruction>s that will be executed in order.
+##  - <Instruction>
+## user: (optional, but strongly recommended) text to send to the user that initiated the command.
+## room: (optional) text to send to the room
+
+## Instruction: can have multiple defined for a do: block, will be executed in order.
+## - set StateReference=value
+## - teleportAll
+
+## StateReference .. a reference to a state value, eg, room.statefieldname  or items.itemname.statefieldname
+
+## Condition:
+##   can refer to any {var}s (eg {id}) and to StateReferences (eg room.statefieldname or items.itemname.statefieldname)
+##   operators supported
+##     == true if operands are equal
+##     != true if operands are not equal
+##     unmatched (not strictly an operator as it has 0 operands) .. will be true if an arugment is present AND no other Actions matched.
+##   comparisons can be logically joined with && (and), || (or) .. unless i discover those chars are forbidden in yaml in a bit ;) 
+##   numerical comparisons of > < >= <= may also be supported, if so, I'll add do: actions of `inc` and `dec` too.. TODO!!
+
+
+## Item:
+## name: name of the item, one word, no spaces!! (so much easier)
+## state: associative array of state variable : inital value.
+## commands: list of <Command> for item.
+
+## Room:
+## name: room name in regular english
+## id: uniqueroomid
+## state: associative array of state variable : inital value.
+## commands: list of <Command> for the room (if needed to override behavior from global). 
+## items: list of <Item> for the room
+
+## Overall doc.. 
+## vars: custom define vars for replacement within text.
+## commands: provide defaults for commands globally.
+## rooms: list of <Room>
+
+
+vars:
+  - schoolname: St Miriams Finishing School for Girls.
+commands:
+   - name: get
+     aliases:
+        - take
+        - pickup
+     - condition: {arg}=""
+       user: I don't know what you are trying to get, try /get name-of-item
+     - condition: unmmatched
+       user: I don't know how to get {arg}
+   - name: drop
+     - condition: {arg}=""
+       user: I don't know what you are trying to drop, try /drop name-of-item
+     - condition: unmmatched
+       user: I don't know how to drop {arg}         
+   - name: use
+     - condition: {arg}=""
+       user: I don't know what you are trying to use, try /use name-of-item
+     - condition: unmmatched
+       user: I don't know how to use {arg} 
+   - name: kick
+     - condition: {arg}=""
+       user: I don't know what you are trying to kick, try /kick name-of-item
+     - condition: unmmatched
+       user: Why would you want to kick {arg}???
+
+     
+rooms:
+    - name: Entry Room
+      id: entryroom
+      commands:
+       - name: opensesame
+         
+      state:
+        lightOn: false
+      commands:
+        - name: go
+          - condition: {arg}=="north" || {arg}=="n"
+            user: The door is locked. You can unlock it only by working together.
+            room: {name} attempted to go north, but was thwarted by the big locked door.
+          - condition: {arg}=="east" || {arg}=="e"
+              user: There’s a wall there. Nowhere to go.
+          - condition: {arg}=="west" || {arg}=="w"
+              user: There’s a wall there. Nowhere to go
+          - condition: {arg}=="south" || {arg}=="s"
+              user: The way you entered is still locked behind you. Doors rarely magically unlock themselves. Today will be no different.
+        - name: examine
+          aliases:
+            - look
+          - condition: room.state.lightOn==false
+            user: It is really dark down here. You know there’s a wall behind you because you just came through the door.
+          - condition: room.state.lightOn==false
+            user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
+          - condition: room.state.lightOn=true
+            user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it. 
+            
+      items:      
+         - name: flashlight
+           state:
+              - hidden: true
+              - isOn: false
+              - heldBy: nobody
+           commands:
+             - name: examine
+               - condition: items.flashlight.isOn==false
+                 user: An old dusty flashlight, it appears to be switched off.
+                 room: {name} examines the flashlight.
+               - condition: items.flashlight.isOn==true
+                 user: An old dusty flashlight, it appears to be switched on.
+                 room: {name} examines the flashlight.             
+              - name: get
+                - condition: items.flashlight.heldBy==nobody
+                  do: 
+                   - set items.flashlight.heldBy={id}
+                  user: You pick up the flashlight.
+                  room: {name} picks up the flashlight.
+              - name: drop
+                - condition: items.flashlight.heldBy=={id}
+                  do: 
+                  - set items.flashlight.heldBy=nobody
+                  user: You drop the flashlight
+                  room: {name} drops the flashlight
+              - name: use
+                - condition: items.flashlight.heldBy!={id}
+                  user: You can't use that, because you are not holding it, try /get flashlight
+                  room: {name} pokes at the flashlight aimlessly.
+                - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
+                  user: You switch off the flashlight.
+                  room: {name} turns the flashlight off. 
+                - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
+                  user: You switch on the flashlight.
+                  room: {name} turns the flashlight on
+              - name: kick
+                - user: You attempt to kick the flashlight, why would you do that! why!
+                - user: You flail wildly toward the torch wih your foot, and miss.
+              
+         - name: door
+           state:
+              - hidden: true
+           commands:
+             - name: examine
+               - user: You stare intently at the door, it appears to be very, very locked.
+             - name: get
+               - user: The door is firmly fixed in place, you cannot take it.
+             - name: drop
+               - user: Impossible!
+             - name: use
+               - user: You attempt to open the door, it is very very locked. It stays shut.
+             - name: kick
+               - user: That was unpleasant. For you. The door does not care. 
+               - user: Don’t break a toe. You could be down here a while. The door still does not care. 
+               - user: This will clearly not be successful. You should stop kicking the door.
+              
+         - name: switch
+           state:
+              - hidden: true
+           commands:
+             - name: examine
+               - user: It appears to be a regular light switch.
+             - name: get
+               - user: The switch is part of the wall, there is no way to take it
+             - name: drop
+               - user: You cannot drop something you do not have!
+             - name: use
+               - condition: room.lightOn=false
+                 do:
+                   - set room.lightOn=true
+                   - set items.flashlight.hidden=false
+                   - set items.door.hidden=false
+                   - set items.switch.hidden=false
+                 user: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. 
+                 room: It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.
+               - condition: room.lightOn=true
+                 user: You consider turning the light back off, but it doesn't feel like a great idea, you decide to leave it on. 
+             - name: kick
+               - user: You prepare a violent kick aimed at the lightswitch, before considering that kicking a lightswitch in a dusty basement, might end badly. You stand down.
+              
+         - name: wall
+           state:
+              - hidden: false
+           commands:
+             -name: examine
+              - do:
+                  - items.switch.hidden=false
+                user: It’s a standard cinder block school basement wall. Near the door is a smoother plate… with a switch in the middle.
+    
