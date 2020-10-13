@@ -59,7 +59,21 @@
 
 
 vars:
-  - schoolname: St Miriams Finishing School for Girls.
+  - schoolname: St Miriam's Finishing School for Girls.
+  - friendname: Gabriella
+  - subject: science
+  - townname: Shadyville
+  - adultname: Ruth
+  - child-first-name: Hannah
+  - describe-walls: Every room has the same cold cinder block walls. 
+  - flashlight-color: blue
+  - walkie-talkie: The walkie talkie is a big, black brick with an obvious speaker on the front and a simple on/off switch on top. 
+  - wall-things: Someone has scrawled "Mr. Jones is the best math teacher ever!" What a kind graffiti artist.
+  - wall-things2: There's a world map poster that has the USSR, and half of the African continent just says "French West Africa." Your realize your school might have been around longer than you thought.
+  - floor: How is there sticky bubblegum on the floor when it doesn't seem like anyone's been down here in centuries?
+  - hospital-name: Tuomey Regional Hospital
+  - basketballs: A rusty silver rack holds half a dozen basketballs, none of which will bounce. One is just a flat orange pancake.
+  - spider: A tiny spiny orb weaver is chilling out in his web. What a great place for a spider to live undisturbed.
 commands:
    - name: get
      aliases:
