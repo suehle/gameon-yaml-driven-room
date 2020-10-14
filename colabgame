@@ -1,0 +1,422 @@
+vars:
+-  schoolname: St Miriams Finishing School for Girls.
+commands:
+-  name: get
+   aliases:
+   - take
+   - pickup
+   actions:
+   -  condition: '{arg}==""'
+      user: I don't know what you are trying to get, try /get name-of-item
+   -  condition: unmmatched
+      user: I don't know how to get {arg}
+-  name: drop
+   actions:
+   -  condition: '{arg}=""'
+      user: I don't know what you are trying to drop, try /drop name-of-item
+   -  condition: unmmatched
+      user: I don't know how to drop {arg}
+-  name: use
+   actions:
+   -  condition: '{arg}=""'
+      user: I don't know what you are trying to use, try /use name-of-item
+   -  condition: unmmatched
+      user: I don't know how to use {arg}
+-  name: kick
+   actions:
+   -  condition: '{arg}=""'
+      user: I don't know what you are trying to kick, try /kick name-of-item
+   -  condition: unmmatched
+      user: Why would you want to kick {arg}???
+rooms:
+-  name: Entry Room
+   id: entryroom
+   state:
+      lightOn: false
+   commands:
+   -  name: go
+      actions:
+      -  condition: '{arg}=="north" || {arg}=="n"'
+         user: The door is locked. You can unlock it only by working together.
+         room: '{name} attempted to go north, but was thwarted by the big locked door.'
+      -  condition: '{arg}=="east" || {arg}=="e"'
+         user: There’s a wall there. Nowhere to go.
+      -  condition: '{arg}=="west" || {arg}=="w"'
+         user: There’s a wall there. Nowhere to go
+      -  condition: '{arg}=="south" || {arg}=="s"'
+         user: The way you entered is still locked behind you. Doors rarely magically unlock themselves. Today will be no
+            different.
+   -  name: examine
+      aliases:
+      - look
+      actions:
+      -  condition: room.state.lightOn==false
+         user: It is really dark down here. You know there’s a wall behind you because you just came through the door.
+      -  condition: room.state.lightOn==false
+         user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
+      -  condition: room.state.lightOn=true
+         user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long
+            it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+   items:
+   -  name: flashlight
+      state:
+      -  hidden: true
+      -  isOn: false
+      -  heldBy: nobody
+      commands:
+      -  name: examine
+         actions:
+         -  condition: items.flashlight.isOn==false
+            user: An old dusty flashlight, it appears to be switched off.
+            room: '{name} examines the flashlight.'
+         -  condition: items.flashlight.isOn==true
+            user: An old dusty flashlight, it appears to be switched on.
+            room: '{name} examines the flashlight.'
+      -  name: get
+         actions:
+         -  condition: items.flashlight.heldBy==nobody
+            do:
+            - set items.flashlight.heldBy={id}
+            user: You pick up the flashlight.
+            room: '{name} picks up the flashlight.'
+      -  name: drop
+         actions:
+         -  condition: items.flashlight.heldBy=={id}
+            do:
+            - set items.flashlight.heldBy=nobody
+            user: You drop the flashlight
+            room: '{name} drops the flashlight'
+      -  name: use
+         actions:
+         -  condition: items.flashlight.heldBy!={id}
+            user: You can't use that, because you are not holding it, try /get flashlight
+            room: '{name} pokes at the flashlight aimlessly.'
+         -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
+            user: You switch off the flashlight.
+            room: '{name} turns the flashlight off.'
+         -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
+            user: You switch on the flashlight.
+            room: '{name} turns the flashlight on'
+      -  name: kick
+         actions:
+         -  user: You attempt to kick the flashlight, why would you do that! why!
+         -  user: You flail wildly toward the torch wih your foot, and miss.
+   -  name: door
+      state:
+      -  hidden: true
+      commands:
+      -  name: examine
+         actions:
+         -  user: You stare intently at the door, it appears to be very, very locked.
+      -  name: get
+         actions:
+         -  user: The door is firmly fixed in place, you cannot take it.
+      -  name: drop
+         actions:
+         -  user: Impossible!
+      -  name: use
+         actions:
+         -  user: You attempt to open the door, it is very very locked. It stays shut.
+      -  name: kick
+         actions:
+         -  user: That was unpleasant. For you. The door does not care.
+         -  user: Don’t break a toe. You could be down here a while. The door still does not care.
+         -  user: This will clearly not be successful. You should stop kicking the door.
+   -  name: switch
+      state:
+      -  hidden: true
+      commands:
+      -  name: examine
+         actions:
+         -  user: It appears to be a regular light switch.
+      -  name: get
+         actions:
+         -  user: The switch is part of the wall, there is no way to take it
+      -  name: drop
+         actions:
+         -  user: You cannot drop something you do not have!
+      -  name: use
+         actions:
+         -  condition: room.lightOn=false
+            do:
+            - set room.lightOn=true
+            - set items.flashlight.hidden=false
+            - set items.door.hidden=false
+            - set items.switch.hidden=false
+            user: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness.
+            room: It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is
+               standing by a light switch.
+         -  condition: room.lightOn=true
+            user: You consider turning the light back off, but it doesn't feel like a great idea, you decide to leave it on.
+      -  name: kick
+         actions:
+         -  user: You prepare a violent kick aimed at the lightswitch, before considering that kicking a lightswitch in a
+               dusty basement, might end badly. You stand down.
+   -  name: wall
+      state:
+      -  hidden: false
+      commands:
+      -  name: examine
+         actions:
+         -  do:
+            - items.switch.hidden=false
+            user: It’s a standard cinder block school basement wall. Near the door is a smoother plate… with a switch in the
+               middle.
+               
+##Where do we put these room descriptions to appear when they first whoosh into the room? Or will it be just a room name, and they have to /look?
+##THE BASEMENT CONTINUES
+##
+##
+##More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. 
+##
+##You wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class. 
+
+- name: Morse Code
+  id: morsecode
+      
+  state:
+   lightOn: true
+##I left this here in case it needed to be set regardless of whether there's a light switch in the room. 
+
+
+  commands:
+        - name: go
+          - condition: {arg}=="north" || {arg}=="n"
+            user: The door is locked. You can unlock it only by working together. 
+            room: {name} attempted to go north but was thwarted by the big, locked door.
+          - condition: {arg}=="east" || {arg}=="e"
+              user: Oh, look! A wall! How wonderful.
+          - condition: {arg}=="west" || {arg}=="w"
+              user: Oh, look! A wall! It's not much help.
+          - condition: {arg}=="south" || {arg}=="s"
+              user: Door still locked behind you. They rarely magically unlock themselves. Today will be no different.
+          - condition: {arg}=="northeast" || {arg}=="ne"
+              user: There is a walkie talkie on the floor in the corner. 
+          - condition: {arg}=="northwest" || {arg}=="nw"
+              user: There is a scrap of paper on the floor.
+          - condition: {arg}=="southeast" || {arg}=="se"
+              user: There is a scrap of paper on the floor.              
+          - condition: {arg}=="southwest" || {arg}=="sw"
+              user: There are two scraps of paper on the floor.              
+              
+        - name: examine
+          aliases:
+            - look
+          - condition: room.state.lightOn=true
+          user: There is a walkie talkie in the northeast corner. How long must that have been here?
+          - condition: room.state.lightOn=true
+          user: You notice several scraps of paper on the floor in the corners of the room. 
+##I think we need to tie some direction here, but right now they're just named scrap1 scrap2 etc and don't know where they are.     
+     
+
+
+  items:      
+         - name: walkietalkie
+           state:
+              - hidden: true
+              - isOn: false
+              - heldBy: nobody
+           commands:
+             - name: examine
+               - condition: items.walkietalkie.isOn==false
+                 user: {walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it.  
+                 room: {name} found a walkie talkie on the floor and seems to be staring at it. 
+               - condition: items.walkietalkie.isOn==true
+                 user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺    
+                 room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺  
+             - name: get
+                - condition: items.walkietalkie.heldBy==nobody
+                  do: 
+                   - set items.walkietalkie.heldBy={id}
+                  user: You pick up the walkie talkie. It is not turned on.
+                  room: {name} picked up a walkie talkie.
+             - name: drop
+                - condition: items.walkietalkie.heldBy=={id}
+                  do: 
+                  - set items.walkietalkie.heldBy=nobody
+                  user: You put the walkie talkie on the floor.
+                  room: {name} put the walkie talkie on the floor.
+             - name: use
+                - condition: items.walkietalkie.heldBy!={id}
+                  user: You can't use the walkie talkie, because you're not holding it. Try "/get walkie talkie" first.
+                  room: {name} pokes the walkie talkie, but it doesn't seem to care.
+                - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==false
+                  user: You switch off the walkie talkie. The beeping stops.
+                  room: {name} turns the walkie talklie off. The beeping sounds stop.
+                - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==true
+                  user: You turn the knob on the top of the walkie talkie. The red light illuminates, and the walkie talkie starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
+                  room: {name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
+             - name: kick
+                - user: You attempt to kick the walkie talkie, but it is small, and you miss.
+                 
+         - name: scrap1
+      	   aliases:
+      	     - paper1
+           state:
+              - hidden: false
+              - heldBy: nobody
+           commands:
+             - name: examine
+                 user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
+             - name: get
+                - condition: items.scrap1.heldBy==nobody
+                  do: 
+                   - set items.scrap1.heldBy={id}
+                  user: The paper says "LEGEND" at the top. Under that it says':'
+— ⏺ ⏺ — RUN
+— TUNNEL
+— ⏺ GO
+⏺ — CHALKBOARD
+Then the paper appears to have been ripped at the bottom. 
+             - name: drop
+                - condition: items.scrap1.heldBy=={id}
+                  do: 
+                  - set items.scrap1.heldBy=nobody
+                  user: You drop the scrap of paper.
+             - name: use
+                - condition: items.scrap1.heldBy!={id}
+                  user: You can't use that, because you are not holding it. 
+
+         - name: scrap2
+           aliases:
+      	     - paper2
+           state:
+              - hidden: false
+              - heldBy: nobody
+           commands:
+             - name: examine
+               user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
+             - name: get
+               - condition: items.scrap2.heldBy==nobody
+                 do: 
+                   - set items.scrap2.heldBy={id}
+                 user: The paper seems to have been torn apart on several edges. What you can read says':'
+⏺⏺ — CEILING
+⏺ BASEMENT
+— — ⏺TO
+— ⏺ — ⏺ESCAPE
+             - name: drop
+               - condition: items.scrap2.heldBy=={id}
+                 do: 
+                   - set items.scrap2.heldBy=nobody
+             user: You drop the scrap of paper.
+              - name: use
+                - condition: items.scrap2.heldBy!={id}
+                  user: You can't use that, because you are not holding it. 
+
+         - name: scrap3
+           aliases:
+      	     - paper3
+           state:
+              - hidden: false
+              - heldBy: nobody
+           commands:
+             - name: examine
+                 user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
+              - name: get
+                - condition: items.scrap3.heldBy==nobody
+                  do: 
+                   - set items.scrap3.heldBy={id}
+                  user: The paper says “LEGEND” at the top. Under that it says:
+— ⏺ ⏺ — RUN
+— TUNNEL
+— ⏺ GO
+⏺ — CHALKBOARD
+Then the paper appears to have been ripped at the bottom. 
+              - name: drop
+                - condition: items.scrap3.heldBy=={id}
+                  do: 
+                  - set items.scrap3.heldBy=nobody
+                  user: You drop the scrap of paper.
+              - name: use
+                - condition: items.scrap3.heldBy!={id}
+                  user: You can't use that, because you are not holding it. 
+                  
+         - name: scrap4
+           aliases:
+      	     - paper4
+           state:
+              - hidden: false
+              - heldBy: nobody
+           commands:
+             - name: examine
+                 user: There is a small piece of paper on the floor. If you pick it up, you cThe paper has a smooth bottom edge, but appears to have been torn above that. It says: 
+⏺ ⏺ ⏺ A
+⏺ ⏺ THE
+⏺ ⏺ ⏺ ⏺ FILE CABINET
+— — — — VAULT
+              - name: drop
+                - condition: items.scrap4.heldBy=={id}
+                  do: 
+                  - set items.scrap4.heldBy=nobody
+                  user: You drop the scrap of paper.
+              - name: use
+                - condition: items.scrap4.heldBy!={id}
+                  user: You can't use that, because you are not holding it. 
+                
+
+         - name: door
+           state:
+              - hidden: true
+           commands:
+             - name: examine
+               - user: The door is locked, and the keypad beside it appears to be the way to open it. Its secrets are in this room.
+             - name: get
+               - user: You didn't bring a screwdriver, so that's not going to happen. 
+             - name: drop
+               - user: Drop a door? First you'll have to get it. 
+             - name: use
+               - user: You attempt to open the door, but it is very, very locked. It stays shut.
+             - name: kick
+               - user: That was unpleasant. For you. The door does not care. 
+               - user: Don’t break a toe. You could be down here a while. The door still does not care. 
+               - user: This will clearly not be successful. You should stop kicking the door.         
+               
+          - name: keypad
+           state:
+              - hidden: true
+           commands:
+             - name: examine
+               - user: The keypad beside the door has buttons with what seem to be an assortment of random words':' 
+RUN
+TUNNEL
+GO
+CHALKBOARD
+CEILING
+BASEMENT
+TO
+ESCAPE
+CLASSROOM
+THROUGH
+ROOF
+UNDER
+A
+THE
+FILE CABINET
+VAULT
+             - name: use
+               - user: It looks like it’s expecting a phrase, you should try “/use keypad with the answer”
+##I have no idea how to tell it the correct answer version
+                             
+
+
+
+         - name: wall
+           alias:
+              - walls
+           state:
+              - hidden: true
+           commands:
+             - name: examine
+               - user: You came in this room to the south, but the door slid shut behind you and is now indistinguishable from the wall. You couldn't go back if you wanted to. There is a heavier looking door to the north.
+             - name: get
+               - user: Exactly how do you propose to do that? 
+             - name: drop
+               - user: You can't drop something you don't have, and good luck getting a wall.  
+             - name: use
+               - user: The wall is perfectly content doing its job making one fourth of this room, and it isn't interested in being used for anything else. 
+             - name: kick
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+
+
+
