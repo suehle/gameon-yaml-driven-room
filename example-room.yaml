@@ -67,19 +67,19 @@ commands:
    actions:
    -  condition: '{arg}==""'
       user: I don't know what you are trying to get, try /get name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: I don't know how to get {arg}
 -  name: drop
    actions:
    -  condition: '{arg}==""'
       user: I don't know what you are trying to drop, try /drop name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: I don't know how to drop {arg}
 -  name: use
    actions:
    -  condition: '{arg}==""'
       user: I don't know what you are trying to use, try /use name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: I don't know how to use {arg}
 -  name: kick
    actions:
@@ -87,6 +87,12 @@ commands:
       user: I don't know what you are trying to kick, try /kick name-of-item
    -  condition: unmmatched
       user: Why would you want to kick {arg}???
+-  name: go
+   actions:
+   -  condition: '{arg}==""'
+      user: I don't know where you are trying to go, try /go direction
+   -  condition: unmatched
+      user: I really don't see how I can /go {arg}!!
 rooms:
 -  name: Entry Room
    id: entryroom
