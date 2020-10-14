@@ -85,7 +85,7 @@ commands:
    actions:
    -  condition: '{arg}==""'
       user: I don't know what you are trying to kick, try /kick name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: Why would you want to kick {arg}???
 -  name: go
    actions:
