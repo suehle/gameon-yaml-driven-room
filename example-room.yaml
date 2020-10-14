@@ -57,21 +57,8 @@
 ## commands: provide defaults for commands globally.
 ## rooms: list of <Room>
 vars:
-  - schoolname: St Miriam's Finishing School for Girls.
-  - friendname: Gabriella
-  - subject: science
-  - townname: Shadyville
-  - adultname: Ruth
-  - child-first-name: Hannah
-  - describe-walls: Every room has the same cold cinder block walls. 
-  - flashlight-color: blue
-  - walkie-talkie: The walkie talkie is a big, black brick with an obvious speaker on the front and a simple on/off switch on top. 
-  - wall-things: Someone has scrawled "Mr. Jones is the best math teacher ever!" What a kind graffiti artist.
-  - wall-things2: There's a world map poster that has the USSR, and half of the African continent just says "French West Africa." Your realize your school might have been around longer than you thought.
-  - floor: How is there sticky bubblegum on the floor when it doesn't seem like anyone's been down here in centuries?
-  - hospital-name: Tuomey Regional Hospital
-  - basketballs: A rusty silver rack holds half a dozen basketballs, none of which will bounce. One is just a flat orange pancake.
-  - spider: A tiny spiny orb weaver is chilling out in his web. What a great place for a spider to live undisturbed.
+  schoolname: St Miriams Finishing School for Girls.
+  test: fish
 commands:
 -  name: get
    aliases:
@@ -84,19 +71,19 @@ commands:
       user: I don't know how to get {arg}
 -  name: drop
    actions:
-   -  condition: '{arg}=""'
+   -  condition: '{arg}==""'
       user: I don't know what you are trying to drop, try /drop name-of-item
    -  condition: unmmatched
       user: I don't know how to drop {arg}
 -  name: use
    actions:
-   -  condition: '{arg}=""'
+   -  condition: '{arg}==""'
       user: I don't know what you are trying to use, try /use name-of-item
    -  condition: unmmatched
       user: I don't know how to use {arg}
 -  name: kick
    actions:
-   -  condition: '{arg}=""'
+   -  condition: '{arg}==""'
       user: I don't know what you are trying to kick, try /kick name-of-item
    -  condition: unmmatched
       user: Why would you want to kick {arg}???
@@ -126,15 +113,15 @@ rooms:
          user: It is really dark down here. You know there’s a wall behind you because you just came through the door.
       -  condition: room.state.lightOn==false
          user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
-      -  condition: room.state.lightOn=true
+      -  condition: room.state.lightOn==true
          user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long
             it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
    items:
    -  name: flashlight
       state:
-      -  hidden: true
-      -  isOn: false
-      -  heldBy: nobody
+         hidden: true
+         isOn: false
+         heldBy: nobody
       commands:
       -  name: examine
          actions:
@@ -175,7 +162,7 @@ rooms:
          -  user: You flail wildly toward the torch wih your foot, and miss.
    -  name: door
       state:
-      -  hidden: true
+         hidden: true
       commands:
       -  name: examine
          actions:
@@ -196,7 +183,7 @@ rooms:
          -  user: This will clearly not be successful. You should stop kicking the door.
    -  name: switch
       state:
-      -  hidden: true
+         hidden: true
       commands:
       -  name: examine
          actions:
@@ -209,28 +196,29 @@ rooms:
          -  user: You cannot drop something you do not have!
       -  name: use
          actions:
-         -  condition: room.lightOn=false
+         -  condition: room.state.lightOn==false
             do:
-            - set room.lightOn=true
+            - set room.state.lightOn=true
             - set items.flashlight.hidden=false
             - set items.door.hidden=false
             - set items.switch.hidden=false
             user: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness.
             room: It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is
                standing by a light switch.
-         -  condition: room.lightOn=true
+         -  condition: room.state.lightOn==true
             user: You consider turning the light back off, but it doesn't feel like a great idea, you decide to leave it on.
       -  name: kick
          actions:
          -  user: You prepare a violent kick aimed at the lightswitch, before considering that kicking a lightswitch in a
                dusty basement, might end badly. You stand down.
-   -  name: wall
+   -  name: north wall
       state:
-      -  hidden: false
+         hidden: false
       commands:
       -  name: examine
          actions:
          -  do:
-            - items.switch.hidden=false
+            - set items.switch.hidden=false
             user: It’s a standard cinder block school basement wall. Near the door is a smoother plate… with a switch in the
                middle.
+            room: '{name} stares at the north wall'
