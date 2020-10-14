@@ -28,8 +28,9 @@ commands:
       user: I don't know what you are trying to kick, try /kick name-of-item
    -  condition: unmmatched
       user: Why would you want to kick {arg}???
+
 rooms:
--  name: Entry Room
+-  name: IT ALL STARTED WITH A RUMOR.
    id: entryroom
    state:
       lightOn: false
@@ -55,8 +56,12 @@ rooms:
       -  condition: room.state.lightOn==false
          user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
       -  condition: room.state.lightOn=true
-         user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long
-            it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+         user: For your whole life, you’ve heard a story that your school, {schoolname}, had been a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.
+
+You didn’t bring your phones, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. 
+
+
+## Not THIS ROOM ==========================================================
    items:
    -  name: flashlight
       state:
@@ -162,17 +167,11 @@ rooms:
             - items.switch.hidden=false
             user: It’s a standard cinder block school basement wall. Near the door is a smoother plate… with a switch in the
                middle.
-               
-##Where do we put these room descriptions to appear when they first whoosh into the room? Or will it be just a room name, and they have to /look?
-##THE BASEMENT CONTINUES
-##
-##
-##More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. 
-##
-##You wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class. 
-
-- name: Morse Code
-  id: morsecode
+  
+## OK THINGS ARE REAL AGAIN NOW ===================================================  
+  
+- name: The Basement Continues
+  id: scraps
       
   state:
    lightOn: true
@@ -203,9 +202,13 @@ rooms:
           aliases:
             - look
           - condition: room.state.lightOn=true
-          user: There is a walkie talkie in the northeast corner. How long must that have been here?
+user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. 
+
+You wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class. 
           - condition: room.state.lightOn=true
-          user: You notice several scraps of paper on the floor in the corners of the room. 
+            user: There is a walkie talkie in the northeast corner. How long must that have been here
+          - condition: room.state.lightOn=true
+            user: You notice several scraps of paper on the floor in the corners of the room. 
 ##I think we need to tie some direction here, but right now they're just named scrap1 scrap2 etc and don't know where they are.     
      
 
@@ -249,110 +252,110 @@ rooms:
              - name: kick
                 - user: You attempt to kick the walkie talkie, but it is small, and you miss.
                  
-         - name: scrap1
-      	   aliases:
-      	     - paper1
-           state:
-              - hidden: false
-              - heldBy: nobody
-           commands:
-             - name: examine
-                 user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
-             - name: get
-                - condition: items.scrap1.heldBy==nobody
-                  do: 
-                   - set items.scrap1.heldBy={id}
-                  user: The paper says "LEGEND" at the top. Under that it says':'
+        - name: scrap
+          state:
+            - hidden: false
+            - heldBy: nobody
+          commands:
+           - name: examine
+               user: There is a small SCRAP of paper on the floor. If you pick it up, you can read it.     
+           - name: get
+              - condition: items.scrap.heldBy==nobody
+               do: 
+                - set items.scrap.heldBy={id}
+## do I need to escape colons or any other characters?
+               user: The paper says "LEGEND" at the top. Under that it says':'
 — ⏺ ⏺ — RUN
 — TUNNEL
 — ⏺ GO
 ⏺ — CHALKBOARD
 Then the paper appears to have been ripped at the bottom. 
-             - name: drop
-                - condition: items.scrap1.heldBy=={id}
-                  do: 
-                  - set items.scrap1.heldBy=nobody
-                  user: You drop the scrap of paper.
-             - name: use
-                - condition: items.scrap1.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
+           - name: drop
+              - condition: items.scrap.heldBy=={id}
+               do: 
+               - set items.scrap.heldBy=nobody
+               user: You drop the scrap of paper.
+           - name: use
+              - condition: items.scrap.heldBy!={id}
+               user: You can't use that, because you are not holding it. 
 
-         - name: scrap2
-           aliases:
-      	     - paper2
-           state:
-              - hidden: false
-              - heldBy: nobody
-           commands:
-             - name: examine
-               user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
-             - name: get
-               - condition: items.scrap2.heldBy==nobody
-                 do: 
-                   - set items.scrap2.heldBy={id}
-                 user: The paper seems to have been torn apart on several edges. What you can read says':'
+        - name: paper
+          state:
+            - hidden: false
+            - heldBy: nobody
+          commands:
+           - name: examine
+             user: There is a small piece of PAPER on the floor. If you pick it up, you can read it.     
+           - name: get
+             - condition: items.paper.heldBy==nobody
+               do: 
+                - set items.paper.heldBy={id}
+               user: The paper seems to have been torn apart on several edges. What you can read says':'
 ⏺⏺ — CEILING
 ⏺ BASEMENT
 — — ⏺TO
 — ⏺ — ⏺ESCAPE
-             - name: drop
-               - condition: items.scrap2.heldBy=={id}
-                 do: 
-                   - set items.scrap2.heldBy=nobody
-             user: You drop the scrap of paper.
-              - name: use
-                - condition: items.scrap2.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
+           - name: drop
+             - condition: items.paper.heldBy=={id}
+               do: 
+                - set items.paper.heldBy=nobody
+           user: You drop the paper.
+            - name: use
+              - condition: items.paper.heldBy!={id}
+               user: You can't use that, because you are not holding it. 
 
-         - name: scrap3
-           aliases:
-      	     - paper3
-           state:
-              - hidden: false
-              - heldBy: nobody
-           commands:
-             - name: examine
-                 user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
-              - name: get
-                - condition: items.scrap3.heldBy==nobody
-                  do: 
-                   - set items.scrap3.heldBy={id}
-                  user: The paper says “LEGEND” at the top. Under that it says:
+        - name: slip
+          state:
+            - hidden: false
+            - heldBy: nobody
+          commands:
+           - name: examine
+               user: There is a small SLIP of paper on the floor. If you pick it up, you can read it.     
+            - name: get
+              - condition: items.slip.heldBy==nobody
+               do: 
+                - set items.slip.heldBy={id}
+               user: The paper says “LEGEND” at the top. Under that it says:''
 — ⏺ ⏺ — RUN
 — TUNNEL
 — ⏺ GO
 ⏺ — CHALKBOARD
 Then the paper appears to have been ripped at the bottom. 
-              - name: drop
-                - condition: items.scrap3.heldBy=={id}
-                  do: 
-                  - set items.scrap3.heldBy=nobody
-                  user: You drop the scrap of paper.
-              - name: use
-                - condition: items.scrap3.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
-                  
-         - name: scrap4
-           aliases:
-      	     - paper4
-           state:
-              - hidden: false
-              - heldBy: nobody
-           commands:
-             - name: examine
-                 user: There is a small piece of paper on the floor. If you pick it up, you cThe paper has a smooth bottom edge, but appears to have been torn above that. It says: 
+            - name: drop
+              - condition: items.slip.heldBy=={id}
+               do: 
+               - set items.slip.heldBy=nobody
+               user: You drop the slip of paper.
+            - name: use
+              - condition: items.slip.heldBy!={id}
+               user: You can't use that, because you are not holding it. 
+               
+        - name: note
+          state:
+            - hidden: false
+            - heldBy: nobody
+          commands:
+           - name: examine
+               user: There is a small piece of paper on the floor. If you pick it up, you can read it.
+           - name: get
+              - condition: items.slip.heldBy==nobody
+               do: 
+                - set items.slip.heldBy={id}
+               user:          
+               The paper has a smooth bottom edge, but appears to have been torn above that. It says':' 
 ⏺ ⏺ ⏺ A
 ⏺ ⏺ THE
 ⏺ ⏺ ⏺ ⏺ FILE CABINET
 — — — — VAULT
-              - name: drop
-                - condition: items.scrap4.heldBy=={id}
-                  do: 
-                  - set items.scrap4.heldBy=nobody
-                  user: You drop the scrap of paper.
-              - name: use
-                - condition: items.scrap4.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
+            - name: drop
+              - condition: items.note.heldBy=={id}
+               do: 
+               - set items.note.heldBy=nobody
+               user: You drop the note of paper.
+            - name: use
+              - condition: items.note.heldBy!={id}
+               user: You can't use that, because you are not holding it. 
+              
                 
 
          - name: door
