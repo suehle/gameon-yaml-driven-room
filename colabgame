@@ -1,5 +1,5 @@
 vars:
--  schoolname: St Miriams Finishing School for Girls.
+  schoolname: St Miriams Finishing School for Girls.
 commands:
 -  name: get
    aliases:
@@ -60,9 +60,9 @@ rooms:
    items:
    -  name: flashlight
       state:
-      -  hidden: true
-      -  isOn: false
-      -  heldBy: nobody
+        hidden: true
+        isOn: false
+        heldBy: nobody
       commands:
       -  name: examine
          actions:
@@ -103,7 +103,7 @@ rooms:
          -  user: You flail wildly toward the torch wih your foot, and miss.
    -  name: door
       state:
-      -  hidden: true
+        hidden: true
       commands:
       -  name: examine
          actions:
@@ -124,7 +124,7 @@ rooms:
          -  user: This will clearly not be successful. You should stop kicking the door.
    -  name: switch
       state:
-      -  hidden: true
+        hidden: true
       commands:
       -  name: examine
          actions:
@@ -154,7 +154,7 @@ rooms:
                dusty basement, might end badly. You stand down.
    -  name: wall
       state:
-      -  hidden: false
+        hidden: false
       commands:
       -  name: examine
          actions:
@@ -224,9 +224,9 @@ rooms:
   items:      
          - name: walkietalkie
            state:
-              - hidden: true
-              - isOn: false
-              - heldBy: nobody
+               hidden: true
+               isOn: false
+               heldBy: nobody
            commands:
              - name: examine
                actions:
@@ -269,8 +269,8 @@ rooms:
            aliases:
            - paper1
            state:
-              - hidden: false
-              - heldBy: nobody
+               hidden: false
+               heldBy: nobody
            commands:
              - name: examine
                actions:
@@ -301,8 +301,8 @@ Then the paper appears to have been ripped at the bottom. "
            aliases:
            - paper2
            state:
-              - hidden: false
-              - heldBy: nobody
+               hidden: false
+               heldBy: nobody
            commands:
              - name: examine
                actions:
@@ -332,8 +332,8 @@ Then the paper appears to have been ripped at the bottom. "
            aliases:
            - paper3
            state:
-              - hidden: false
-              - heldBy: nobody
+               hidden: false
+               heldBy: nobody
            commands:
              - name: examine
                actions:
@@ -364,8 +364,8 @@ Then the paper appears to have been ripped at the bottom."
            aliases:
            - paper4
            state:
-              - hidden: false
-              - heldBy: nobody
+               hidden: false
+               heldBy: nobody
            commands:
              - name: examine
                actions:
@@ -388,7 +388,7 @@ Then the paper appears to have been ripped at the bottom."
 
          - name: door
            state:
-              - hidden: true
+               hidden: true
            commands:
              - name: examine
                actions:
@@ -410,7 +410,7 @@ Then the paper appears to have been ripped at the bottom."
                
          - name: keypad
            state:
-              - hidden: true
+               hidden: true
            commands:
              - name: examine
                action:
@@ -447,7 +447,7 @@ VAULT"
            alias:
               - walls
            state:
-              - hidden: true
+               hidden: true
            commands:
              - name: examine
                actions:
