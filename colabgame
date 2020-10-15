@@ -8,25 +8,25 @@ commands:
    actions:
    -  condition: '{arg}==""'
       user: I don't know what you are trying to get, try /get name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: I don't know how to get {arg}
 -  name: drop
    actions:
-   -  condition: '{arg}=""'
+   -  condition: '{arg}==""'
       user: I don't know what you are trying to drop, try /drop name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: I don't know how to drop {arg}
 -  name: use
    actions:
-   -  condition: '{arg}=""'
+   -  condition: '{arg}==""'
       user: I don't know what you are trying to use, try /use name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: I don't know how to use {arg}
 -  name: kick
    actions:
-   -  condition: '{arg}=""'
+   -  condition: '{arg}==""'
       user: I don't know what you are trying to kick, try /kick name-of-item
-   -  condition: unmmatched
+   -  condition: unmatched
       user: Why would you want to kick {arg}???
 rooms:
 -  name: Entry Room
@@ -54,15 +54,15 @@ rooms:
          user: It is really dark down here. You know there’s a wall behind you because you just came through the door.
       -  condition: room.state.lightOn==false
          user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
-      -  condition: room.state.lightOn=true
+      -  condition: room.state.lightOn==true
          user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long
             it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
    items:
    -  name: flashlight
       state:
-        hidden: true
-        isOn: false
-        heldBy: nobody
+         hidden: true
+         isOn: false
+         heldBy: nobody
       commands:
       -  name: examine
          actions:
@@ -103,7 +103,7 @@ rooms:
          -  user: You flail wildly toward the torch wih your foot, and miss.
    -  name: door
       state:
-        hidden: true
+         hidden: true
       commands:
       -  name: examine
          actions:
@@ -124,7 +124,7 @@ rooms:
          -  user: This will clearly not be successful. You should stop kicking the door.
    -  name: switch
       state:
-        hidden: true
+         hidden: true
       commands:
       -  name: examine
          actions:
@@ -137,40 +137,40 @@ rooms:
          -  user: You cannot drop something you do not have!
       -  name: use
          actions:
-         -  condition: room.lightOn=false
+         -  condition: room.state.lightOn==false
             do:
-            - set room.lightOn=true
+            - set room.state.lightOn=true
             - set items.flashlight.hidden=false
             - set items.door.hidden=false
             - set items.switch.hidden=false
             user: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness.
             room: It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is
                standing by a light switch.
-         -  condition: room.lightOn=true
+         -  condition: room.state.lightOn==true
             user: You consider turning the light back off, but it doesn't feel like a great idea, you decide to leave it on.
       -  name: kick
          actions:
          -  user: You prepare a violent kick aimed at the lightswitch, before considering that kicking a lightswitch in a
                dusty basement, might end badly. You stand down.
-   -  name: wall
+   -  name: north wall
       state:
-        hidden: false
+         hidden: false
       commands:
       -  name: examine
          actions:
          -  do:
-            - items.switch.hidden=false
+            - set items.switch.hidden=false
             user: It’s a standard cinder block school basement wall. Near the door is a smoother plate… with a switch in the
                middle.
-               
-##Where do we put these room descriptions to appear when they first whoosh into the room? Or will it be just a room name, and they have to /look?
+            room: '{name} stares at the north wall'
+##r:Where do we put these room descriptions to appear when they first whoosh into the room? Or will it be just a room name, and they have to /look?
+##o:the text when you enter is just gameon issuing a /look for the player.. so text like below should live in an examine action
 ##THE BASEMENT CONTINUES
 ##
 ##
 ##More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. 
 ##
 ##You wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class. 
-rooms:
 -  name: Entry Room
    id: entryroom
    state:
@@ -181,14 +181,14 @@ rooms:
       -  condition: '{arg}=="north" || {arg}=="n"'
          user: The door is locked. You can unlock it only by working together.
          room: '{name} attempted to go north, but was thwarted by the big locked door.'
+         
 - name: Morse Code
   id: morsecode
       
   state:
-   lightOn: true
-##I left this here in case it needed to be set regardless of whether there's a light switch in the room. 
-
-
+    lightOn: true
+##r:I left this here in case it needed to be set regardless of whether there's a light switch in the room. 
+##o:It's not required (no state is required, and the only state with special meaning is 'hidden' that may mean 'hide the item from /look'
   commands:
         - name: go
           actions:
@@ -213,14 +213,11 @@ rooms:
           aliases:
             - look
           actions:
-          - condition: room.state.lightOn=true
+          - condition: room.state.lightOn==true
             user: There is a walkie talkie in the northeast corner. How long must that have been here?
-          - condition: room.state.lightOn=true
+          - condition: room.state.lightOn==true
             user: You notice several scraps of paper on the floor in the corners of the room. 
 ##I think we need to tie some direction here, but right now they're just named scrap1 scrap2 etc and don't know where they are.     
-     
-
-
   items:      
          - name: walkietalkie
            state:
@@ -369,7 +366,8 @@ Then the paper appears to have been ripped at the bottom."
            commands:
              - name: examine
                actions:
-                 user: "There is a small piece of paper on the floor. If you pick it up, you cThe paper has a smooth bottom edge, but appears to have been torn above that. It says: 
+##TODO review wording here.. 
+                 - user: "There is a small piece of paper on the floor. If you pick it up, you can something ... The paper has a smooth bottom edge, but appears to have been torn above that. It says: 
 ⏺ ⏺ ⏺ A
 ⏺ ⏺ THE
 ⏺ ⏺ ⏺ ⏺ FILE CABINET
@@ -384,8 +382,6 @@ Then the paper appears to have been ripped at the bottom."
                actions:
                 - condition: items.scrap4.heldBy!={id}
                   user: You can't use that, because you are not holding it. 
-                
-
          - name: door
            state:
                hidden: true
@@ -413,7 +409,7 @@ Then the paper appears to have been ripped at the bottom."
                hidden: true
            commands:
              - name: examine
-               action:
+               actions:
                - user: "The keypad beside the door has buttons with what seem to be an assortment of random words':' 
 RUN
 TUNNEL
@@ -434,17 +430,16 @@ VAULT"
              - name: use
                actions:
                - user: It looks like it’s expecting a phrase, you should try “/use keypad with the answer”
-##I have no idea how to tell it the correct answer version
-##..like this =)
+##r:I have no idea how to tell it the correct answer version
+##o:..like this =)
                - condition: unmatched
                  user: You try to guess the code, the device bleeps, but nothing happens
-## Note that for now, we can't have spaces in the compare value, I know we need this.. I'll let you know when it's there.
+##o: Note that for now, we can't have spaces in the compare value, I know we need this.. I'll let you know when it's there.
                - condition: '{arg}==1234'
                  user: You enter the correct code, the door opens, the secrets of the universe are revealed to you.
                  room: "{name} entered the right code, the self destruct sequence is aborted. Wait.. I didn't tell you about that? Ah well, you're all good now!!"
-
          - name: wall
-           alias:
+           aliases:
               - walls
            state:
                hidden: true
