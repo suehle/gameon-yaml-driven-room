@@ -29,28 +29,28 @@ commands:
     actions:
        -  condition: '{arg}==""'
           user: I don't know what you are trying to get, try /get name-of-item
-       -  condition: unmmatched
+       -  condition: unmatched
           user: I'm sorry. I don't know how to get {arg}.
 
   - name: drop
     actions:
-       -  condition: '{arg}=""'
+       -  condition: '{arg}==""'
           user: I don't know what you are trying to drop, try /drop name-of-item
-       -  condition: unmmatched
+       -  condition: unmatched
           user: I'm sorry. I don't know how to drop {arg}.
 
   - name: use
     actions:
-       -  condition: '{arg}=""'
+       -  condition: '{arg}==""'
           user: I don't know what you are trying to use, try /use name-of-item
-       -  condition: unmmatched
+       -  condition: unmatched
           user: I'm sorry. I don't know how to use {arg}.
 
   - name: kick
     actions:
-       -  condition: '{arg}=""'
+       -  condition: '{arg}==""'
           user: I don't know what you are trying to kick, try /kick name-of-item
-       -  condition: unmmatched
+       -  condition: unmatched
           user: Why would you want to kick {arg}???
 
 ## First room. All users must /use door to get out.
@@ -81,14 +81,14 @@ rooms:
                user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
             -  condition: room.state.lightOn==false
                user: You still can't see anything at all. You feel like there should be a light switch though. Try examining the wall.
-            -  condition: room.state.lightOn=true
+            -  condition: room.state.lightOn==true
                user: For your whole life, you’ve heard a story that your school, {SCHOOLNAME}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {fRIENDNAME}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.<br>You didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here.
                room: For your whole life, you’ve heard a story that your school, {SCHOOLNAME}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {FRIENDNAME}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.<br>You didn’t bring your phones, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here.
-            -  condition: room.state.lightOn=true
+            -  condition: room.state.lightOn==true
                user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {FRIENDNAME} looks terrified. There is a door to the north.
-            -  condition: room.state.lightOn=true
+            -  condition: room.state.lightOn==true
                user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {FRIENDNAME} looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
-            -  condition: room.state.lightOn=true
+            -  condition: room.state.lightOn==true
                user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. There is a door to the north. Your friend {FRIENDNAME} looks terrified. Have you tried talking to her?
        - name: exits
          actions:
@@ -222,11 +222,11 @@ rooms:
         aliases:
           - look
         actions:
-          - condition: room.state.lightOn=true
+          - condition: room.state.lightOn==true
             user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. <br><br>You wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
-          - condition: room.state.lightOn=true
+          - condition: room.state.lightOn==true
             user: There is a walkie talkie in the northeast corner. How long must that have been here?
-          - condition: room.state.lightOn=true
+          - condition: room.state.lightOn==true
             user: You notice several scraps of paper on the floor in the corners of the room.
       ##I think we need to tie some direction here, but right now they're just named scrap1 scrap2 etc and don't know where they are.
       - name: exits
@@ -528,9 +528,9 @@ rooms:
         aliases:
           - look
         actions:
-          - condition: room.state.lightOn=true
+          - condition: room.state.lightOn==true
             user: This just seems to be a room full of assorted leftovers from classrooms, mostly broken desks and chairs. Some of them look pretty old.
-          - condition: room.state.lightOn=true
+          - condition: room.state.lightOn==true
             user: There’s not much of interest here. Mostly just broken desks and chairs that accumulated over the years. There is {FLASHLIGHT-COLOR} flashlight on the floor.
 
       - name: exits
