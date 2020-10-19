@@ -20,7 +20,7 @@ vars:
 commands:
   - name: help
     actions:
-      - user: There are a few commands that will help you get out of this basement. Remember to always type a '/' in front of the command and use simple phrases. For example':' <br> /examine or /look - Used alone, this will look around the room and tell you what you see. Sometimes you will see things differently if you look around again. And perhaps again and again. Used with an object in the room ("/examine book") will take a closer look at that thing.<br> /use - Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?<br> /get - Pick up an object. You’ll have to /get cookie before you can /use cookie.<br> /talk {friendname} - See what {friendname} is thinking right now. To talk to other people playing with you, simply type without a / in front. Everyone in the room will see your message.<br> /go - Move in the direction specified, such as "/go n" to move north. This is always relative to the center of the room. You do not have to move back to go another direction. You can think of it like "/examine direction", which may reveal to you more than you see with a simple /look or /examine.<br> /exits - Will tell you where you see ways out of the room. Too bad you’re trapped in a basement without many of them.
+      - user: There are a few commands that will help you get out of this basement. Remember to always type a '/' in front of the command and use simple phrases. For example':' \n\n /examine or /look - Used alone, this will look around the room and tell you what you see. Sometimes you will see things differently if you look around again. And perhaps again and again. Used with an object in the room ("/examine book") will take a closer look at that thing.\n\n /use - Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?\n\n /get - Pick up an object. You’ll have to /get cookie before you can /use cookie.\n\n /talk {friendname} - See what {friendname} is thinking right now. To talk to other people playing with you, simply type without a / in front. Everyone in the room will see your message.\n\n /go - Move in the direction specified, such as "/go n" to move north. This is always relative to the center of the room. You do not have to move back to go another direction. You can think of it like "/examine direction", which may reveal to you more than you see with a simple /look or /examine.\n\n /exits - Will tell you where you see ways out of the room. Too bad you’re trapped in a basement without many of them.
 
   - name: get
     aliases:
@@ -82,20 +82,20 @@ rooms:
             -  condition: room.state.lightOn==false
                user: You still can't see anything at all. You feel like there should be a light switch though. Try examining the wall.
             -  condition: room.state.lightOn==true
-               user: For your whole life, you’ve heard a story that your school, {SCHOOLNAME}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {fRIENDNAME}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.<br>You didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here.
-               room: For your whole life, you’ve heard a story that your school, {SCHOOLNAME}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {FRIENDNAME}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.<br>You didn’t bring your phones, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here.
+               user: For your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here.
+               room: For your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phones, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here.
             -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {FRIENDNAME} looks terrified. There is a door to the north.
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {friendname} looks terrified. There is a door to the north.
             -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {FRIENDNAME} looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {friendname} looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
             -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. There is a door to the north. Your friend {FRIENDNAME} looks terrified. Have you tried talking to her?
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. There is a door to the north. Your friend {friendname} looks terrified. Have you tried talking to her?
        - name: exits
          actions:
            - user: The door you came in is to the south. It has locked behind you, and despite your best efforts, it will not open. There is another door to the north. This is a basement, so there are no windows. The floor is firm, and you have no shovel. You are much too short to reach the ceiling. Your options are limited.
 
      items:
-       - name: Gabriella
+       - name: {friendname}
          commands:
            - name: examine
              actions:
@@ -103,7 +103,7 @@ rooms:
                - user: '"Why are you staring at me?" she asks suspiciously. Maybe try to /talk to her instead.'
            - name: talk
              actions:
-               - user: '"Why did you let the door close?" you ask {FRIENDNAME}, immediately regretting it. You’ve spent 20 minutes yelling for help and trying to kick the locked door open. It’s fruitless. <br><br>"I’m sorry," {FRIENDNAME} says quietly. "Are you mad at me? I am just getting nervous."'
+               - user: '"Why did you let the door close?" you ask {friendname}, immediately regretting it. You’ve spent 20 minutes yelling for help and trying to kick the locked door open. It’s fruitless. \n\n\n\n"I’m sorry," {friendname} says quietly. "Are you mad at me? I am just getting nervous."'
            - name: kick
              actions:
                - user: Hey! Kicking your friend is not going to get you out of here.
@@ -114,12 +114,12 @@ rooms:
          commands:
             - name: examine
               actions:
-                - user: 'While {SUBJECT} is your favorite subject, now is not the time for a study break.'
-                - user: 'The books unfortunately are about {SUBJECT}, not how to escape a locked basement. They are of no help to you.'
+                - user: 'While {subject} is your favorite subject, now is not the time for a study break.'
+                - user: 'The books unfortunately are about {subject}, not how to escape a locked basement. They are of no help to you.'
                 - user: 'Dust fills your nose, and you sneeze. Some history books that end in the 1960s probably aren’t worth the effort'
             - name: talk
               actions:
-               - user: The books are not good conversationalists. Try a human
+               - user: The books are not good conversationalists. Try a human.
        - name: north door
          commands:
            - name: talk
@@ -135,9 +135,10 @@ rooms:
                - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
            - name: use
              actions:
+                - user: "The door is closed."
 ## This door won’t work until everyone agrees they’re ready to move on.
 ## Nobody can move along until everyone is ready to move along.
-## (after everyone has done it) {name} successfully unlocks the door. {FRIENDNAME} goes into the next room, and you follow her.
+## (after everyone has done it) {name} successfully unlocks the door. {friendname} goes into the next room, and you follow her.
 
        - name: south door
          commands:
@@ -181,8 +182,10 @@ rooms:
                - user: Looks like a pretty standard light switch. Try to /use it.
            - name: use
              actions:
-               - user: CLICK. It feels like you turned on the sun. You squint and rub your eyes in the sudden brightness. <br><br>The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
-                 room: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.<br><br>The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+               - user: CLICK. It feels like you turned on the sun. You squint and rub your eyes in the sudden brightness. \n\n\n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+                 room: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.\n\n\n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+                 do:
+                  - set room.state.lightOn=true
 
        - name: chalkboard
          aliases:
@@ -191,13 +194,14 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: You read the newspaper article out loud. <br>STUDENTS MISSING AFTER FOLLOWING TOWN RUMOR<br>April 21, 1979<br>{TOWNNAME} {ADULTNAME} is at her wit’s end. Her daughter {CHILD-FIRST-NAME} has been missing for more than 24 hours. Although she didn’t see {CHILD-FIRST-NAME} before she left Saturday morning, {CHILD-FIRST-NAME} left a note stating she was going to find a "secret vault" under {SCHOOLNAME}. {CHILD-FIRST-NAME} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
-                 room: '{name} reads the newspaper article out loud. <br>STUDENTS MISSING AFTER FOLLOWING TOWN RUMOR<br>April 21, 1979<br>{TOWNNAME} {ADULTNAME} is at her wit’s end. Her daughter {CHILD-FIRST-NAME} has been missing for more than 24 hours. Although she didn’t see {CHILD-FIRST-NAME} before she left Saturday morning, {CHILD-FIRST-NAME} left a note stating she was going to find a "secret vault" under {SCHOOLNAME}. {CHILD-FIRST-NAME} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.'
+               - user: You read the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n{townname} {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
+                 room: '{name} reads the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n{townname} {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.'
 
 ## Room 2
   - name: The Basement Continues
     id: morsecode
-
+    state:
+     lightOn: true
     commands:
       - name: go
         actions:
@@ -223,7 +227,7 @@ rooms:
           - look
         actions:
           - condition: room.state.lightOn==true
-            user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. <br><br>You wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
+            user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. \n\n\n\nYou wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
           - condition: room.state.lightOn==true
             user: There is a walkie talkie in the northeast corner. How long must that have been here?
           - condition: room.state.lightOn==true
@@ -240,7 +244,7 @@ rooms:
         commands:
           - name: examine
             actions:
-              - user: '{FRIENDNAME} looks skeptical, as if she is trying to remember how you talked her into coming down here to begin with.'
+              - user: '{friendname} looks skeptical, as if she is trying to remember how you talked her into coming down here to begin with.'
           - name: talk
             actions:
               - user: '"That story was creepy," she says. "I wonder how they found their way out… or if they found their way out?"'
@@ -311,6 +315,8 @@ rooms:
               - user: The wall is perfectly content doing its job making one fourth of this room, and it isn't interested in being used for anything else.
 
       - name: walkietalkie
+        aliases:
+          - walkie-talkie
         state:
           hidden: true
           isOn: false
@@ -322,8 +328,8 @@ rooms:
                 user: '{walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it.'
                 room: '{name} found a walkie talkie on the floor and seems to be staring at it.'
               - condition: items.walkietalkie.isOn==true
-                user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
-                room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
+                user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
+                room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
           - name: get
             actions:
               - condition: items.walkietalkie.heldBy==nobody
@@ -331,6 +337,10 @@ rooms:
                   - set items.walkietalkie.heldBy={id}
                 user: You pick up the walkie talkie. It is not turned on.
                 room: '{name} picked up a walkie talkie.'
+              - condition: walkietalkie.heldBy=={id}
+                user: "You can't get the walkietalkie when it's already in your hands!!"
+              - condition: walkietalkie.heldBy!={id} && walkietalkie.heldBy!=nobody 
+                user: "It's not polite to try to snatch the walkietalkie from someone else, you could ask them nicely to drop it for you"
           - name: drop
             actions:
               - condition: items.walkietalkie.heldBy=={id}
@@ -338,6 +348,8 @@ rooms:
                 - set items.walkietalkie.heldBy=nobody
                 user: You put the walkie talkie on the floor.
                 room: '{name} put the walkie talkie on the floor.'
+              - condition: unmatched
+                user: "You can't drop the walkietalkie if you don't have it!!"
           - name: use
             actions:
             - condition: items.walkietalkie.heldBy!={id}
@@ -348,7 +360,7 @@ rooms:
               room: '{name} turns the walkie talklie off. The beeping sounds stop.'
             - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==true
               user: You turn the knob on the top of the walkie talkie. The red light illuminates, and the walkie talkie starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
-              room: '{name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺'
+              room: '{name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series.\n —   — — —   ⏺⏺   ⏺'
           - name: kick
             actions:
               - user: You attempt to kick the walkie talkie, but it is small, and you miss.
@@ -368,7 +380,7 @@ rooms:
            - condition: items.scrap1.heldBy==nobody
              do:
                - 'set items.scrap1.heldBy={id}'
-             user: The paper says "LEGEND" at the top. Under that it says':'<br>— ⏺ ⏺ — RUN<br>— TUNNEL<br>— ⏺ GO<br>⏺ — CHALKBOARD<br>Then the paper appears to have been ripped at the bottom.
+             user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\nThen the paper appears to have been ripped at the bottom.
         - name: drop
           actions:
             - condition: items.scrap1.heldBy=={id}
@@ -395,7 +407,7 @@ rooms:
                 - condition: items.scrap2.heldBy==nobody
                   do:
                     - set items.scrap2.heldBy={id}
-                  user: The paper seems to have been torn apart on several edges. What you can read says':'<br>⏺⏺ — CEILING<br>⏺ BASEMENT<br>— — ⏺TO<br>— ⏺ — ⏺ESCAPE
+                  user: The paper seems to have been torn apart on several edges. What you can read says':'\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE
             - name: drop
               actions:
                 - condition: items.scrap2.heldBy=={id}
@@ -422,7 +434,7 @@ rooms:
                 - condition: items.scrap3.heldBy==nobody
                   do:
                     - set items.scrap3.heldBy={id}
-                  user: The paper says "LEGEND" at the top. Under that it says':'<br>— ⏺ ⏺ — RUN<br>— TUNNEL<br>— ⏺ GO<br>⏺ — CHALKBOARD<br>Then the paper appears to have been ripped at the bottom.
+                  user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\nThen the paper appears to have been ripped at the bottom.
             - name: drop
               actions:
                 - condition: items.scrap3.heldBy=={id}
@@ -443,7 +455,7 @@ rooms:
         commands:
             - name: examine
               actions:
-                - user: There is a small piece of paper on the floor. If you pick it up, you cThe paper has a smooth bottom edge, but appears to have been torn above that. It says':'<br>⏺ ⏺ ⏺ A<br>⏺ ⏺ THE<br>⏺ ⏺ ⏺ ⏺ FILE CABINET<br>— — — — VAULT<br>
+                - user: There is a small piece of paper on the floor. If you pick it up, you cThe paper has a smooth bottom edge, but appears to have been torn above that. It says':'\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n
             - name: drop
               actions:
                 - condition: items.scrap4.heldBy=={id}
@@ -484,7 +496,7 @@ rooms:
         commands:
             - name: examine
               actions:
-                - user: The keypad beside the door has buttons with what seem to be an assortment of random words':' <br>RUN<br>TUNNEL<br>GO<br>CHALKBOARD<br>CEILING<br>BASEMENT<br>TO<br>ESCAPE<br>CLASSROOM<br>THROUGH<br>ROOF<br>UNDER<br>A<br>THE<br>FILE CABINET<br>VAULT
+                - user: The keypad beside the door has buttons with what seem to be an assortment of random words':' \n\nRUN\n\nTUNNEL\n\nGO\n\nCHALKBOARD\n\nCEILING\n\nBASEMENT\n\nTO\n\nESCAPE\n\nCLASSROOM\n\nTHROUGH\n\nROOF\n\nUNDER\n\nA\n\nTHE\n\nFILE CABINET\n\nVAULT
             - name: use
               actions:
                 - condition: '{arg}==""'
@@ -494,14 +506,16 @@ rooms:
                 - condition: '{arg}=="keypad with the answer"'
                   user: If the keypad had emotions, it would currently be quite baffled. Use the answer from the puzzle in the room!
                 - condition: '{arg}=="tunnel under the basement"'
-                  user: You press the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.<br>"That sounded like Morse Code, but it is definitely not Morse Code," {FRIENDNAME} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.
-                  room: '{name} presses the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.<br>"That sounded like Morse Code, but it is definitely not Morse Code," {FRIENDNAME} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.'
+                  user: You press the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.
+                  room: '{name} presses the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.'
                   do:
                    - teleportAll nextroomid
 
 ## Room 3
   - name: Classroom Storage
     id: classroomstorage
+    state:
+      lightOn: true
 
     commands:
       - name: go
@@ -650,8 +664,8 @@ rooms:
                   user: You shine the flashlight on the north wall. {wall-things}
                   room: '{name} shines the flashlight on the north wall. {wall-things}'
                -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="east" || {arg}=="e"'
-                  user: You shine the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."<br><br>You shiver at the vaguely ominous message. "Go in where?!" {FRIENDNAME} wonders out loud. "A tunnel, maybe? Or the vault?"<br>You wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.
-                  room: '{name} shines the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."<br><br>You shiver at the vaguely ominous message. "Go in where?!" {FRIENDNAME} wonders out loud. "A tunnel, maybe? Or the vault?"<br><br>You wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.'
+                  user: You shine the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.
+                  room: '{name} shines the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\n\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.'
                -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="west" || {arg}=="w"'
                   user: You shine the flashlight on the west wall. {wall-things2}
                   room: '{name} shines the flashlight on the west wall. {wall-things2}'
@@ -673,14 +687,14 @@ rooms:
          commands:
           -  name: examine
              actions:
-               - user: You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. <br><br>YOU HAVE TO GO IN GET OUT. <br><br>Under it, the projector shines a series of numbers and a message from the transparency that was left on it. <br><br>20 9 20 1 14 19   20 23 15   23 9 14 19<br>CLUE':' The letter that lights up = 1
-                 room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. <br><br>YOU HAVE TO GO IN GET OUT. <br><br>Under it, the projector shines a series of numbers and a message from the transparency that was left on it. <br><br>20 9 20 1 14 19   20 23 15   23 9 14 19<br>CLUE... The letter that lights up = 1'
+               - user: You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19   20 23 15   23 9 14 19\n\nCLUE':' The letter that lights up = 1
+                 room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19   20 23 15   23 9 14 19\n\nCLUE... The letter that lights up = 1'
 
       - name: keypad
         commands:
          - name: examine
            actions:
-             - user: The keypad beside the door has a display showing blanks':'<br>_ _ _ _ _ _   _ _ _   _ _ _ _ <br><br>elow it is a standard keyboard on the screen.
+             - user: The keypad beside the door has a display showing blanks':'\n\n_ _ _ _ _ _   _ _ _   _ _ _ _ \n\n\n\nelow it is a standard keyboard on the screen.
          - name: use
            actions:
              - user: It looks like it’s expecting a phrase. You should try "/use keypad with the answer"
@@ -689,8 +703,8 @@ rooms:
              - condition: '{arg}=="keypad with the answer"'
                user: If the keypad had emotions, it would currently be quite baffled. Use the answer from the puzzle in the room!
              - condition: '{arg}=="titans two wins"'
-               user: You type "TITANS TWO WINS" on the keypad beside the door. <br><br>"Like the Greek Titans we learned about in social studies?" {FRIENDNAME} wonders. <br><br>The door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.
-               room: '{name} types "TITANS TWO WINS" on the keypad beside the door.<br><br> "Like the Greek Titans we learned about in social studies?" {FRIENDNAME} wonders. <br><br>The door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.'
+               user: You type "TITANS TWO WINS" on the keypad beside the door. \n\n\n\n"Like the Greek Titans we learned about in social studies?" {friendname} wonders. \n\n\n\nThe door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.
+               room: '{name} types "TITANS TWO WINS" on the keypad beside the door.\n\n\n\n "Like the Greek Titans we learned about in social studies?" {friendname} wonders. \n\n\n\nThe door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.'
                do:
                  - teleportAll nextroomid
 
@@ -723,7 +737,7 @@ rooms:
         aliases:
           - look
         actions:
-          - user: This must be the athletic department’s storage room. There’s a rack of partially deflated basketballs, a table of old yearbooks, and the old baseball field’s scoreboard hanging on the north wall with several well-used bats on the ground under it. A globe that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. <br><br>"Oh, of course," {FRIENDNAME} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."<br><br>Everyone knows {FRIENDNAME}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {HOSPITALNAME} closed.
+          - user: This must be the athletic department’s storage room. There’s a rack of partially deflated basketballs, a table of old yearbooks, and the old baseball field’s scoreboard hanging on the north wall with several well-used bats on the ground under it. A globe that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
 
       - name: exits
         aliases:
@@ -739,11 +753,11 @@ rooms:
               - user: She looks pretty sad. Probably thinking how she’s going to miss you way more than she’ll miss watching the baseball team lose.
           - name: talk
             actions:
-              - user: '{FRIENDNAME} sighs. "Do you think there’s any hope of getting out of here? At least there don’t appear to be any characters from Greek mythology waiting for us."'
+              - user: '{friendname} sighs. "Do you think there’s any hope of getting out of here? At least there don’t appear to be any characters from Greek mythology waiting for us."'
           - name: kick
             actions:
              - user: Hey! Kicking your friend is not going to get you out of here.
-             - user: Stop that. It isn’t helping you
+             - user: Stop that. It isn’t helping you.
 
       - name: south door
         aliases:
@@ -834,15 +848,15 @@ rooms:
               - user: You recognize the scoreboard as the one that used to be on the baseball field before the school held a fundraiser to replace it. It’s not plugged in, but you notice the cord is dangling near an outlet.
           - name: use
             actions:
-              - user: You plug in the scoreboard and discover most of the lights still work. It says {SCHOOLNAME} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
-              - room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {SCHOOLNAME} TITANS. The score is 47-3 Titans with two strikes and two outs.'
+              - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
+              - room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
 
       - name: cord
         commands:
           - name: use
             actions:
-              - user: You plug in the scoreboard and discover most of the lights still work. It says {SCHOOLNAME} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
-                room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {SCHOOLNAME} TITANS. The score is 47-3 Titans with two strikes and two outs.'
+              - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
+                room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
 
       - name: ticket
         aliases:
@@ -871,7 +885,7 @@ rooms:
       ## Goal: display the following text to the room when both the ticket and yearbook have been identified.
       ## "We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."
 
-      ## "And what? Wait for me to move?" {FRIENDNAME} paces back and forth, sounding desperate. "This is our only chance to find the vault."
+      ## "And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."
 
       ## Seeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"
 
@@ -892,7 +906,7 @@ rooms:
         commands:
           - name: examine
             actions:
-              - user: This time the keypad has a message with a regular keyboard layout waiting under it. The message reads':'<br>FIND ANOTHER WORD INSIDE THE HIDDEN WORD. YOU’LL NEED TO USE IT TO GET OUT OF HERE.<br>_ _ _ _ _
+              - user: This time the keypad has a message with a regular keyboard layout waiting under it. The message reads':'\n\nFIND ANOTHER WORD INSIDE THE HIDDEN WORD. YOU’LL NEED TO USE IT TO GET OUT OF HERE.\n\n_ _ _ _ _
           - name: use
             actions:
               - user: It looks like it’s expecting a phrase, you should try "/use keypad with the answer"
@@ -1045,8 +1059,8 @@ rooms:
                    user: You shine the flashlight on the south wall. Just wall. Wall, wall, wall.
                    room: '{name} shines the flashlight on the south wall. Just wall. Wall, wall, wall.'
                 -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="floor"'
-                   user: 'You shine the flashlight at the floor. In the dust beside {FRIENDNAME}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
-                   room: '{name} shines the flashlight at the floor. In the dust beside {FRIENDNAME}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the north wall?'
+                   user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
+                   room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the north wall?'
                 -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="ceiling"'
                    user: You shine the flashlight on the ceiling. You find nothing.
                    room: '{name} shines the flashlight at the ceiling.'
@@ -1077,8 +1091,8 @@ rooms:
           - name: examine
             actions:
             ## needs the condition of working only after footprints are found
-            - user: You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! <br><br>Missing Teens Found<br>April 22, 1979<br>{TOWNNAME}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {SCHOOLNAME}. "We were locked in," said {CHILD-FIRST-NAME}, an eighth grader at {SCHOOLNAME}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.<br>Some people believe it is all an elaborate hoax to get out of final exams. But some residents of {TOWNNAME} believe the teens. They want to try to find the vault again, but the {TOWNNAME} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. <br><br>People are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {TOWNNAME} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {TOWNNAME} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.
-              room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! <br><br><br>Missing Teens Found<br>April 22, 1979<br><br>{TOWNNAME}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {SCHOOLNAME}. "We were locked in," said {CHILD-FIRST-NAME}, an eighth grader at {SCHOOLNAME}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.<br><br>Some people believe it is all an elaborate hoax to get out of final exams. But some residents of {TOWNNAME} believe the teens. They want to try to find the vault again, but the {TOWNNAME} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. <br><br>People are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {TOWNNAME} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {TOWNNAME} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
+            - user: You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMissing Teens Found\n\nApril 22, 1979\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.
+              room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\n\n\nMissing Teens Found\n\nApril 22, 1979\n\n\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\n\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
 
       ## Choices here: Either examining the north wall is the last task to be done, or we can add a /use doorway. Since we haven't had a "doorway" so far, it seems unlikely they'd do it by accident, but not impossible.
 
@@ -1115,7 +1129,7 @@ rooms:
          aliases:
            - look
          actions:
-           - user: '"So there’s really a vault," {FRIENDNAME} gasps. "This proves it. And those kids got out." <br><br>"It seems that to find the tunnel, we first have to find a riddle in the darkest corner of the basement, and answer it correctly," you say. <br><br>"Easy peasy," {FRIENDNAME} jokes sarcastically. "Except why would we have to turn off the light to hear a sound?"<br><br>This is the smallest room yet, and it doesn’t even seem to be used as storage. In fact, the only thing you see is a light switch on the wall.  <br><br>The hidden doorway slides shut behind you. You are now truly, officially trapped. <br><br>There’s a light switch on the wall. And nothing else in the room.'
+           - user: '"So there’s really a vault," {friendname} gasps. "This proves it. And those kids got out." \n\n\n\n"It seems that to find the tunnel, we first have to find a riddle in the darkest corner of the basement, and answer it correctly," you say. \n\n\n\n"Easy peasy," {friendname} jokes sarcastically. "Except why would we have to turn off the light to hear a sound?"\n\n\n\nThis is the smallest room yet, and it doesn’t even seem to be used as storage. In fact, the only thing you see is a light switch on the wall.  \n\n\n\nThe hidden doorway slides shut behind you. You are now truly, officially trapped. \n\n\n\nThere’s a light switch on the wall. And nothing else in the room.'
            - condition: room.state.lightOn==false
              user: Try looking in each direction and see if you can find where the sound is coming from.
    
@@ -1133,7 +1147,7 @@ rooms:
              - user: '{friendname} looks increasingly uncertain about all of this.'
          - name: talk
            actions:
-             - user: '"I have never been a fan of the dark," {FRIENDNAME} says. "I might never turn off the lights again if we ever get out of here."'
+             - user: '"I have never been a fan of the dark," {friendname} says. "I might never turn off the lights again if we ever get out of here."'
          - name: kick
            actions:
              - user: Hey! Kicking your friend is not going to get you out of here.
@@ -1327,7 +1341,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user: You notice a small crack between the bricks and pull out a long piece of rolled up paper. A sliver of light peeks out of the crack where the paper had been. It says':'<br><br>WE ARE A GROUP OF EIGHT<br>WE PROTECT THE KING IN EVERY BATTLE<br>WE ARE CONSIDERED WEAK, BUT IF WE MOVE AHEAD<br>WE NEVER TURN BACK. WHO ARE WE?
+                  user: You notice a small crack between the bricks and pull out a long piece of rolled up paper. A sliver of light peeks out of the crack where the paper had been. It says':'\n\n\n\nWE ARE A GROUP OF EIGHT\n\nWE PROTECT THE KING IN EVERY BATTLE\n\nWE ARE CONSIDERED WEAK, BUT IF WE MOVE AHEAD\n\nWE NEVER TURN BACK. WHO ARE WE?
    
    
        - name: pawn
@@ -1599,8 +1613,8 @@ rooms:
                  - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="south wall" || {arg}=="south"'
                    user: That way lies the BEEP. Let’s not think of it again.
                  - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="floor"'
-                   user: You shine the flashlight towards the floor, which is made up of square tiles. <br>The entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them':' <br>L  J  O  K  O<br>                R  K  B  A  P<br>                B  P  O  M  V<br>C  E  A  Y  K<br>O  A  U  O  V
-                   room: '{name} shines the flashlight towards the floor, which is made up of square tiles. <br>The entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them:'' <br>L  J  O  K  O<br>                R  K  B  A  P<br>                B  P  O  M  V <br>C  E  A  Y  K<br>O  A  U  O  V'
+                   user: You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them':' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V
+                   room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them:'' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
                  - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="ceiling"'
                    user: You shine the flashlight on the ceiling. Someone has scribbled "Back to square one" on it.
                    room: '{name} shines the flashlight at the ceiling. Someone has scribbled "Back to square one" on it.'
@@ -1673,8 +1687,8 @@ rooms:
                   - condition: '{arg}=="*"'
                     user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
                   - condition: '{arg}=="7827"'
-                    user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. <br><br>{FRIENDNAME} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
-                    room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.<br><br>{FRIENDNAME} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
+                    user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
+                    room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.\n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
        - name: star
          aliases:
             - handle
@@ -1737,7 +1751,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: '{FRIENDNAME} looks as excited as you feel. If this is the tunnel, it seems like you might finally be near the end'
+               - user: '{friendname} looks as excited as you feel. If this is the tunnel, it seems like you might finally be near the end'
            - name: talk
              actions:
              - user: '"Do you hear something?" {friendname} asks.'
@@ -1815,7 +1829,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: It says':' <br><br>NME     NME    NME<br>NME    I AM    NME<br>NME     NME    NME<br><br>"Oh, we did these in English class," {FRIENDNAME} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {FRIENDNAME} laughs, then adds, "This must be our final clue!"
+               - user: It says':' \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"
            - name: use
              actions:
                - user: Do you need to blow your nose? If you use this napkin, no one else will be able to see the puzzle! Or at least they won’t want to…
@@ -1828,7 +1842,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: There are 9 paintings in the room. Going clockwise from the doorway':'  <br>1. A woman in a medieval-looking red and green dress is watching while a knight fights a dragon.<br>2. Vikings are sailing towards a castle for a raid. <br>3. This was probably supposed to be a person, but none of the facial features are in quite the right place.<br>4. A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? <br>5. Some purple water lilies float in a vaguely watery blue scene. <br>6. One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat<br>7. A dozen or so people, many of them wearing yellow hats, are having a tea party.<br>8. A man leaning on a cane is addressing a ballroom of ballerinas. <br>9. A lot of squares, mostly white, some painted red, yellow, or blue. It's hanging diagonally, shaped like a diamond.
+               - user: There are 9 paintings in the room. Going clockwise from the doorway':'  \n\n1. A woman in a medieval-looking red and green dress is watching while a knight fights a dragon.\n\n2. Vikings are sailing towards a castle for a raid. \n\n3. This was probably supposed to be a person, but none of the facial features are in quite the right place.\n\n4. A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? \n\n5. Some purple water lilies float in a vaguely watery blue scene. \n\n6. One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat\n\n7. A dozen or so people, many of them wearing yellow hats, are having a tea party.\n\n8. A man leaning on a cane is addressing a ballroom of ballerinas. \n\n9. A lot of squares, mostly white, some painted red, yellow, or blue. It's hanging diagonally, shaped like a diamond.
            - name: get
              actions:
                - user: Please specify which painting you would like to get, using its number, e.g. "/get painting 1"
@@ -1837,7 +1851,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: A woman in a medieval-looking red and green dress is watching while a knight fights a dragon. You read the card beside the painting'"'<br>            SAINT GEORGE AND THE DRAGON<br>            Paolo Uccello<br>            c. 1470<br>oil on canvas
+               - user: A woman in a medieval-looking red and green dress is watching while a knight fights a dragon. You read the card beside the painting'"'\n\n            SAINT GEORGE AND THE DRAGON\n\n            Paolo Uccello\n\n            c. 1470\n\noil on canvas
            - name: get
              actions:
                - user: Good news. The dragon does not come to life. Bad news. Nothing else happens either. You put the painting back.
@@ -1846,7 +1860,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: Vikings are sailing towards a castle for a raid. You read the card beside the painting'"'<br>             VISITORS FROM OVERSEAS (Übersee-Gäste)<br>             Nicholas Konstantin Roerich<br>             1901<br>             oil on canvas
+               - user: Vikings are sailing towards a castle for a raid. You read the card beside the painting'"'\n\n             VISITORS FROM OVERSEAS (Übersee-Gäste)\n\n             Nicholas Konstantin Roerich\n\n             1901\n\n             oil on canvas
            - name: get
              actions:
                - user: They were probably storming the castle because someone stole their art! You put the painting back.
@@ -1855,7 +1869,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: This was probably supposed to be a person, but none of the facial features are in quite the right place.You read the card beside the painting'"'<br>             BUST OF A WOMAN (Dora Maar)<br>             Pablo Picasso<br>             1944<br>             oil on canvas
+               - user: This was probably supposed to be a person, but none of the facial features are in quite the right place.You read the card beside the painting'"'\n\n             BUST OF A WOMAN (Dora Maar)\n\n             Pablo Picasso\n\n             1944\n\n             oil on canvas
            - name: get
              actions:
                - user: It would be unwise to cut the painting apart to try to put the eyes where they belong. You put the painting back.
@@ -1864,7 +1878,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? You read the card beside the painting'"'<br>THE PEASANT DANCE<br>Peter Bruegel the Elder<br>c. 1567<br>oil on panel
+               - user: A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? You read the card beside the painting'"'\n\nTHE PEASANT DANCE\n\nPeter Bruegel the Elder\n\nc. 1567\n\noil on panel
            - name: get
              actions:
                - user: Holding the painting up and dancing with the figures is briefly satisfying, but gets you no closer to the exit. You put the painting back.
@@ -1873,7 +1887,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: Some purple water lilies float in a vaguely watery blue scene. You read the card beside the painting'"'<br>           WATER-LILIES<br>            Claude Monet<br>            c. 1916-17<br>            oil on canvas
+               - user: Some purple water lilies float in a vaguely watery blue scene. You read the card beside the painting'"'\n\n           WATER-LILIES\n\n            Claude Monet\n\n            c. 1916-17\n\n            oil on canvas
            - name: get
              actions:
                - user: This would look great on your bedroom wall, but you’d have to explain where you got it. Oh well. You put the painting back.
@@ -1882,7 +1896,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user:  One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting'"'<br>          FIN<br>          Augustus Brooke-Winslow<br>          c. 1900<br>          oil on canvas
+               - user:  One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting'"'\n\n          FIN\n\n          Augustus Brooke-Winslow\n\n          c. 1900\n\n          oil on canvas
            - name: get
              actions:
                - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
@@ -1892,7 +1906,7 @@ rooms:
          commands:
              - name: examine
                actions:
-                 - user: A dozen or so people, many of them wearing yellow hats, are having a tea party. You read the card beside the painting'"'<br>            LUNCHEON OF THE BOATING PARTY (Le déjeuner des canotiers)<br>           Pierre-Auguste Renoir<br>            1881<br>            oil on canvas <br>
+                 - user: A dozen or so people, many of them wearing yellow hats, are having a tea party. You read the card beside the painting'"'\n\n            LUNCHEON OF THE BOATING PARTY (Le déjeuner des canotiers)\n\n           Pierre-Auguste Renoir\n\n            1881\n\n            oil on canvas \n\n
              - name: get
                actions:
                    - user: You wish you had a jaunty yellow hat as well and sigh. You put the painting back.
@@ -1901,7 +1915,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: A man leaning on a cane is addressing a ballroom of ballerinas. You read the card beside the painting'"'<br>           THE BALLET CLASS (La Classe de danse)<br>          Edgar Degas<br>           1871-1874<br>           oil on canvas
+               - user: A man leaning on a cane is addressing a ballroom of ballerinas. You read the card beside the painting'"'\n\n           THE BALLET CLASS (La Classe de danse)\n\n          Edgar Degas\n\n           1871-1874\n\n           oil on canvas
            - name: get
              actions:
                - user: You attempt a pirouette while holding the painting and land a perfect triple turn, which is amazing, since you’ve never taken a ballet class. You put the painting back and try again. The skill was fleeting.
@@ -1910,7 +1924,7 @@ rooms:
          commands:
              - name: examine
                actions:
-                 - user: A lot of squares, mostly white, some painted red, yellow, or blue. You read the card beside the painting'"'<br>          VICTORY BOOGIE WOOGIE<br>          Pieter Cornelis Mondriaan<br>          1944<br>          oil and paper on canvas
+                 - user: A lot of squares, mostly white, some painted red, yellow, or blue. You read the card beside the painting'"'\n\n          VICTORY BOOGIE WOOGIE\n\n          Pieter Cornelis Mondriaan\n\n          1944\n\n          oil and paper on canvas
              - name: get
                actions:
                    - user: You’re pretty sure your kindergartener cousin brought something home last week that looked just like this, so you don’t need another one. You put the painting back.
@@ -1936,5 +1950,5 @@ rooms:
                  - condition: '{arg}=="with the right answer"'
                    user: You can't get out of here that easily!
                  - condition: '{arg}=="5115"'
-                   user: You carefully enter "5115" on the keypad. <br><br>Chimes sound. The door swings open. <br><br>Inside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.<br><br>A note stuck to the wall says, "Take some; leave some. This belongs to all of us."<br><br>You realize that all those years ago, those five kids faced the same problem {FRIENDNAME} is, and you know what you must do. The next week, a new article appears in the {TOWNNAME} Times. <br><br>ANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL<br><br>{TOWNNAME}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {FRIENDNAME} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {TOWNNAME}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."<br><br><br>Congratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.
-                   room: '{name} enters "5115" on the keypad. <br><br>Chimes sound. The door swings open. <br><br>Inside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.<br><br>A note stuck to the wall says, "Take some; leave some. This belongs to all of us."<br><br>You realize that all those years ago, those five kids faced the same problem {FRIENDNAME} is, and you know what you must do. The next week, a new article appears in the {TOWNNAME} Times. <br><br>ANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL<br><br>{TOWNNAME}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {FRIENDNAME} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {TOWNNAME}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."<br><br><br>Congratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.'
+                   user: You carefully enter "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.
+                   room: '{name} enters "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.'
