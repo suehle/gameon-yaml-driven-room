@@ -95,7 +95,7 @@ rooms:
            - user: The door you came in is to the south. It has locked behind you, and despite your best efforts, it will not open. There is another door to the north. This is a basement, so there are no windows. The floor is firm, and you have no shovel. You are much too short to reach the ceiling. Your options are limited.
 
      items:
-       - name: {friendname}
+       - name: "{friendname}"
          commands:
            - name: examine
              actions:
