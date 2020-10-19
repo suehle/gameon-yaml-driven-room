@@ -1,463 +1,2004 @@
+##variables to edit for each class
+
 vars:
-  schoolname: St Miriams Finishing School for Girls.
+    schoolname: St Miriams Finishing School for Girls.
+    friendname: Gabriella
+    subject: science
+    townname: Shadyville
+    adultname: Ruth
+    child-first-name: Hannah
+    describe-walls: Every room has the same cold cinder block walls.
+    flashlight-color: blue
+    walkie-talkie: The walkie talkie is a big, black brick with an obvious speaker on the front and a simple on/off switch on top.
+    wall-things: Someone has scrawled "Mr. Jones is the best math teacher ever!" What a kind graffiti artist.
+    wall-things2: There's a world map poster that has the USSR, and half of the African continent just says "French West Africa." Your realize your school might have been around longer than you thought.
+    floor: How is there sticky bubblegum on the floor when it doesn't seem like anyone's been down here in centuries?
+    hospital-name: Tuomey Regional Hospital
+    basketballs: A rusty silver rack holds half a dozen basketballs, none of which will bounce. One is just a flat orange pancake.
+    spider: A tiny spiny orb weaver is chilling out in his web. What a great place for a spider to live undisturbed.
+
 commands:
--  name: get
-   aliases:
-   - take
-   - pickup
-   actions:
-   -  condition: '{arg}==""'
-      user: I don't know what you are trying to get, try /get name-of-item
-   -  condition: unmatched
-      user: I don't know how to get {arg}
--  name: drop
-   actions:
-   -  condition: '{arg}==""'
-      user: I don't know what you are trying to drop, try /drop name-of-item
-   -  condition: unmatched
-      user: I don't know how to drop {arg}
--  name: use
-   actions:
-   -  condition: '{arg}==""'
-      user: I don't know what you are trying to use, try /use name-of-item
-   -  condition: unmatched
-      user: I don't know how to use {arg}
--  name: kick
-   actions:
-   -  condition: '{arg}==""'
-      user: I don't know what you are trying to kick, try /kick name-of-item
-   -  condition: unmatched
-      user: Why would you want to kick {arg}???
+  - name: help
+    actions:
+      - user: There are a few commands that will help you get out of this basement. Remember to always type a '/' in front of the command and use simple phrases. For example':' \n\n /examine or /look - Used alone, this will look around the room and tell you what you see. Sometimes you will see things differently if you look around again. And perhaps again and again. Used with an object in the room ("/examine book") will take a closer look at that thing.\n\n /use - Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?\n\n /get - Pick up an object. You’ll have to /get cookie before you can /use cookie.\n\n /talk {friendname} - See what {friendname} is thinking right now. To talk to other people playing with you, simply type without a / in front. Everyone in the room will see your message.\n\n /go - Move in the direction specified, such as "/go n" to move north. This is always relative to the center of the room. You do not have to move back to go another direction. You can think of it like "/examine direction", which may reveal to you more than you see with a simple /look or /examine.\n\n /exits - Will tell you where you see ways out of the room. Too bad you’re trapped in a basement without many of them.
+
+  - name: get
+    aliases:
+       - take
+       - pickup
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to get, try /get name-of-item
+       -  condition: unmatched
+          user: I'm sorry. I don't know how to get {arg}.
+
+  - name: drop
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to drop, try /drop name-of-item
+       -  condition: unmatched
+          user: I'm sorry. I don't know how to drop {arg}.
+
+  - name: use
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to use, try /use name-of-item
+       -  condition: unmatched
+          user: I'm sorry. I don't know how to use {arg}.
+
+  - name: kick
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to kick, try /kick name-of-item
+       -  condition: unmatched
+          user: Why would you want to kick {arg}???
+
+## First room. All users must /use door to get out.
 rooms:
--  name: Entry Room
-   id: entryroom
-   state:
-      lightOn: false
-   commands:
-   -  name: go
-      actions:
-      -  condition: '{arg}=="north" || {arg}=="n"'
-         user: The door is locked. You can unlock it only by working together.
-         room: '{name} attempted to go north, but was thwarted by the big locked door.'
-      -  condition: '{arg}=="east" || {arg}=="e"'
-         user: There’s a wall there. Nowhere to go.
-      -  condition: '{arg}=="west" || {arg}=="w"'
-         user: There’s a wall there. Nowhere to go
-      -  condition: '{arg}=="south" || {arg}=="s"'
-         user: The way you entered is still locked behind you. Doors rarely magically unlock themselves. Today will be no
-            different.
-   -  name: examine
-      aliases:
-      - look
-      actions:
-      -  condition: room.state.lightOn==false
-         user: It is really dark down here. You know there’s a wall behind you because you just came through the door.
-      -  condition: room.state.lightOn==false
-         user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
-      -  condition: room.state.lightOn==true
-         user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long
-            it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
-   items:
-   -  name: flashlight
-      state:
-         hidden: true
-         isOn: false
-         heldBy: nobody
-      commands:
-      -  name: examine
-         actions:
-         -  condition: items.flashlight.isOn==false
-            user: An old dusty flashlight, it appears to be switched off.
-            room: '{name} examines the flashlight.'
-         -  condition: items.flashlight.isOn==true
-            user: An old dusty flashlight, it appears to be switched on.
-            room: '{name} examines the flashlight.'
-      -  name: get
-         actions:
-         -  condition: items.flashlight.heldBy==nobody
-            do:
-            - set items.flashlight.heldBy={id}
-            user: You pick up the flashlight.
-            room: '{name} picks up the flashlight.'
-      -  name: drop
-         actions:
-         -  condition: items.flashlight.heldBy=={id}
-            do:
-            - set items.flashlight.heldBy=nobody
-            user: You drop the flashlight
-            room: '{name} drops the flashlight'
-      -  name: use
-         actions:
-         -  condition: items.flashlight.heldBy!={id}
-            user: You can't use that, because you are not holding it, try /get flashlight
-            room: '{name} pokes at the flashlight aimlessly.'
-         -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
-            user: You switch off the flashlight.
-            room: '{name} turns the flashlight off.'
-         -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
-            user: You switch on the flashlight.
-            room: '{name} turns the flashlight on'
-      -  name: kick
-         actions:
-         -  user: You attempt to kick the flashlight, why would you do that! why!
-         -  user: You flail wildly toward the torch wih your foot, and miss.
-   -  name: door
-      state:
-         hidden: true
-      commands:
-      -  name: examine
-         actions:
-         -  user: You stare intently at the door, it appears to be very, very locked.
-      -  name: get
-         actions:
-         -  user: The door is firmly fixed in place, you cannot take it.
-      -  name: drop
-         actions:
-         -  user: Impossible!
-      -  name: use
-         actions:
-         -  user: You attempt to open the door, it is very very locked. It stays shut.
-      -  name: kick
-         actions:
-         -  user: That was unpleasant. For you. The door does not care.
-         -  user: Don’t break a toe. You could be down here a while. The door still does not care.
-         -  user: This will clearly not be successful. You should stop kicking the door.
-   -  name: switch
-      state:
-         hidden: true
-      commands:
-      -  name: examine
-         actions:
-         -  user: It appears to be a regular light switch.
-      -  name: get
-         actions:
-         -  user: The switch is part of the wall, there is no way to take it
-      -  name: drop
-         actions:
-         -  user: You cannot drop something you do not have!
-      -  name: use
-         actions:
-         -  condition: room.state.lightOn==false
-            do:
-            - set room.state.lightOn=true
-            - set items.flashlight.hidden=false
-            - set items.door.hidden=false
-            - set items.switch.hidden=false
-            user: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness.
-            room: It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is
-               standing by a light switch.
-         -  condition: room.state.lightOn==true
-            user: You consider turning the light back off, but it doesn't feel like a great idea, you decide to leave it on.
-      -  name: kick
-         actions:
-         -  user: You prepare a violent kick aimed at the lightswitch, before considering that kicking a lightswitch in a
-               dusty basement, might end badly. You stand down.
-   -  name: north wall
-      state:
-         hidden: false
-      commands:
-      -  name: examine
-         actions:
-         -  do:
-            - set items.switch.hidden=false
-            user: It’s a standard cinder block school basement wall. Near the door is a smoother plate… with a switch in the
-               middle.
-            room: '{name} stares at the north wall'
-##r:Where do we put these room descriptions to appear when they first whoosh into the room? Or will it be just a room name, and they have to /look?
-##o:the text when you enter is just gameon issuing a /look for the player.. so text like below should live in an examine action
-##THE BASEMENT CONTINUES
-##
-##
-##More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. 
-##
-##You wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class. 
--  name: Entry Room
-   id: entryroom
-   state:
-      lightOn: false
-   commands:
-   -  name: go
-      actions:
-      -  condition: '{arg}=="north" || {arg}=="n"'
-         user: The door is locked. You can unlock it only by working together.
-         room: '{name} attempted to go north, but was thwarted by the big locked door.'
-         
-- name: Morse Code
-  id: morsecode
-      
-  state:
-    lightOn: true
-##r:I left this here in case it needed to be set regardless of whether there's a light switch in the room. 
-##o:It's not required (no state is required, and the only state with special meaning is 'hidden' that may mean 'hide the item from /look'
-  commands:
-        - name: go
+  -  name: IT ALL STARTED WITH A RUMOR.
+     id: entry
+     state:
+       lightOn: false
+     commands:
+       -  name: go
           actions:
-          - condition: '{arg}=="north" || {arg}=="n"'
-            user: The door is locked. You can unlock it only by working together. 
-            room: '{name} attempted to go north but was thwarted by the big, locked door.'
-          - condition: '{arg}=="east" || {arg}=="e"'
-            user: Oh, look! A wall! How wonderful.
-          - condition: '{arg}=="west" || {arg}=="w"'
-            user: Oh, look! A wall! It's not much help.
-          - condition: '{arg}=="south" || {arg}=="s"'
-            user: Door still locked behind you. They rarely magically unlock themselves. Today will be no different.
-          - condition: '{arg}=="northeast" || {arg}=="ne"'
-            user: There is a walkie talkie on the floor in the corner. 
-          - condition: '{arg}=="northwest" || {arg}=="nw"'
-            user: There is a scrap of paper on the floor.
-          - condition: '{arg}=="southeast" || {arg}=="se"'
-            user: There is a scrap of paper on the floor.
-          - condition: '{arg}=="southwest" || {arg}=="sw"'
-            user: There are two scraps of paper on the floor.
-        - name: examine
+            -  condition: '{arg}=="north" || {arg}=="n"'
+               user: The door is locked. You can unlock it only by working together.
+               room: '{name} attempted to go north, but was thwarted by the big locked door.'
+            -  condition: '{arg}=="east" || {arg}=="e"'
+               user: There’s a wall there. Nowhere to go.
+            -  condition: '{arg}=="west" || {arg}=="w"'
+               user: There’s a wall there. Nowhere to go
+            -  condition: '{arg}=="south" || {arg}=="s"'
+               user: The way you entered has closed and locked behind you.
+       -  name: examine
           aliases:
             - look
           actions:
+            -  condition: room.state.lightOn==false
+               user: It is really dark down here. You're pretty sure there’s a wall behind you because you just got here.
+            -  condition: room.state.lightOn==false
+               user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
+            -  condition: room.state.lightOn==false
+               user: You still can't see anything at all. You feel like there should be a light switch though. Try examining the wall.
+            -  condition: room.state.lightOn==true
+               user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+               room: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+            -  condition: room.state.lightOn==true
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {friendname} looks terrified. There is a door to the north.
+            -  condition: room.state.lightOn==true
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {friendname} looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
+            -  condition: room.state.lightOn==true
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. There is a door to the north. Your friend {friendname} looks terrified. Have you tried talking to her?
+       - name: exits
+         actions:
+           - user: The door you came in is to the south. It has locked behind you, and despite your best efforts, it will not open. There is another door to the north. This is a basement, so there are no windows. The floor is firm, and you have no shovel. You are much too short to reach the ceiling. Your options are limited.
+
+     items:
+       - name: '{friendname}'
+         commands:
+           - name: examine
+             actions:
+               - user: Your friend. You are trapped in the school basement with her. Working together is your only hope of escape. Have you tried to /talk to her?
+               - user: '"Why are you staring at me?" she asks suspiciously. Maybe try to /talk to her instead.'
+           - name: talk
+             actions:
+               - user: '"Why did you let the door close?" you ask {friendname}, immediately regretting it. You’ve spent 20 minutes yelling for help and trying to kick the locked door open. It’s fruitless. \n\n\n\n"I’m sorry," {friendname} says quietly. "Are you mad at me? I am just getting nervous."'
+           - name: kick
+             actions:
+               - user: Hey! Kicking your friend is not going to get you out of here.
+               - user: Stop that. It isn't helping anyone.
+       - name: books
+         aliases:
+            - book
+         commands:
+            - name: examine
+              actions:
+                - user: 'While {subject} is your favorite subject, now is not the time for a study break.'
+                - user: 'The books unfortunately are about {subject}, not how to escape a locked basement. They are of no help to you.'
+                - user: 'Dust fills your nose, and you sneeze. Some history books that end in the 1960s probably aren’t worth the effort'
+            - name: talk
+              actions:
+               - user: The books are not good conversationalists. Try a human.
+       - name: north door
+         commands:
+           - name: talk
+             actions:
+               - user: The door listens thoughtfully to your words; however, it remains very, very shut.
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: Pretty standard, unlocked school door. You can handle it. Ha. "Handle." I made a door joke.
+           - name: kick
+             actions:
+               - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
+           - name: use
+             actions:
+                - user: "The door is locked."
+## This door won’t work until everyone agrees they’re ready to move on.
+## Nobody can move along until everyone is ready to move along.
+## (after everyone has done it) {name} successfully unlocks the door. {friendname} goes into the next room, and you follow her.
+
+       - name: door
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: Which door? Specify north door or south door.
+           - name: use
+             actions:
+               - user: Which door? Specify north door or south door.
+
+       - name: south door
+         commands:
+           - name: talk
+             actions:
+               - user: The door listens thoughtfully to your words; however, it remains very, very locked.
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: If you just walked back out this door, there would be no game to play. But also, it’s locked tightly, and you have no key.
+           - name: kick
+             actions:
+               - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
+           - name: use
+             actions:
+               - user: "It's locked. You have no key. Perhaps this room has another door?"
+
+       - name: wall
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: It’s a standard cinder block school basement wall. But there is a smoother plate… with a switch in the middle.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+
+       - name: switch
+         aliases:
+           - light switch
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: Looks like a pretty standard light switch. Try to /use it.
+           - name: use
+             actions:
+               - condition: room.state.lightOn==false
+                 user: CLICK. It feels like you turned on the sun. You squint and rub your eyes in the sudden brightness. \n\nFor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+                 room: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.\n\nor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+                 do:
+                  - set room.state.lightOn=true
+               - condition: room.state.lightOn==true
+                 user: You're trapped in a locked basement, and you want it to be dark, too!? You should reconsider.
+
+       - name: chalkboard
+         aliases:
+           - newspaper
+           - clipping
+         commands:
+           - name: examine
+             actions:
+               - user: You read the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[]{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
+                 room: '{name} reads the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n{townname} {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.'
+
+## Room 2
+  - name: The Basement Continues
+    id: morsecode
+    state:
+     lightOn: true
+    commands:
+      - name: go
+        actions:
+          - condition: '{arg} == "north" || {arg} == "n"'
+            user: The door is locked. You can unlock it only by working together.
+            room: '{name} attempted to go north but was thwarted by the big, locked door.'
+          - condition: '{arg} == "east" || {arg} == "e"'
+            user: Oh, look! A wall! How wonderful.
+          - condition: '{arg}=="west" || {arg}=="w"'
+            user: Oh, look! A wall! It's not much help.
+          - condition: '{arg} == "south" || {arg} == "s"'
+            user: Door still locked behind you. They rarely magically unlock themselves. Today will be no different.
+          - condition: '{arg} == "northeast" || {arg} == "ne"'
+            user: There is a walkie talkie on the floor in the corner.
+          - condition: '{arg} == "northwest" || {arg} == "nw"'
+            user: There is a scrap of paper on the floor.
+          - condition: '{arg} == "southeast" || {arg} == "se"'
+            user: There is a scrap of paper on the floor.
+          - condition: '{arg} == "southwest" || {arg} == "sw"'
+            user: There are two scraps of paper on the floor.
+      - name: examine
+        aliases:
+          - look
+        actions:
+          - condition: room.state.lightOn==true
+            user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. \n\n\n\nYou wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
           - condition: room.state.lightOn==true
             user: There is a walkie talkie in the northeast corner. How long must that have been here?
           - condition: room.state.lightOn==true
-            user: You notice several scraps of paper on the floor in the corners of the room. 
-##I think we need to tie some direction here, but right now they're just named scrap1 scrap2 etc and don't know where they are.     
-  items:      
-         - name: walkietalkie
-           state:
-               hidden: true
-               isOn: false
-               heldBy: nobody
-           commands:
-             - name: examine
-               actions:
-               - condition: items.walkietalkie.isOn==false
-                 user: '{walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it.'
-                 room: '{name} found a walkie talkie on the floor and seems to be staring at it.' 
-               - condition: items.walkietalkie.isOn==true
-                 user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺    
-                 room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺  
-             - name: get
-               actions:
-                - condition: items.walkietalkie.heldBy==nobody
-                  do: 
-                   - set items.walkietalkie.heldBy={id}
-                  user: You pick up the walkie talkie. It is not turned on.
-                  room: '{name} picked up a walkie talkie.'
-             - name: drop
-               actions:
-                - condition: items.walkietalkie.heldBy=={id}
-                  do: 
-                  - set items.walkietalkie.heldBy=nobody
-                  user: You put the walkie talkie on the floor.
-                  room: '{name} put the walkie talkie on the floor.'
-             - name: use
-               actions:
-                - condition: items.walkietalkie.heldBy!={id}
-                  user: You can't use the walkie talkie, because you're not holding it. Try "/get walkie talkie" first.
-                  room: "{name} pokes the walkie talkie, but it doesn't seem to care."
-                - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==false
-                  user: You switch off the walkie talkie. The beeping stops.
-                  room: '{name} turns the walkie talklie off. The beeping sounds stop.'
-                - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==true
-                  user: You turn the knob on the top of the walkie talkie. The red light illuminates, and the walkie talkie starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
-                  room: '{name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺'
-             - name: kick
-               actions:
-                - user: You attempt to kick the walkie talkie, but it is small, and you miss.
-                 
-         - name: scrap1
-           aliases:
-           - paper1
-           state:
-               hidden: false
-               heldBy: nobody
-           commands:
-             - name: examine
-               actions:
-                 - user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
-             - name: get
-               actions:
-                - condition: items.scrap1.heldBy==nobody
-                  do: 
-                   - set items.scrap1.heldBy={id}
-                  user: "The paper says \"LEGEND\" at the top. Under that it says:
-— ⏺ ⏺ — RUN
-— TUNNEL
-— ⏺ GO
-⏺ — CHALKBOARD
-Then the paper appears to have been ripped at the bottom. "
-             - name: drop
-               actions:
-                - condition: items.scrap1.heldBy=={id}
-                  do: 
-                  - set items.scrap1.heldBy=nobody
-                  user: You drop the scrap of paper.
-             - name: use
-               actions:
-                - condition: items.scrap1.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
+            user: You notice several scraps of paper on the floor in the corners of the room.
+      ##I think we need to tie some direction here, but right now they're just named scrap1 scrap2 etc and don't know where they are.
+      - name: exits
+        aliases:
+          - exit
+        actions:
+          - user: The door you came in is to the south. Much like the first door, it has now locked behind you. There is a heavier looking door to the north.
 
-         - name: scrap2
-           aliases:
-           - paper2
-           state:
-               hidden: false
-               heldBy: nobody
-           commands:
-             - name: examine
-               actions:
-               - user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
-             - name: get
-               actions:
-               - condition: items.scrap2.heldBy==nobody
-                 do: 
-                   - set items.scrap2.heldBy={id}
-                 user: "The paper seems to have been torn apart on several edges. What you can read says':'
-⏺⏺ — CEILING
-⏺ BASEMENT
-— — ⏺TO
-— ⏺ — ⏺ESCAPE"
-             - name: drop
-               actions:
-               - condition: items.scrap2.heldBy=={id}
-                 do: 
-                   - set items.scrap2.heldBy=nobody
-                 user: You drop the scrap of paper.
-             - name: use
-               actions:
+    items:
+      - name: '{friendname}'
+        commands:
+          - name: examine
+            actions:
+              - user: '{friendname} looks skeptical, as if she is trying to remember how you talked her into coming down here to begin with.'
+          - name: talk
+            actions:
+              - user: '"That story was creepy," she says. "I wonder how they found their way out… or if they found their way out?"'
+          - name: kick
+            actions:
+              - user: Hey! Kicking your friend is not going to get you out of here.
+              - user: Stop that. It isn't helping anyone.
+
+      - name: north door
+        commands:
+          - name: talk
+            actions:
+              - user: The door listens thoughtfully to your words; however, it remains very, very shut.
+          - name: examine
+            aliases:
+              - look
+            actions:
+              - user: This door is larger and heavier than the first two. There’s a keypad beside the door.
+          - name: kick
+            actions:
+              - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
+          - name: use
+            actions:
+              - user: The door is locked, and the keypad appears to be the way to open it. Its secrets are in this room.
+
+
+      - name: south door
+        commands:
+          - name: talk
+            actions:
+              - user: The door listens thoughtfully to your words; however, it remains very, very locked.
+          - name: examine
+            aliases:
+              - look
+            actions:
+              - user: It's locked. Really, really locked. Sorry. You'll have to find another way out.
+          - name: kick
+            actions:
+              - user: That door let you in here. What do you have against it?
+              - user: What’s your goal here?
+          - name: use
+            actions:
+              - user: Sorry. That door is locked shut. There’s nothing you can do about it.
+
+      - name: wall
+        aliases:
+          - walls
+        commands:
+          - name: examine
+            aliases:
+              - look
+            actions:
+              - user: What a very wally wall. So much wall. Wall, wall, wall.
+          - name: kick
+            actions:
+              - user: The wall is firm, as walls generally are. It is not affected by your foot.
+          - name: talk
+            actions:
+              - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+          - name: get
+            actions:
+              - user: Exactly how do you propose to do that?
+          - name: drop
+            actions:
+              - user: You can't drop something you don't have, and good luck getting a wall.
+          - name: use
+            actions:
+              - user: The wall is perfectly content doing its job making one fourth of this room, and it isn't interested in being used for anything else.
+
+      - name: walkietalkie
+        aliases:
+          - walkie-talkie
+          - walkie talkie
+        state:
+          hidden: true
+          isOn: false
+          heldBy: nobody
+        commands:
+          - name: examine
+            actions:
+              - condition: items.walkietalkie.isOn==false
+                user: '{walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it.'
+                room: '{name} found a walkie talkie on the floor and seems to be staring at it.'
+              - condition: items.walkietalkie.isOn==true
+                user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
+                room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
+          - name: get
+            actions:
+              - condition: items.walkietalkie.heldBy==nobody
+                do:
+                  - set items.walkietalkie.heldBy={id}
+                user: You pick up the walkie talkie. It is not turned on.
+                room: '{name} picked up a walkie talkie.'
+              - condition: walkietalkie.heldBy=={id}
+                user: "You can't get the walkietalkie when it's already in your hands!!"
+              - condition: walkietalkie.heldBy!={id} && walkietalkie.heldBy!=nobody
+                user: "It's not polite to try to snatch the walkietalkie from someone else, you could ask them nicely to drop it for you"
+          - name: drop
+            actions:
+              - condition: items.walkietalkie.heldBy=={id}
+                do:
+                - set items.walkietalkie.heldBy=nobody
+                user: You put the walkie talkie on the floor.
+                room: '{name} put the walkie talkie on the floor.'
+              - condition: unmatched
+                user: "You can't drop the walkietalkie if you don't have it!!"
+          - name: use
+            actions:
+            - condition: items.walkietalkie.heldBy!={id}
+              user: You can't use the walkie talkie, because you're not holding it. Try "/get walkie talkie" first.
+              room: '{name} pokes the walkie talkie, but it pays no attention.'
+            - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==true
+              user: You switch off the walkie talkie. The beeping stops.
+              room: '{name} turns the walkie talklie off. The beeping sounds stop.'
+              do:
+              - set items.walkietalkie.isOn==false
+            - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==false
+              user: You turn the knob on the top of the walkie talkie. The red light illuminates, and the walkie talkie starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
+              room: '{name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series.\n —   — — —   ⏺⏺   ⏺'
+              do:
+              - set items.walkietalkie.isOn==true
+          - name: kick
+            actions:
+              - user: You attempt to kick the walkie talkie, but it is small, and you miss.
+
+      - name: scrap1
+        aliases:
+            - paper1
+        state:
+          hidden: false
+          heldBy: nobody
+        commands:
+        - name: examine
+          actions:
+             - user: There is a small piece of paper on the floor. If you pick it up, you can read it.
+        - name: get
+          actions:
+           - condition: items.scrap1.heldBy==nobody
+             do:
+               - 'set items.scrap1.heldBy={id}'
+             user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\nThen the paper appears to have been ripped at the bottom.
+        - name: drop
+          actions:
+            - condition: items.scrap1.heldBy=={id}
+              do:
+                 - set items.scrap1.heldBy=nobody
+              user: You drop the scrap of paper.
+        - name: use
+          actions:
+            - condition: items.scrap1.heldBy!={id}
+              user: You can't use that, because you are not holding it.
+
+      - name: scrap2
+        aliases:
+            - paper2
+        state:
+           hidden: false
+           heldBy: nobody
+        commands:
+            - name: examine
+              actions:
+                - user: There is a small piece of paper on the floor. If you pick it up, you can read it.
+            - name: get
+              actions:
+                - condition: items.scrap2.heldBy==nobody
+                  do:
+                    - set items.scrap2.heldBy={id}
+                  user: The paper seems to have been torn apart on several edges. What you can read says':'\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE
+            - name: drop
+              actions:
+                - condition: items.scrap2.heldBy=={id}
+                  do:
+                    - set items.scrap2.heldBy=nobody
+                  user: You drop the scrap of paper.
+            - name: use
+              actions:
                 - condition: items.scrap2.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
+                  user: You can't use that, because you are not holding it.
 
-         - name: scrap3
-           aliases:
-           - paper3
-           state:
-               hidden: false
-               heldBy: nobody
-           commands:
-             - name: examine
-               actions:
-                - user: There is a small piece of paper on the floor. If you pick it up, you can read it.     
-             - name: get
-               actions:
-               - condition: items.scrap3.heldBy==nobody
-                 do: 
-                 - set items.scrap3.heldBy={id}
-                 user: "The paper says “LEGEND” at the top. Under that it says:
-— ⏺ ⏺ — RUN
-— TUNNEL
-— ⏺ GO
-⏺ — CHALKBOARD
-Then the paper appears to have been ripped at the bottom."
-             - name: drop
-               actions:
+      - name: scrap3
+        aliases:
+            - paper3
+        state:
+             hidden: false
+             heldBy: nobody
+        commands:
+            - name: examine
+              actions:
+                - user: There is a small piece of paper on the floor. If you pick it up, you can read it.
+            - name: get
+              actions:
+                - condition: items.scrap3.heldBy==nobody
+                  do:
+                    - set items.scrap3.heldBy={id}
+                  user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\nThen the paper appears to have been ripped at the bottom.
+            - name: drop
+              actions:
                 - condition: items.scrap3.heldBy=={id}
-                  do: 
-                  - set items.scrap3.heldBy=nobody
+                  do:
+                    - set items.scrap3.heldBy=nobody
                   user: You drop the scrap of paper.
-             - name: use
-               actions:
+            - name: use
+              actions:
                 - condition: items.scrap3.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
-                  
-         - name: scrap4
-           aliases:
-           - paper4
-           state:
-               hidden: false
-               heldBy: nobody
-           commands:
-             - name: examine
-               actions:
-##TODO review wording here.. 
-                 - user: "There is a small piece of paper on the floor. If you pick it up, you can something ... The paper has a smooth bottom edge, but appears to have been torn above that. It says: 
-⏺ ⏺ ⏺ A
-⏺ ⏺ THE
-⏺ ⏺ ⏺ ⏺ FILE CABINET
-— — — — VAULT"
-             - name: drop
-               actions:
+                  user: You can't use that, because you are not holding it.
+
+      - name: scrap4
+        aliases:
+            - paper4
+        state:
+             hidden: false
+             heldBy: nobody
+        commands:
+            - name: examine
+              actions:
+                - user: There is a small piece of paper on the floor. If you pick it up, you cThe paper has a smooth bottom edge, but appears to have been torn above that. It says':'\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n
+            - name: drop
+              actions:
                 - condition: items.scrap4.heldBy=={id}
-                  do: 
-                  - set items.scrap4.heldBy=nobody
+                  do:
+                    - set items.scrap4.heldBy=nobody
                   user: You drop the scrap of paper.
-             - name: use
-               actions:
+            - name: use
+              actions:
                 - condition: items.scrap4.heldBy!={id}
-                  user: You can't use that, because you are not holding it. 
-         - name: door
-           state:
-               hidden: true
-           commands:
-             - name: examine
-               actions:
-               - user: The door is locked, and the keypad beside it appears to be the way to open it. Its secrets are in this room.
-             - name: get
-               actions:
-               - user: You didn't bring a screwdriver, so that's not going to happen. 
-             - name: drop
-               actions:
-               - user: Drop a door? First you'll have to get it. 
-             - name: use
-               actions:
-               - user: You attempt to open the door, but it is very, very locked. It stays shut.
-             - name: kick
-               actions:
-               - user: That was unpleasant. For you. The door does not care. 
-               - user: Don’t break a toe. You could be down here a while. The door still does not care. 
-               - user: This will clearly not be successful. You should stop kicking the door.         
-               
-         - name: keypad
-           state:
-               hidden: true
-           commands:
-             - name: examine
-               actions:
-               - user: "The keypad beside the door has buttons with what seem to be an assortment of random words':' 
-RUN
-TUNNEL
-GO
-CHALKBOARD
-CEILING
-BASEMENT
-TO
-ESCAPE
-CLASSROOM
-THROUGH
-ROOF
-UNDER
-A
-THE
-FILE CABINET
-VAULT"
-             - name: use
-               actions:
-               - user: It looks like it’s expecting a phrase, you should try “/use keypad with the answer”
-##r:I have no idea how to tell it the correct answer version
-##o:..like this =)
-               - condition: unmatched
-                 user: You try to guess the code, the device bleeps, but nothing happens
-##o: Note that for now, we can't have spaces in the compare value, I know we need this.. I'll let you know when it's there.
-               - condition: '{arg}==1234'
-                 user: You enter the correct code, the door opens, the secrets of the universe are revealed to you.
-                 room: "{name} entered the right code, the self destruct sequence is aborted. Wait.. I didn't tell you about that? Ah well, you're all good now!!"
-         - name: wall
-           aliases:
-              - walls
-           state:
-               hidden: true
-           commands:
-             - name: examine
-               actions:
-               - user: You came in this room to the south, but the door slid shut behind you and is now indistinguishable from the wall. You couldn't go back if you wanted to. There is a heavier looking door to the north.
-             - name: get
-               actions:
-               - user: Exactly how do you propose to do that? 
-             - name: drop
-               actions:
-               - user: You can't drop something you don't have, and good luck getting a wall.  
-             - name: use
-               actions:
-               - user: The wall is perfectly content doing its job making one fourth of this room, and it isn't interested in being used for anything else. 
-             - name: kick
-               actions:
-               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+                  user: You can't use that, because you are not holding it.
 
 
+      - name: door
+        state:
+             hidden: true
+        commands:
+            - name: examine
+              actions:
+                - user: The door is locked, and the keypad beside it appears to be the way to open it. Its secrets are in this room.
+            - name: get
+              actions:
+                - user: You didn't bring a screwdriver, so that's not going to happen.
+            - name: drop
+              actions:
+                - user: Drop a door? First you'll have to get it.
+            - name: use
+              actions:
+                - user: You attempt to open the door, but it is very, very locked. It stays shut.
+            - name: kick
+              actions:
+                - user: That was unpleasant. For you. The door does not care.
+                - user: Don’t break a toe. You could be down here a while. The door still does not care.
+                - user: This will clearly not be successful. You should stop kicking the door.
+
+      - name: keypad
+        state:
+            hidden: true
+        commands:
+            - name: examine
+              actions:
+                - user: The keypad beside the door has buttons with what seem to be an assortment of random words':' \n\nRUN\n\nTUNNEL\n\nGO\n\nCHALKBOARD\n\nCEILING\n\nBASEMENT\n\nTO\n\nESCAPE\n\nCLASSROOM\n\nTHROUGH\n\nROOF\n\nUNDER\n\nA\n\nTHE\n\nFILE CABINET\n\nVAULT
+            - name: use
+              actions:
+                - condition: '{arg}==""'
+                  user: It looks like it’s expecting a phrase, you should try "/use keypad with the answer"
+                - condition: unmatched
+                  user: Nothing happens. That must not have been the right phrase.
+                - condition: '{arg}=="keypad with the answer"'
+                  user: If the keypad had emotions, it would currently be quite baffled. Use the answer from the puzzle in the room!
+                - condition: '{arg}=="tunnel under the basement"'
+                  user: You press the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.
+                  room: '{name} presses the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.'
+                  do:
+                   - teleportAll nextroomid
+
+## Room 3
+  - name: Classroom Storage
+    id: classroomstorage
+    state:
+      lightOn: true
+
+    commands:
+      - name: go
+        actions:
+          - condition: '{arg}=="north" || {arg}=="n"'
+            user: The door is locked. But its secrets are in this room.
+            room: '{name} attempted to go north but was thwarted by the big, locked door.'
+          - condition: '{arg}=="east" || {arg}=="e"'
+            user: There’s a wall there. Nowhere to go.
+          - condition: '{arg}=="west" || {arg}=="w"'
+            user: There’s a wall there. Nowhere to go.
+          - condition: '{arg}=="south" || {arg}=="s"'
+            user: That door has closed and locked.
+          - condition: '{arg}=="northeast" || {arg}=="ne"'
+            user: An unremarkable corner, though it’s been years since anyone noticed it was here, and it’s delighted that you did.
+          - condition: '{arg}=="northwest" || {arg}=="nw"'
+            user: An unremarkable corner.
+          - condition: '{arg}=="southeast" || {arg}=="se"'
+            user: There’s a flashlight on the floor.
+          - condition: '{arg}=="southwest" || {arg}=="sw"'
+            user: An unremarkable corner.
+
+      - name: examine
+        aliases:
+          - look
+        actions:
+          - condition: room.state.lightOn==true
+            user: This just seems to be a room full of assorted leftovers from classrooms, mostly broken desks and chairs. Some of them look pretty old.
+          - condition: room.state.lightOn==true
+            user: There’s not much of interest here. Mostly just broken desks and chairs that accumulated over the years. There is {flaslight-color} flashlight on the floor.
+
+      - name: exits
+        aliases:
+          - exit
+        actions:
+          - user: The door you came in is to the south. Much like the first two doors, it has now locked behind you. There is another heavier looking door to the north, similar to the one you just came through.
+
+    items:
+      - name: '{friendname}'
+        commands:
+          - name: examine
+            actions:
+              - user: ' {friendname} mutters, "Seriously. NOT how Morse Code works." But you know if you ask more questions, she’ll spend an hour telling you about the entire history of telecommunications, and you don’t have time for that.'
+          - name: talk
+            actions:
+              - user: '{friendname} seems to be more interested in getting out of here than engaging in small talk.'
+          - name: kick
+            actions:
+              - user: Hey! Kicking your friend is not going to get you out of here.
+              - user: Stop that. It isn't helping anyone.
+
+      - name: north door
+        commands:
+          - name: talk
+            actions:
+              - user: The door listens thoughtfully to your words; however, it remains very, very shut.
+          - name: get
+            actions:
+              - user: The door is firmly fixed in place, you cannot take it.
+          - name: drop
+            actions:
+              - user: Impossible!
+          - name: examine
+            aliases:
+              - look
+            actions:
+              - user: This door is larger and heavier than the first two. There’s a keypad beside the door.
+          - name: kick
+            actions:
+              - user: That was unpleasant. For you. The door does not care.
+          - name: use
+            actions:
+              - user: The door is locked, and the keypad appears to be the way to open it. Its secrets are in this room.
+
+      - name: south door
+        commands:
+          - name: talk
+            actions:
+              - user: The door listens thoughtfully to your words; however, it remains very, very locked.
+          - name: examine
+            aliases:
+              - look
+            actions:
+              - user: "It's locked. Really, really locked. Sorry. You'll have to find another way out."
+          - name: kick
+            actions:
+              - user: Don’t break a toe. You could be down here a while. The door still does not care.
+          - name: use
+            actions:
+              - user: "It's locked. You have no key. Perhaps this room has another door?"
+
+      - name: wall
+        commands:
+          - name: examine
+            aliases:
+              - look
+            actions:
+              - user: What a very wally wall. So much wall. Wall, wall, wall.
+          - name: kick
+            actions:
+              - user: You fought the wall. The wall won.
+          - name: talk
+            actions:
+              - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+
+      -  name: flashlight
+         state:
+            hidden: true
+            isOn: false
+            heldBy: nobody
+         commands:
+          -  name: examine
+             actions:
+               -  condition: items.flashlight.isOn==false
+                  user: An old dusty flashlight, it appears to be switched off.
+                  room: '{name} examines the flashlight.'
+               -  condition: items.flashlight.isOn==true
+                  user: An old dusty flashlight, it appears to be switched on.
+                  room: '{name} examines the flashlight.'
+          -  name: get
+             actions:
+               -  condition: items.flashlight.heldBy==nobody
+                  do:
+                    - set items.flashlight.heldBy={id}
+                  user: You pick up the flashlight.
+                  room: '{name} found a flashlight and picked it up. That might be useful later.'
+          -  name: drop
+             actions:
+               -  condition: items.flashlight.heldBy=={id}
+                  do:
+                    - set items.flashlight.heldBy=nobody
+                  user: You drop the flashlight
+                  room: '{name} drops the flashlight'
+          -  name: use
+             actions:
+               -  condition: items.flashlight.heldBy!={id}
+                  user: You can't use that, because you are not holding it, try /get flashlight
+                  room: '{name} pokes at the flashlight aimlessly.'
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
+                  user: You switch off the flashlight.
+                  room: '{name} turns the flashlight off.'
+                  do:
+                    - set items.flashlight.isOn==false
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
+                  user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
+                  room: '{name} turns the flashlight on'
+                  do:
+                    - set items.flashlight.isOn==true
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="north" || {arg}=="n"'
+                  user: You shine the flashlight on the north wall. {wall-things}
+                  room: '{name} shines the flashlight on the north wall. {wall-things}'
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="east" || {arg}=="e"'
+                  user: You shine the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.
+                  room: '{name} shines the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\n\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.'
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="west" || {arg}=="w"'
+                  user: You shine the flashlight on the west wall. {wall-things2}
+                  room: '{name} shines the flashlight on the west wall. {wall-things2}'
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="south" || {arg}=="s"'
+                  user: You shine the flashlight on the south wall. The door you came through is there. No use going back, though. Escape can only lie ahead.
+                  room: '{name} shines the flashlight on the south wall. The door you came through is there. No use going back, though. Escape can only lie ahead.'
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="floor"'
+                  user: You shine the flashlight at the floor. {FLOOR}
+                  room: '{name} shines the flashlight at the floor. {FLOOR}'
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="ceiling"'
+                  user: You shine the flashlight on the ceiling. You find nothing.
+                  room: '{name} shines the flashlight at the ceiling.'
+          -  name: kick
+             actions:
+               -  user: You attempt to kick the flashlight, why would you do that! why!
+               -  user: You flail wildly toward the torch wih your foot, and miss.
+
+      -  name: projector
+         commands:
+          -  name: examine
+             actions:
+               - user: You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19   20 23 15   23 9 14 19\n\nCLUE':' The letter that lights up = 1
+                 room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19   20 23 15   23 9 14 19\n\nCLUE... The letter that lights up = 1'
+
+      - name: keypad
+        commands:
+         - name: examine
+           actions:
+             - user: The keypad beside the door has a display showing blanks':'\n\n_ _ _ _ _ _   _ _ _   _ _ _ _ \n\n\n\nelow it is a standard keyboard on the screen.
+         - name: use
+           actions:
+             - user: It looks like it’s expecting a phrase. You should try "/use keypad with the answer"
+             - condition: unmatched
+               user: Nothing happens. That must not have been the right phrase.
+             - condition: '{arg}=="with the answer"'
+               user: If the keypad had emotions, it would currently be quite baffled. Use the answer from the puzzle in the room!
+             - condition: '{arg}=="titans two wins"'
+               user: You type "TITANS TWO WINS" on the keypad beside the door. \n\n\n\n"Like the Greek Titans we learned about in social studies?" {friendname} wonders. \n\n\n\nThe door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.
+               room: '{name} types "TITANS TWO WINS" on the keypad beside the door.\n\n\n\n "Like the Greek Titans we learned about in social studies?" {friendname} wonders. \n\n\n\nThe door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.'
+               do:
+                 - teleportAll nextroomid
+
+## Room 4
+
+  - name: GO TITANS!
+    id: bigroom
+
+    commands:
+      - name: go
+        actions:
+          - condition: '{arg}=="north" || {arg}=="n"'
+            user: You look at the scoreboard. The scoreboard looks back.
+          - condition: '{arg}=="east" || {arg}=="e"'
+            user: The door is locked. But its secrets are in this room. Or in the world.
+          - condition: '{arg}=="west" || {arg}=="w"'
+            user: There’s nowhere to go, so you have a brief chat with the wall. It’s not much of a conversationalist.
+          - condition: '{arg}=="south" || {arg}=="s"'
+            user: The door you came in has locked behind you, but it doesn’t matter. There’s only one way out, and that’s to keep moving ahead.
+          - condition: '{arg}=="northeast" || {arg}=="ne"'
+            user: There’s a globe sitting on an old desk.
+          - condition: '{arg}=="northwest" || {arg}=="nw"'
+            user: There’s a pile of old, half-deflated basketballs on a rack in the corner.
+          - condition: '{arg}=="southeast" || {arg}=="se"'
+            user: What an unremarkable corner. It appreciates your visit.
+          - condition: '{arg}=="southwest" || {arg}=="sw"'
+            user: A stack of dusty old yearbooks sit on a table.
+
+      - name: examine
+        aliases:
+          - look
+        actions:
+          - user: This must be the athletic department’s storage room. There’s a rack of partially deflated basketballs, a table of old yearbooks, and the old baseball field’s scoreboard hanging on the north wall with several well-used bats on the ground under it. A globe that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
+
+      - name: exits
+        aliases:
+          - exit
+        actions:
+          - user: The door you came in is to the south. No point in going back. Another door is on the east wall. There are no windows because, well, it’s a basement.
+
+    items:
+      - name: '{friendname}'
+        commands:
+          - name: examine
+            actions:
+              - user: She looks pretty sad. Probably thinking how she’s going to miss you way more than she’ll miss watching the baseball team lose.
+          - name: talk
+            actions:
+              - user: '{friendname} sighs. "Do you think there’s any hope of getting out of here? At least there don’t appear to be any characters from Greek mythology waiting for us."'
+          - name: kick
+            actions:
+             - user: Hey! Kicking your friend is not going to get you out of here.
+             - user: Stop that. It isn’t helping you.
+
+      - name: south door
+        aliases:
+          - door
+        commands:
+          - name: kick
+            actions:
+              - user: Your foot hurts, but the door is no worse off.
+              - user: What’s your goal here?
+
+      - name: east door
+        aliases:
+          - door
+        commands:
+          - name: kick
+            actions:
+              - user: Your foot hurts, but the door is no worse off.
+              - user: What’s your goal here?
+          - name: examine
+            actions:
+              - user: With every room, the doors look thicker and harder to open. It’s starting to look like someone really didn’t want people poking around down here. There’s a keypad beside the door.
+              - user: The door is locked, and the keypad appears to be the way to open it. Its secrets are in this room. Or in the world.
+
+      - name: wall
+        aliases:
+          - walls
+        commands:
+          - name: kick
+            actions:
+              - user: The wall is firm, as walls generally are. It is not affected by your foot.
+          - name: examine
+            actions:
+              - user: Indeed, this wall is much like other walls. Vertical, perpendicular to the ground. Wall-tastic in every way.
+
+      - name: basketballs
+        aliases:
+          - basketball
+        commands:
+          - name: examine
+            actions:
+              - user: '{basketballs} You wonder why they’re even saving these if they’re just going to sit down here collecting dust.'
+          - name: kick
+            actions:
+              - user: They're basketballs, not soccer balls.
+          - name: get
+            actions:
+             - user: Ew, the rubber is disintegrating. That feels weird. You put the ball back on the stack.
+          - name: use
+            aliases:
+             - bounce
+            actions:
+             - user: You pick up a ball and attempt to dribble. The half-deflated ball drops to the floor with a "thud."``
+
+      - name: bats
+        commands:
+          - name: examine
+            actions:
+              - user: It’s obvious why these aren’t in the gym anymore. Some look so old, you wonder if they’d break in half if they ever hit another ball.
+          - name: kick
+            actions:
+              - user: I don't think you understand how baseball works. It doesn't matter. Knowing how to play won't get you out of this basement.
+          - name: get
+            actions:
+              - user: You pick up a bat and get a splinter. You immediately drop the bat.
+          - name: use
+            actions:
+              - user: You pick up a bat and try to swing it. It cracks in half. You get a splinter.
+
+      - name: yearbooks
+        aliases:
+          - yearbook
+          - book
+        commands:
+          - name: examine
+            actions:
+              - user: You pick up a yearbook from the stack on the table and flip to the baseball team’s pages. Alas, they did not win that year. Nothing useful here. Maybe try looking at another one.
+              - user: You pick up a yearbook and look through its pages. Hairstyles were weird in the 80s. But knowing that probably won’t get you out of here. Try looking at another yearbook.
+              - user: You pick up a yearbook and marvel at the fact that people have been signing yearbooks "2 good + 2 be = 4 gotten" since the beginning of time. Those aren’t the numbers you need though. Try looking at another yearbook.
+              - user: You pick up a yearbook and flip to the athletics section. If only they’d spent as much time in practice as they did on their spirit week outfits, some team at this school might have won a game. Surely if you look at another yearbook, you’ll find evidence of a win?
+              - user: Apparently they didn’t just lose all the time! The Titans won on March 12, 2008.
+                room: '{name} picks up a yearbook and learns something interesting.'
+## This last one to the room is meant to only show on the last user response... I'm not sure if that's what will actually happen?
+
+      - name: scoreboard
+        commands:
+          - name: examine
+            actions:
+              - user: You recognize the scoreboard as the one that used to be on the baseball field before the school held a fundraiser to replace it. It’s not plugged in, but you notice the cord is dangling near an outlet.
+          - name: use
+            actions:
+              - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
+              - room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
+
+      - name: cord
+        commands:
+          - name: use
+            actions:
+              - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
+                room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
+
+      - name: ticket
+        aliases:
+          - stub
+        commands:
+          - name: get
+            actions:
+              - user: You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.
+                room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.'
+
+      - name: spider
+        commands:
+          - name: examine
+            actions:
+              - user: '{spider}'
+          - name: get
+            actions:
+              - user: The spider is perfectly content in her web. Why don't you leave her alone?
+              - user: No, really. Leave the spider alone.
+              - user: You're not taking no for an answer, are you?
+              - user: What spider? There's no spider here.
+              - user: The spider has gone.
+              - user: I don't know what spider you're talking about.
+              - user: I don't know the word "spider."
+
+      ## Goal: display the following text to the room when both the ticket and yearbook have been identified.
+      ## "We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."
+
+      ## "And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."
+
+      ## Seeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"
+
+      ## If that's a no-go, lmk and I'll rewrite.
+
+      - name: globe
+        aliases:
+          - world
+        commands:
+          - name: examine
+            actions:
+              - user: You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.
+              - room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.'
+
+      ## need to create two states: before dates found and after dates found
+
+      - name: keypad
+        commands:
+          - name: examine
+            actions:
+              - user: This time the keypad has a message with a regular keyboard layout waiting under it. The message reads':'\n\nFIND ANOTHER WORD INSIDE THE HIDDEN WORD. YOU’LL NEED TO USE IT TO GET OUT OF HERE.\n\n_ _ _ _ _
+          - name: use
+            actions:
+              - condition: unmatched
+                user: The keypad wants you to enter a word, but not that one. Think… a word you find inside the hidden word.
+              - condition: unmatched
+                user: It seems likely that what you need is a five-letter word.
+              - condition: unmatched
+                user: Hmmm. What is a five-letter word for something you’ll need to use to get out of here that you can make from a word hidden in this room?
+              - condition: '{arg}=="with the answer"'
+                user: If the keypad had emotions, it would currently be quite baffled. Use the answer from the puzzle in the room!
+              - condition: '{arg}=="brain"'
+                user: Use your brain, indeed! You’d say you’re doing a pretty good job of that so far. What else will you have to do to find a way out of here? You all move on to the next room.
+                room: '{name} enters "BRAIN" on the keypad, and the door swings open. What else will you have to do to find a way out of here? You all move on to the next room.'
+                do:
+                  - teleportAll nextroomid
+
+  ## Room 5
+
+  - name: The Science and Social Studies Room
+    id: skeleton
+
+    commands:
+      - name: go
+        actions:
+          - condition: '{arg}=="north" || {arg}=="n"'
+            user: Just a wall.
+          - condition: '{arg}=="east" || {arg}=="e"'
+            user: Just a wall.
+          - condition: '{arg}=="west" || {arg}=="w"'
+            user: Just a wall, but with a locked door.
+          - condition: '{arg}=="south" || {arg}=="s"'
+            user: Just a wall.
+          - condition: '{arg}=="northeast" || {arg}=="ne"'
+            user: Just a corner.
+          - condition: '{arg}=="northwest" || {arg}=="nw"'
+            user: Just a corner.
+          - condition: '{arg}=="southeast" || {arg}=="se"'
+            user: Just a corner.
+          - condition: '{arg}=="southwest" || {arg}=="sw"'
+            user: Just a corner.
+
+      - name: examine
+        aliases:
+          - look
+        actions:
+          - user: This might be the creepiest room yet. It’s barely lit, but it doesn’t matter, because it looks like the only thing here is an old plastic skeleton from the science lab.
+
+      - name: exits
+        aliases:
+          - exit
+        actions:
+          - user: The door you came in is to the west. And other than that… you seem to be very trapped.
+
+
+    items:
+      - name: '{friendname}'
+        commands:
+        - name: examine
+          actions:
+              - user: '{friendname} looks absolutely terrified.'
+        - name: talk
+          actions:
+            - user: '"A SKELETON?!" {friendname} shrieks. "I’m not touching it."'
+        - name: kick
+          actions:
+            - user: Hey! Kicking your friend is not going to get you out of here.
+            - user: Stop that. It isn’t helping you.
+
+      - name: west door
+        aliases:
+          - door
+        commands:
+          - name: kick
+            actions:
+              - user: What’s your goal here?
+
+      - name: skeleton
+        commands:
+          - name: kick
+            actions:
+              - user: The skeleton rattles in an unsettling fashion, but it does not kick back. This is just a skeleton. It's not haunted. (What a relief.)
+          - name: examine
+            actions:
+              - user: The skeleton may be plastic, but it makes quite a racket when you shake it. Behind its eyes, you can see a plastic brain model.
+                room: '{name} rattles the skeleton. The noise does not make this room less creepy.'
+
+      - name: brain
+        commands:
+          - name: examine
+            actions:
+              - user: You take the top off the skeleton’s head and find the plastic brain is an unnaturally bright shade of pink. Along the line between the right and left hemispheres, there’s a message. On one side, "What makes more as you take them." On the other, "Follow." What might that mean? Don’t forget to use the tools you have.
+          - name: kick
+            actions:
+              - user: No. Just no.
+          - name: use
+            actions:
+              - user: You spend several minutes examining the brain. You memorize the locations of the frontal and parietal lobe. The temporal and occipital lobe. The encephalic trunk and cerebellum. You consider going to medical school. Then you remember you need to get out of this basement first.
+
+## do they still have the flashlight, or do we need to drop another one in this room?
+      -  name: flashlight
+         state:
+           hidden: true
+           isOn: false
+           heldBy: nobody
+         commands:
+           -  name: examine
+              actions:
+                -  condition: items.flashlight.isOn==false
+                   user: An old dusty flashlight, it appears to be switched off.
+                   room: '{name} examines the flashlight.'
+                -  condition: items.flashlight.isOn==true
+                   user: An old dusty flashlight, it appears to be switched on.
+                   room: '{name} examines the flashlight.'
+           -  name: get
+              actions:
+                -  condition: items.flashlight.heldBy==nobody
+                   do:
+                     - set items.flashlight.heldBy={id}
+                   user: You pick up the flashlight.
+                   room: '{name} found a flashlight and picked it up.'
+           -  name: drop
+              actions:
+                -  condition: items.flashlight.heldBy=={id}
+                   do:
+                     - set items.flashlight.heldBy=nobody
+                   user: You drop the flashlight
+                   room: '{name} drops the flashlight'
+           -  name: use
+              actions:
+                -  condition: 'items.flashlight.heldBy!={id}'
+                   user: "You can't use that, because you are not holding it, try /get flashlight"
+                   room: '{name} pokes at the flashlight aimlessly.'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
+                   user: 'You switch off the flashlight.'
+                   room: '{name} turns the flashlight off.'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
+                   user: 'Hey, the flashlight works! And it’s shining in your eyes. Remember, you need to specify what you want to use the flashlight on (eg, "/use flashlight east wall"). You can also shine it at the floor or ceiling.'
+                   room: '{name} turns the flashlight on'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="north" || {arg}=="n"'
+                   user: 'You shine the flashlight on the north wall. You thought you saw a hint of something there, but... hmm. Maybe not.'
+                   room: '{name} shines the flashlight on the north wall. You thought you saw a hint of something there, but... hmm. Maybe not'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="east" || {arg}=="e"'
+                   user: You shine the flashlight on the east wall. It looks like a wall.
+                   room: '{name} shines the flashlight on the east wall. It looks like a wall.'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="west" || {arg}=="w"'
+                   user: You shine the flashlight on the west wall. The door you came in is quite shiny. But locked. And there’s no keypad on this side.
+                   room:  '{name} shines the flashlight on the west wall. The door you came in is quite shiny. But locked. And there’s no keypad on this side.'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="south" || {arg}=="s"'
+                   user: You shine the flashlight on the south wall. Just wall. Wall, wall, wall.
+                   room: '{name} shines the flashlight on the south wall. Just wall. Wall, wall, wall.'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="floor"'
+                   user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
+                   room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the north wall?'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="ceiling"'
+                   user: You shine the flashlight on the ceiling. You find nothing.
+                   room: '{name} shines the flashlight at the ceiling.'
+           -  name: kick
+              actions:
+                -  user: You attempt to kick the flashlight, why would you do that! why!
+                -  user: You flail wildly toward the torch wih your foot, and miss.
+      - name: south wall
+        commands:
+          - name: examine
+            actions:
+              - user: This seems to be just a wall.
+
+      - name: east wall
+        commands:
+          - name: examine
+            actions:
+              - user: This seems to be just a wall.
+
+      - name: west wall
+        commands:
+          - name: examine
+            actions:
+              - user: This seems to be just a wall.
+
+      - name: north wall
+        commands:
+          - name: examine
+            actions:
+            ## needs the condition of working only after footprints are found
+            - user: You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMissing Teens Found\n\nApril 22, 1979\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.
+              room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\n\n\nMissing Teens Found\n\nApril 22, 1979\n\n\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\n\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
+
+      ## Choices here: Either examining the north wall is the last task to be done, or we can add a /use doorway. Since we haven't had a "doorway" so far, it seems unlikely they'd do it by accident, but not impossible.
+
+
+
+## Room 6 -- almost the tunnel
+
+  - name: A Riddle
+    id: riddle
+    state:
+         lightOn: true
+
+    commands:
+       - name: go
+         actions:
+           - condition: '{arg}=="north" || {arg}=="n"'
+             user: Just a wall.
+           - condition: '{arg}=="east" || {arg}=="e"'
+             user: Just a wall.
+           - condition: '{arg}=="west" || {arg}=="w"'
+             user: Just a wall, but with a locked door.
+           - condition: '{arg}=="south" || {arg}=="s"'
+             user: Just a wall.
+           - condition: '{arg}=="northeast" || {arg}=="ne"'
+             user: Just a corner.
+           - condition: '{arg}=="northwest" || {arg}=="nw"'
+             user: Just a corner.
+           - condition: '{arg}=="southeast" || {arg}=="se"'
+             user: Just a corner.
+           - condition: '{arg}=="southwest" || {arg}=="sw"'
+             user: Just a corner.
+
+       - name: examine
+         aliases:
+           - look
+         actions:
+           - condition: room.state.lightOn==true
+             user: '"So there’s really a vault," {friendname} gasps. "This proves it. And those kids got out." \n\n\n\n"It seems that to find the tunnel, we first have to find a riddle in the darkest corner of the basement, and answer it correctly," you say. \n\n\n\n"Easy peasy," {friendname} jokes sarcastically. "Except why would we have to turn off the light to hear a sound?"\n\n\n\nThis is the smallest room yet, and it doesn’t even seem to be used as storage. In fact, the only thing you see is a light switch on the wall.  \n\n\n\nThe hidden doorway slides shut behind you. You are now truly, officially trapped. \n\n\n\nThere’s a light switch on the wall. And nothing else in the room.'
+           - condition: room.state.lightOn==false
+             user: Try looking in each direction and see if you can find where the sound is coming from.
+
+       - name: exits
+         aliases:
+           - exit
+         actions:
+           - user: The door you came in is to the south.
+
+    items:
+       - name: '{friendname}'
+         commands:
+         - name: examine
+           actions:
+             - user: '{friendname} looks increasingly uncertain about all of this.'
+         - name: talk
+           actions:
+             - user: '"I have never been a fan of the dark," {friendname} says. "I might never turn off the lights again if we ever get out of here."'
+         - name: kick
+           actions:
+             - user: Hey! Kicking your friend is not going to get you out of here.
+             - user: Stop that. It isn’t helping you.
+
+       - name: south door
+         aliases:
+           - door
+         commands:
+           - name: examine
+             actions:
+               - user: It's a door. It is locked. You are trapped.
+           - name: use
+             actions:
+               - user: Surely by now you understand that you cannot use a locked door.
+           - name: kick
+             actions:
+               - user: What’s your goal here?
+
+       - name: switch
+         aliases:
+           - light switch
+           - lightswitch
+         commands:
+           - name: use
+             actions:
+             - condition: room.state.lightOn==true
+               do:
+                 - set room.state.lightOn=false
+               user: You turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.
+               room: '{name} turns out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.'
+             - condition: room.state.lightOn==false
+               user: The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.
+       ## Will the room see anything on the second user output? And what happens if they keep using the switch?
+
+       - name: north
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: The beeping grows louder.
+               -  condition: room.state.lightOn==true
+                  user: There's a wall.
+
+       - name: east
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: The beeping is fading. You seem to be walking away from it.
+               -  condition: room.state.lightOn==true
+                  user: There's a wall.
+
+       - name: south
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: The beeping is fading. You seem to be walking away from it.
+               -  condition: room.state.lightOn==true
+                  user: There's a wall.
+
+       - name: west
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: The beeping grows louder.
+               -  condition: room.state.lightOn==true
+                  user: There's a wall.
+
+       - name: northeast
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: The beeping is somewhat louder, but you’re not quite close to it yet.
+               -  condition: room.state.lightOn==true
+                  user: There's a corner.
+
+       - name: southwest
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: The beeping is somewhat louder, but you’re not quite close to it yet.
+               -  condition: room.state.lightOn==true
+                  user: There's a corner.
+
+       - name: southeast
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You don’t even hear the beeping anymore and are growing tired of being in the dark. What did that news article say about how the last teens got out?
+               -  condition: room.state.lightOn==true
+                  user: There's a corner.
+
+       - name: northwest
+         commands:
+           - name: examine
+             aliases:
+               - look
+               - listen
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: As you get to the corner, the beeping is clearly coming from inside the wall.
+               -  condition: room.state.lightOn==true
+                  user: There's a corner.
+
+       - name: north wall
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: There are what seem to be outlines of game pieces on the wall. You see a pawn and a knight.
+
+       - name: east wall
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user:  There are what seem to be outlines of game pieces on the wall. You see a pair of dice showing two sixes.
+
+       - name: south wall
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user:  There are what seem to be outlines of game pieces on the wall. You see a rook and a bishop.
+
+       - name: west wall
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user:  There are what seem to be outlines of game pieces on the wall. There's a stack of circles that you decide represent marbles.
+
+       - name: northeast wall
+         aliases:
+           - northeast corner
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user:  There are what seem to be outlines of game pieces on the wall. You see king and queen chess pieces.
+
+       - name: southwest wall
+         aliases:
+           - southwest corner
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: There are what seem to be outlines of a hand of cards on the wall. They're the A, K, Q, J, and 10 of diamonds.
+
+       - name: southeast wall
+         aliases:
+           - southeast corner
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: There are what seem to be outlines of a two dominoes on the wall. One shows a pair of 1s and the other a pair of 6s.
+
+       - name: northwest wall
+         aliases:
+           - northwest corner
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You notice a small crack between the bricks and pull out a long piece of rolled up paper. A sliver of light peeks out of the crack where the paper had been. It says':'\n\n\n\nWE ARE A GROUP OF EIGHT\n\nWE PROTECT THE KING IN EVERY BATTLE\n\nWE ARE CONSIDERED WEAK, BUT IF WE MOVE AHEAD\n\nWE NEVER TURN BACK. WHO ARE WE?
+
+
+       - name: pawn
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a chess pawn on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You press the pawn on the wall. A doorway-sized set of bricks cracks away from the rest of the wall and swings inward to a long, dark space. Could this be the tunnel? All you can see is a light at what seems to be the north end.
+                  room: '{name} presses the pawn on the wall. A doorway-sized set of bricks cracks away from the rest of the wall and swings inward to a long, dark space. Could this be the tunnel? All you can see is a light at what seems to be the north end.'
+                  do:
+                    - teleportAll nextroomid
+
+       - name: knight
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a chess knight on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You press the knight. Nothing happens.
+
+       - name: dice
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a pair of dice on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You press the dice. Nothing happens.
+
+       - name: bishop
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a chess bishop on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You press the bishop. Nothing happens.
+
+       - name: rook
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a chess rook on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You press the rook. Nothing happens.
+
+       - name: marbles
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a stack of marbles on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You press the marbles. Nothing happens.
+
+       - name: king
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a chess king on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You press the king. Nothing happens.
+
+       - name: queen
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a chess queen on the wall.
+           - name: use
+             aliases:
+               - press
+             actions:
+               -  condition: room.state.lightOn==false
+                  user: You press the queen. Nothing happens.
+
+       - name: cards
+         aliases:
+             - A
+             - K
+             - Q
+             - J
+             - 10
+             - card
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a hand of cards on the wall. They're the A, K, Q, J, and 10 of diamonds.
+           - name: use
+             aliases:
+               - press
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You press the cards. Nothing happens.
+
+       - name: dominoes
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You see the outline of a pair of dominoes on the wall. One shows a pair of 1s and the other a pair of 6s.
+           - name: use
+             aliases:
+               - press
+             actions:
+               - condition: room.state.lightOn==false
+                 user: You press the dominoes. Nothing happens.
+
+
+   ## Room 6 -- actually the tunnel
+
+  - name: The tunnel
+    id: tunnel
+    state:
+       lightOn: false
+      ## in this room, false light means barely lit, true light is after they pull the chain on the bulb
+
+    commands:
+       - name: go
+         actions:
+           - condition: '{arg}=="north" || {arg}=="n"'
+             user: At the other end of what you’re now certain must be the tunnel you were looking for, a bare light bulb hangs from the ceiling, barely glowing.
+           - condition: '{arg}=="east" || {arg}=="e"'
+             user: You can barely turn around, let alone move in that direction!
+           - condition: '{arg}=="west" || {arg}=="w"'
+             user: You can barely turn around, let alone move in that direction!
+           - condition: '{arg}=="south" || {arg}=="s" && room.state.lightOn==false'
+             user: You really would rather never go back to the room with that BEEP ever again. And if you’re in the tunnel, you must be close to the vault, right?
+           - condition: '{arg}=="south" || {arg}=="s" && room.state.lightOn==true'
+             user: You’re back at the end of the tunnel where you came in. Tired of solving puzzles, you stand silently, wondering whether you’ll ever get out. In the silence, you think you hear a light rumble under your feet?
+           - condition: '{arg}=="northeast" || {arg}=="ne"'
+             user: This tunnel is reall too small to worry about the corners.
+           - condition: '{arg}=="northwest" || {arg}=="nw"'
+             user: This tunnel is reall too small to worry about the corners.
+           - condition: '{arg}=="southeast" || {arg}=="se"'
+             user: This tunnel is reall too small to worry about the corners.
+           - condition: '{arg}=="southwest" || {arg}=="sw"'
+             user: This tunnel is reall too small to worry about the corners.
+
+       - name: examine
+         aliases:
+           - look
+         actions:
+           - user: You stand up to look around and quickly find that the ceiling is rather low when you bump your head on it. Some bits of the bricks crumble to the floor. You can touch both walls by holding your arms out to the side. They feel unremarkable. A light glows to the north.
+       - name: exits
+         aliases:
+           - exit
+         actions:
+           - user: Good luck.
+
+    items:
+       - name: '{friendname}'
+         commands:
+           - name: examine
+             actions:
+               - user: '{friendname} looks as excited as you feel. If this is the tunnel, it seems like you might finally be near the end'
+           - name: talk
+             actions:
+                - user: '"Do you hear something?" {friendname} asks.'
+           - name: kick
+             actions:
+                - user: Hey! Kicking your friend is not going to get you out of here.
+                - user: Stop that. It isn’t helping you.
+
+       ## do they still have the flashlight, or do we need to drop another one in this room?
+
+       -  name: flashlight
+          state:
+            hidden: true
+            isOn: false
+            heldBy: nobody
+          commands:
+            -  name: examine
+               actions:
+                 -  condition: items.flashlight.isOn==false
+                    user: An old dusty flashlight, it appears to be switched off.
+                    room: '{name} examines the flashlight.'
+                 -  condition: items.flashlight.isOn==true
+                    user: An old dusty flashlight, it appears to be switched on.
+                    room: '{name} examines the flashlight.'
+            -  name: get
+               actions:
+                 -  condition: 'items.flashlight.heldBy==nobody'
+                    do:
+                      - 'set items.flashlight.heldBy={id}'
+                    user: You pick up the flashlight.
+                    room: '{name} found a flashlight and picked it up.'
+            -  name: drop
+               actions:
+                 -  condition: 'items.flashlight.heldBy=={id}'
+                    do:
+                      - set items.flashlight.heldBy=nobody
+                    user: You drop the flashlight
+                    room: '{name} drops the flashlight'
+            - name: use
+              actions:
+                 - condition: 'items.flashlight.heldBy!={id}'
+                   user: You can't use that, because you are not holding it, try /get flashlight
+                   room: '{name} pokes at the flashlight aimlessly.'
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
+                   user: You switch off the flashlight.
+                   room: '{name} turns the flashlight off.'
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
+                   user: Hey, the flashlight works! And it’s shining in your eyes. Remember, you need to specify what you want to use the flashlight on (eg, "/use flashlight east wall"). You can also shine it in a direction, at the floor, or at the ceiling.
+                   room: '{name} turns the flashlight on'
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="north wall" || {arg}=="north"'
+                   user: There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.
+                   room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="east wall" || {arg}=="east"'
+                   user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
+                   room: '{name} shines the light towards the east wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="west wall" || {arg}=="west"'
+                   user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
+                   room: '{name} shines the light towards the west wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="south wall" || {arg}=="south"'
+                   user: That way lies the BEEP. Let’s not think of it again.
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="floor"'
+                   user: You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them':' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V
+                   room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them:'' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="ceiling"'
+                   user: You shine the flashlight on the ceiling. Someone has scribbled "Back to square one" on it.
+                   room: '{name} shines the flashlight at the ceiling. Someone has scribbled "Back to square one" on it.'
+            - name: kick
+              actions:
+                -  user: You attempt to kick the flashlight, why would you do that! why!
+                -  user: You flail wildly toward the torch wih your foot, and miss.
+
+       - name: bulb
+         aliases:
+           - light bulb
+           - lightbulb
+         commands:
+            - name: examine
+              aliases:
+                - look
+              actions:
+                - user: You gaze into the light. It's not very bright, but it's bright enough that you see spots for moment.
+
+       - name: floor
+         commands:
+            - name: examine
+              aliases:
+                - look
+              actions:
+                - user: You lie down and press your ear to the floor. The closer you get to the wall, the louder the rumbling gets. On the first one in the corner, you’re sure you hear some sort of vibration. You notice the floor appears to be built out of tiles, maybe you should examine one?
+                  room: '{name} is lying down on the floor. Perhaps they have an idea?'
+            - name: use
+              actions:
+                - user: You'll have to be more specific.
+
+       - name: tile
+         aliases:
+              - tiles
+              - loose tile
+              - loose tiles
+              - rumbling tile
+              - rumbling tiles
+         commands:
+              - name: examine
+                aliases:
+                  - look
+                actions:
+                  - user: The floor tile where the rumbling is loudest seems to be loose. You should try to /use it.
+              - name: use
+                actions:
+                  - user: You lift the tile and find a shiny silver flip phone resting in a hole under the floor. It looks ancient, but maybe it still works?
+                    room: '{name} has pulled up a loose tile and is now looking at a hole in the floor. There is an old flip phone resting inside it.'
+
+       - name: phone
+         aliases:
+              - flip phone
+         commands:
+              - name: get
+                actions:
+                  - condition: 'items.phone.heldBy==nobody'
+                    do:
+                     - set items.phone.heldBy={id}
+                    user: You pick up the phone.
+                    room: '{name} picked up the phone.'
+              - name: drop
+                actions:
+                  - condition: 'items.phone.heldBy=={id}'
+                    do:
+                      - set items.phone.heldBy=nobody
+                    user: You put the phone back in the hole in the floor.
+                    room: '{name} put the phone back in the hole in the floor.'
+              - name: use
+                actions:
+                  - condition: 'items.phone.heldBy!={id}'
+                    user: You can't use the phone, because you're not holding it. Try "/get phone" first.
+                  - condition: 'items.phone.heldBy=={id}'
+                    user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
+                  - condition: 'items.phone.heldBy=={id}'
+                    user: The phone is already on. To dial a number, enter "/use phone" followed by the digits you would like to press.
+                  ## I'm pretty sure having required picking up the phone is going to make this unmatched fail.
+                  - condition: unmatched
+                    user: Your call cannot be completed as dialed. Nothing happens.
+                  - condition: unmatched
+                    user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.
+                  - condition: '{arg}=="*"'
+                    user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
+                  - condition: '{arg}=="7827"'
+                    user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
+                    room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.\n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
+       - name: star
+         aliases:
+            - handle
+            - door handle
+         commands:
+            - name: user
+              actions:
+              - user: You cover your hand in your sleeve and quickly turn the knob. As if shaken by an earthquake, the tunnel wall cracks open.
+                room: '{name} covers their hand in their sleeve and quickly turns the knob. As if shaken by an earthquake, the tunnel wall cracks open.'
+                do:
+                  - teleportAll nextroomid
+
+
+
+   ## Room 7 -- The End
+
+  - name: The Office
+    id: office
+
+    state:
+         lightOn: false
+     ## in this room, false light means barely lit, true light is after they pull the chain on the bulb
+
+    commands:
+       - name: go
+         actions:
+           - condition: '{arg}=="north" || {arg}=="n"'
+             user: There are three paintings on the north wall.
+           - condition: '{arg}=="east" || {arg}=="e"'
+             user: There are two paintings on the east wall.
+           - condition: '{arg}=="west" || {arg}=="w"'
+             user: There are two paintings on the west wall.
+           - condition: '{arg}=="south" || {arg}=="s"'
+             user: There are two paintings on the south wall, one on either side of the door you came in.
+           - condition: '{arg}=="northeast" || {arg}=="ne"'
+             user: You note what an excellent job someone did on the crown molding at the corner.
+           - condition: '{arg}=="northwest" || {arg}=="nw"'
+             user: The wallpaper seam is peeling a bit at the corner. You consider shoddy workmanship but decide it's probably just age and lack of anyone using or caring about this room.
+           - condition: '{arg}=="southeast" || {arg}=="se"'
+             user: A spider crawls away from you down the east wall.
+           - condition: '{arg}=="southwest" || {arg}=="sw"'
+             user: You don't have to stand in the corner. Look around!
+
+       - name: examine
+         aliases:
+           - look
+         actions:
+           - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken chandelier barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead flowers all over the marble floor, and every wall is covered in very old paintings in fancy gold frames. Only one chair is upright, and there is a napkin on it.
+           - room: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken chandelier barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead flowers all over the marble floor, and every wall is covered in very old paintings in fancy gold frames. Only one chair is upright, and there is a napkin on it.
+
+       - name: exits
+         aliases:
+           - exit
+         actions:
+           - user: There must be one, right?
+
+
+    items:
+       - name: '{friendname}'
+         commands:
+           - name: examine
+             actions:
+               - user: '{friendname} looks as excited as you feel. If this is the tunnel, it seems like you might finally be near the end'
+           - name: talk
+             actions:
+             - user: '"Do you hear something?" {friendname} asks.'
+           - name: kick
+             actions:
+             - user: Hey! Kicking your friend is not going to get you out of here.
+             - user: Stop that. It isn’t helping you.
+
+       - name: wallpaper
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: Unlike all of the rooms you've been in so far, this one is decorated luxuriously, with burgundy and gold damask wallpaper. It looks expensive.
+           - name: use
+             aliases:
+               - peel
+               - get
+             actions:
+               - user: You pull at the wallpaper where the seam is curling apart in one corner. A piece of the beautiful wallpaper rips away from the wall. You feel a little sad and decide not to peel any more.
+
+       - name: spider
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: You don't really get a good look before she runs away, but you decide to name her Anansi.
+           - name: get
+             actions:
+               - user: Oh, Anansi is much too fast for you to catch her.
+
+       - name: chandelier
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: It’s still technically doing its job and making light, but it doesn’t look like something you should stand directly under for very long… just in case.
+           - name: get
+             actions:
+               - user: You cannot get the chandelier. You didn't bring any tools, and how would you carry it out of here? What would you do with it?
+
+       - name: chairs
+         aliases:
+           - chair
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: The chairs look a little out of place. The only other place you’ve ever seen wrought iron furniture is in your neighbor’s backyard garden. Only one of them hasn’t been knocked over, and it has a napkin on it.
+           - name: use
+             actions:
+               - user: You pick up one of the chairs and sit down. It’s nice to rest, but it won’t get you out of here.
+
+       - name: flowers
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: You’re pretty sure they used to be roses? Whatever they are, they’re dead now.
+           - name: get
+             actions:
+               - user: You gather some dead roses from the floor.
+           - name: use
+             actions:
+               - user: You make yourself a spoopy bouquet.
+
+       - name: napkin
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: It says':' \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"
+           - name: use
+             actions:
+               - user: Do you need to blow your nose? If you use this napkin, no one else will be able to see the puzzle! Or at least they won’t want to…
+
+       - name: paintings
+         aliases:
+           - painting
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: There are 9 paintings in the room. Going clockwise from the doorway':'  \n\n1. A woman in a medieval-looking red and green dress is watching while a knight fights a dragon.\n\n2. Vikings are sailing towards a castle for a raid. \n\n3. This was probably supposed to be a person, but none of the facial features are in quite the right place.\n\n4. A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? \n\n5. Some purple water lilies float in a vaguely watery blue scene. \n\n6. One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat\n\n7. A dozen or so people, many of them wearing yellow hats, are having a tea party.\n\n8. A man leaning on a cane is addressing a ballroom of ballerinas. \n\n9. A lot of squares, mostly white, some painted red, yellow, or blue. It's hanging diagonally, shaped like a diamond.
+           - name: get
+             actions:
+               - user: Please specify which painting you would like to get, using its number, e.g. "/get painting 1"
+
+       - name: painting 1
+         commands:
+           - name: examine
+             actions:
+               - user: A woman in a medieval-looking red and green dress is watching while a knight fights a dragon. You read the card beside the painting'"'\n\n            SAINT GEORGE AND THE DRAGON\n\n            Paolo Uccello\n\n            c. 1470\n\noil on canvas
+           - name: get
+             actions:
+               - user: Good news. The dragon does not come to life. Bad news. Nothing else happens either. You put the painting back.
+
+       - name: painting 2
+         commands:
+           - name: examine
+             actions:
+               - user: Vikings are sailing towards a castle for a raid. You read the card beside the painting'"'\n\n             VISITORS FROM OVERSEAS (Übersee-Gäste)\n\n             Nicholas Konstantin Roerich\n\n             1901\n\n             oil on canvas
+           - name: get
+             actions:
+               - user: They were probably storming the castle because someone stole their art! You put the painting back.
+
+       - name: painting 3
+         commands:
+           - name: examine
+             actions:
+               - user: This was probably supposed to be a person, but none of the facial features are in quite the right place.You read the card beside the painting'"'\n\n             BUST OF A WOMAN (Dora Maar)\n\n             Pablo Picasso\n\n             1944\n\n             oil on canvas
+           - name: get
+             actions:
+               - user: It would be unwise to cut the painting apart to try to put the eyes where they belong. You put the painting back.
+
+       - name: painting 4
+         commands:
+           - name: examine
+             actions:
+               - user: A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? You read the card beside the painting'"'\n\nTHE PEASANT DANCE\n\nPeter Bruegel the Elder\n\nc. 1567\n\noil on panel
+           - name: get
+             actions:
+               - user: Holding the painting up and dancing with the figures is briefly satisfying, but gets you no closer to the exit. You put the painting back.
+
+       - name: painting 5
+         commands:
+           - name: examine
+             actions:
+               - user: Some purple water lilies float in a vaguely watery blue scene. You read the card beside the painting'"'\n\n           WATER-LILIES\n\n            Claude Monet\n\n            c. 1916-17\n\n            oil on canvas
+           - name: get
+             actions:
+               - user: This would look great on your bedroom wall, but you’d have to explain where you got it. Oh well. You put the painting back.
+
+       - name: painting 6
+         commands:
+           - name: examine
+             actions:
+               - user:  One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting'"'\n\n          FIN\n\n          Augustus Brooke-Winslow\n\n          c. 1900\n\n          oil on canvas
+           - name: get
+             actions:
+               - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
+               - room: '{USER removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
+
+       - name: painting 7
+         commands:
+             - name: examine
+               actions:
+                 - user: A dozen or so people, many of them wearing yellow hats, are having a tea party. You read the card beside the painting'"'\n\n            LUNCHEON OF THE BOATING PARTY (Le déjeuner des canotiers)\n\n           Pierre-Auguste Renoir\n\n            1881\n\n            oil on canvas \n\n
+             - name: get
+               actions:
+                   - user: You wish you had a jaunty yellow hat as well and sigh. You put the painting back.
+
+       - name: painting 8
+         commands:
+           - name: examine
+             actions:
+               - user: A man leaning on a cane is addressing a ballroom of ballerinas. You read the card beside the painting'"'\n\n           THE BALLET CLASS (La Classe de danse)\n\n          Edgar Degas\n\n           1871-1874\n\n           oil on canvas
+           - name: get
+             actions:
+               - user: You attempt a pirouette while holding the painting and land a perfect triple turn, which is amazing, since you’ve never taken a ballet class. You put the painting back and try again. The skill was fleeting.
+
+       - name: painting 9
+         commands:
+             - name: examine
+               actions:
+                 - user: A lot of squares, mostly white, some painted red, yellow, or blue. You read the card beside the painting'"'\n\n          VICTORY BOOGIE WOOGIE\n\n          Pieter Cornelis Mondriaan\n\n          1944\n\n          oil and paper on canvas
+             - name: get
+               actions:
+                   - user: You’re pretty sure your kindergartener cousin brought something home last week that looked just like this, so you don’t need another one. You put the painting back.
+
+       - name: keypad
+         commands:
+             - name: examine
+               actions:
+                 - user: This one looks like a pretty normal keypad with the numbers 0-9.
+             - name: use
+               actions:
+                 - user: I don't know what numbers you would like to use on the keypad.
+                 - condition: unmatched
+                   user: The keypad beeps an angry sound at you and flashes a red light. Try another number?
+                 - condition: unmatched
+                   user: The keypad beeps an angry sound at you and flashes a red light. You know, if it takes you three seconds to enter a guess, it will take you less than 9 hours to guess all possible combinations. Try another number?
+                 - condition: unmatched
+                   user: The keypad beeps an angry sound at you and flashes a red light. I think you need the mother’s age and the daughter’s age. So four digits. Try another number?
+                 - condition: unmatched
+                   user: "Clue: Over the hill, under a quarter. (In case you weren’t sure, the keypad indeed beeps and flashes a red light.)"
+                 - condition: unmatched
+                   user: Keep at it. You’ll get there! (In case you weren’t sure, the keypad indeed beeps and flashes a red light.)
+                 - condition: '{arg}=="with the right answer"'
+                   user: You can't get out of here that easily!
+                 - condition: '{arg}=="5115"'
+                   user: You carefully enter "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.
+                   room: '{name} enters "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.'
