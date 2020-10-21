@@ -254,7 +254,7 @@ rooms:
           - user: The door you came in is to the south. Much like the first door, it has now locked behind you. There is a heavier looking door to the north.
 
     items:
-      - name: {friendname}
+      - name: '{friendname}'
         commands:
           - name: examine
             actions:
