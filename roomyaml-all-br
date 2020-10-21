@@ -760,7 +760,7 @@ rooms:
         aliases:
           - look
         actions:
-          - user: This must be the athletic department’s storage room. There’s a rack of partially deflated basketballs, a table of old yearbooks, and the old baseball field’s scoreboard hanging on the north wall with several well-used bats on the ground under it. A globe that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
+          - user: This must be the {schoolname} athletic department’s storage room. There’s a rack of partially deflated basketballs, a table of old yearbooks, and the old baseball field’s scoreboard hanging on the north wall with several well-used bats on the ground under it. A globe that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
 
       - name: exits
         aliases:
