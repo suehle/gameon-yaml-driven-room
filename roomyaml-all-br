@@ -1,11 +1,11 @@
 ##variables to edit for each class
 
 vars:
-    schoolname: St Miriams Finishing School for Girls.
-    friendname: Gabriella
+    schoolname: St Miriam's Finishing School for Girls
+    friendname: Gabriellalala
     subject: science
     townname: Shadyville
-    adultname: Ruth
+    adultname: Ruth Suehle
     child-first-name: Hannah
     describe-walls: Every room has the same cold cinder block walls.
     flashlight-color: blue
@@ -208,11 +208,11 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: You read the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[]{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
-                 room: '{name} reads the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n{townname} {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.'
+               - user: You read the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
+                 room: '{name} reads the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.'
 
 ## Room 2
-  - name: The Basement Continues
+  - name: BASEMENT CONTINUES
     id: morsecode
     state:
      lightOn: true
@@ -231,17 +231,17 @@ rooms:
           - condition: '{arg} == "northeast" || {arg} == "ne"'
             user: There is a walkie talkie on the floor in the corner.
           - condition: '{arg} == "northwest" || {arg} == "nw"'
-            user: There is a scrap of paper on the floor.
+            user: There is a red scrap of paper on the floor.
           - condition: '{arg} == "southeast" || {arg} == "se"'
-            user: There is a scrap of paper on the floor.
+            user: There is a blue scrap of paper on the floor.
           - condition: '{arg} == "southwest" || {arg} == "sw"'
-            user: There are two scraps of paper on the floor.
+            user: There are two scraps of paper on the floor, one yellow and one green.
       - name: examine
         aliases:
           - look
         actions:
           - condition: room.state.lightOn==true
-            user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. \n\n\n\nYou wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
+            user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. \n\nYou wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
           - condition: room.state.lightOn==true
             user: There is a walkie talkie in the northeast corner. How long must that have been here?
           - condition: room.state.lightOn==true
@@ -254,7 +254,7 @@ rooms:
           - user: The door you came in is to the south. Much like the first door, it has now locked behind you. There is a heavier looking door to the north.
 
     items:
-      - name: '{friendname}'
+      - name: {friendname}
         commands:
           - name: examine
             actions:
@@ -384,109 +384,126 @@ rooms:
             actions:
               - user: You attempt to kick the walkie talkie, but it is small, and you miss.
 
-      - name: scrap1
-        aliases:
-            - paper1
+      - name: scrap
         state:
           hidden: false
           heldBy: nobody
         commands:
         - name: examine
           actions:
-             - user: There is a small piece of paper on the floor. If you pick it up, you can read it.
+             - user: There are four scraps of paper in the room spread among the corners. Try to go ne, nw, se, and sw to find them, and then specify which color scrap you would like to look at.
+
+      - name: redscrap
+        aliases:
+          - red scrap
+        state:
+          hidden: false
+          heldBy: nobody
+        commands:
+        - name: examine
+          aliases: 
+          - look
+          actions:
+             - user: There is a small red scrap of paper on the floor. If you pick it up, you can read it.
         - name: get
           actions:
-           - condition: items.scrap1.heldBy==nobody
+           - condition: items.redscrap.heldBy==nobody
              do:
-               - 'set items.scrap1.heldBy={id}'
-             user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\nThen the paper appears to have been ripped at the bottom.
+               - 'set items.redscrap.heldBy={id}'
+             user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD
         - name: drop
           actions:
-            - condition: items.scrap1.heldBy=={id}
+            - condition: items.redscrap.heldBy=={id}
               do:
-                 - set items.scrap1.heldBy=nobody
+                 - set items.redscrap.heldBy=nobody
               user: You drop the scrap of paper.
         - name: use
           actions:
-            - condition: items.scrap1.heldBy!={id}
+            - condition: items.redscrap.heldBy!={id}
               user: You can't use that, because you are not holding it.
 
-      - name: scrap2
+      - name: bluescrap
         aliases:
-            - paper2
+          - blue scrap
         state:
            hidden: false
            heldBy: nobody
         commands:
             - name: examine
               actions:
-                - user: There is a small piece of paper on the floor. If you pick it up, you can read it.
+                - user: There is a small blue scrap of paper on the floor. If you pick it up, you can read it.
             - name: get
               actions:
-                - condition: items.scrap2.heldBy==nobody
+                - condition: items.bluescrap.heldBy==nobody
                   do:
-                    - set items.scrap2.heldBy={id}
-                  user: The paper seems to have been torn apart on several edges. What you can read says':'\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE
+                    - set items.bluescrap.heldBy={id}
+                  user: It says':'\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE
             - name: drop
               actions:
-                - condition: items.scrap2.heldBy=={id}
+                - condition: items.bluescrap.heldBy=={id}
                   do:
-                    - set items.scrap2.heldBy=nobody
+                    - set items.bluescrap.heldBy=nobody
                   user: You drop the scrap of paper.
             - name: use
               actions:
-                - condition: items.scrap2.heldBy!={id}
+                - condition: items.bluescrap.heldBy!={id}
                   user: You can't use that, because you are not holding it.
 
-      - name: scrap3
+      - name: yellowscrap
         aliases:
-            - paper3
+          - yellow scrap
         state:
              hidden: false
              heldBy: nobody
         commands:
             - name: examine
               actions:
-                - user: There is a small piece of paper on the floor. If you pick it up, you can read it.
+                - user: There is a small yellow scrap of paper on the floor. If you pick it up, you can read it.
             - name: get
               actions:
-                - condition: items.scrap3.heldBy==nobody
+                - condition: items.yellowscrap.heldBy==nobody
                   do:
-                    - set items.scrap3.heldBy={id}
+                    - set items.yellowscrap.heldBy={id}
                   user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\nThen the paper appears to have been ripped at the bottom.
             - name: drop
               actions:
-                - condition: items.scrap3.heldBy=={id}
+                - condition: items.yellowscrap.heldBy=={id}
                   do:
-                    - set items.scrap3.heldBy=nobody
+                    - set items.yellowscrap.heldBy=nobody
                   user: You drop the scrap of paper.
             - name: use
               actions:
-                - condition: items.scrap3.heldBy!={id}
+                - condition: items.yellowscrap.heldBy!={id}
                   user: You can't use that, because you are not holding it.
 
-      - name: scrap4
+      - name: greenscrap
         aliases:
-            - paper4
+            - green scrap
         state:
              hidden: false
              heldBy: nobody
         commands:
             - name: examine
               actions:
-                - user: There is a small piece of paper on the floor. If you pick it up, you cThe paper has a smooth bottom edge, but appears to have been torn above that. It says':'\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n
+                - user: There is a small green scrap of paper on the floor. If you pick it up, you can read it.
+            - name: get
+              actions:
+                - condition: items.greenscrap.heldBy==nobody
+                  do:
+                    - set items.greenscrap.heldBy={id}
+                  user: It says':'\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n
             - name: drop
               actions:
-                - condition: items.scrap4.heldBy=={id}
+                - condition: items.greenscrap.heldBy=={id}
                   do:
-                    - set items.scrap4.heldBy=nobody
+                    - set items.greenscrap.heldBy=nobody
                   user: You drop the scrap of paper.
             - name: use
               actions:
-                - condition: items.scrap4.heldBy!={id}
+                - condition: items.greenscrap.heldBy!={id}
                   user: You can't use that, because you are not holding it.
-
-
+             
+             
       - name: door
         state:
              hidden: true
