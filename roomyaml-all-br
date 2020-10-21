@@ -11,7 +11,7 @@ vars:
     flashlight-color: blue
     walkie-talkie: The walkie talkie is a big, black brick with an obvious speaker on the front and a simple on/off switch on top.
     wall-things: Someone has scrawled "Mr. Jones is the best math teacher ever!" What a kind graffiti artist.
-    wall-things2: There's a world map poster that has the USSR, and half of the African continent just says "French West Africa." Your realize your school might have been around longer than you thought.
+    wall-things2: There's a world map poster that has the USSR, and half of the African continent just says "French West Africa." You realize your school might have been around longer than you thought.
     floor: How is there sticky bubblegum on the floor when it doesn't seem like anyone's been down here in centuries?
     hospital-name: Tuomey Regional Hospital
     basketballs: A rusty silver rack holds half a dozen basketballs, none of which will bounce. One is just a flat orange pancake.
@@ -777,7 +777,7 @@ rooms:
         aliases:
           - look
         actions:
-          - user: This must be the {schoolname} athletic department’s storage room. There’s a rack of partially deflated basketballs, a table of old yearbooks, and the old baseball field’s scoreboard hanging on the north wall with several well-used bats on the ground under it. A globe that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
+          - user: This must be the athletic department’s storage room. There’s a rack of partially deflated basketballs, a table of old yearbooks, and the old baseball field’s scoreboard is hanging on the north wall with several well-used bats on the ground under it. A globe that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
 
       - name: exits
         aliases:
@@ -852,6 +852,8 @@ rooms:
              - user: You pick up a ball and attempt to dribble. The half-deflated ball drops to the floor with a "thud."``
 
       - name: bats
+        aliases:
+          - bat
         commands:
           - name: examine
             actions:
@@ -871,6 +873,9 @@ rooms:
           - yearbook
           - book
         commands:
+          - name: get
+            actions:
+              - user: You don't have to get the books. They're heavy. But it would help to /examine a few.
           - name: examine
             actions:
               - user: You pick up a yearbook from the stack on the table and flip to the baseball team’s pages. Alas, they did not win that year. Nothing useful here. Maybe try looking at another one.
@@ -1215,10 +1220,10 @@ rooms:
            - name: use
              actions:
              - condition: room.state.lightOn==true
-               do:
-                 - set room.state.lightOn==false
                user: You turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.
                room: '{name} turns out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.'
+               do:
+                 - set room.state.lightOn==false
              - condition: room.state.lightOn==false
                user: The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.
        ## Will the room see anything on the second user output? And what happens if they keep using the switch?
