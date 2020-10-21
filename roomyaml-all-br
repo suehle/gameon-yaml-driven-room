@@ -1223,7 +1223,7 @@ rooms:
                user: You turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.
                room: '{name} turns out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.'
                do:
-                 - set room.state.lightOn==false
+                 - set room.state.lightOn=false
              - condition: room.state.lightOn==false
                user: The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.
        ## Will the room see anything on the second user output? And what happens if they keep using the switch?
