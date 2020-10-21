@@ -700,7 +700,7 @@ rooms:
                   room: '{name} turns the flashlight on'
                   do:
                     - set items.flashlight.isOn=true
-               -  condition: items.flashlight.isOn==true && '{arg}=="north" 
+               -  condition: items.flashlight.isOn==true && '{arg}=="flashlight north" 
                   user: You shine the flashlight on the north wall. {wall-things}
                   room: '{name} shines the flashlight on the north wall. {wall-things}'
                -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="east" || {arg}=="e"'
