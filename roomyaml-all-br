@@ -694,12 +694,12 @@ rooms:
                   user: You switch off the flashlight.
                   room: '{name} turns the flashlight off.'
                   do:
-                    - set items.flashlight.isOn==false
+                    - set items.flashlight.isOn=false
                -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
                   user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
                   room: '{name} turns the flashlight on'
                   do:
-                    - set items.flashlight.isOn==true
+                    - set items.flashlight.isOn=true
                -  condition: items.flashlight.isOn==true && '{arg}=="north" 
                   user: You shine the flashlight on the north wall. {wall-things}
                   room: '{name} shines the flashlight on the north wall. {wall-things}'
