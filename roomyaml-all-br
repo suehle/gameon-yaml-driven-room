@@ -703,7 +703,7 @@ rooms:
                -  condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                   user: You shine the flashlight on the north wall. {wall-things}
                   room: '{name} shines the flashlight on the north wall. {wall-things}'
-               -  condition: '{arg}=="east" || {arg}=="e" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true
+               -  condition: '{arg}=="east" || {arg}=="e" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                   user: You shine the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.
                   room: '{name} shines the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\n\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.'
                -  condition: '{arg}=="west" || {arg}=="w" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
