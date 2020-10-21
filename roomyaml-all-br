@@ -695,21 +695,21 @@ rooms:
                   room: '{name} turns the flashlight off.'
                   do:
                     - set items.flashlight.isOn=false
-               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
+               -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
                   user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
                   room: '{name} turns the flashlight on'
                   do:
                     - set items.flashlight.isOn=true
-               -  condition: items.flashlight.isOn==true && '{arg}=="flashlight north" 
+               -  condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                   user: You shine the flashlight on the north wall. {wall-things}
                   room: '{name} shines the flashlight on the north wall. {wall-things}'
-               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="east" || {arg}=="e"'
+               -  condition: '{arg}=="east" || {arg}=="e" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true
                   user: You shine the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.
                   room: '{name} shines the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H  VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\n\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.'
-               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="flashlight west" 
+               -  condition: '{arg}=="west" || {arg}=="w" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                   user: You shine the flashlight on the west wall. {wall-things2}
                   room: '{name} shines the flashlight on the west wall. {wall-things2}'
-               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="south" || {arg}=="s"'
+               -  condition: '{arg}=="south" || {arg}=="s" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                   user: You shine the flashlight on the south wall. The door you came through is there. No use going back, though. Escape can only lie ahead.
                   room: '{name} shines the flashlight on the south wall. The door you came through is there. No use going back, though. Escape can only lie ahead.'
                -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="floor"'
