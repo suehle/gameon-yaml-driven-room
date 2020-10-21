@@ -581,7 +581,7 @@ rooms:
           - condition: room.state.lightOn==true
             user: This just seems to be a room full of assorted leftovers from classrooms, mostly broken desks and chairs. Some of them look pretty old.
           - condition: room.state.lightOn==true
-            user: There’s not much of interest here. Mostly just broken desks and chairs that accumulated over the years. There is {flaslight-color} flashlight on the floor.
+            user: There’s not much of interest here. Mostly just broken desks and chairs that accumulated over the years. There is {flashAlight-color} flashlight on the floor.
 
       - name: exits
         aliases:
@@ -700,7 +700,7 @@ rooms:
                   room: '{name} turns the flashlight on'
                   do:
                     - set items.flashlight.isOn==true
-               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="north" || {arg}=="n"'
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="north" 
                   user: You shine the flashlight on the north wall. {wall-things}
                   room: '{name} shines the flashlight on the north wall. {wall-things}'
                -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="east" || {arg}=="e"'
@@ -734,7 +734,7 @@ rooms:
         commands:
          - name: examine
            actions:
-             - user: The keypad beside the door has a display showing blanks':'\n\n_ _ _ _ _ _   _ _ _   _ _ _ _ \n\n\n\nelow it is a standard keyboard on the screen.
+             - user: The keypad beside the door has a display showing blanks':'\n\n_ _ _ _ _ _   _ _ _   _ _ _ _ \n\n\n\n Below it is a standard keyboard on the screen.
          - name: use
            actions:
              - user: It looks like it’s expecting a phrase. You should try "/use keypad with the answer"
