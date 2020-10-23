@@ -778,7 +778,7 @@ rooms:
         commands:
          - name: examine
            actions:
-             - user: The keypad beside the door has a display showing blanks':'\n\n_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;\n\n\n\n Below it is a standard keyboard on the screen.
+             - user: 'The keypad beside the door has a display showing blanks:\n\n_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_&nbsp;&nbsp;&nbsp;_&nbsp;_&nbsp;_&nbsp;_&nbsp;\n\n\n\n Below it is a standard keyboard on the screen.'
          - name: use
            actions:
              - user: It looks like it’s expecting a phrase. You should try "/use keypad with the answer"
