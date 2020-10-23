@@ -17,6 +17,15 @@ vars:
     basketballs: A RUSTY SILVER RACK HOLDS HALF A DOZEN BASKETBALLS, NONE OF WHICH WILL BOUNCE. ONE IS JUST A FLAT ORANGE PANCAKE.
     spider: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
 
+commanddescriptions:
+ use: Use an item, eg /use door to open it, or /use radio to switch the radio on or off, or /use button to push the button.
+ talk: Communicate with something, eg /talk fish to speak to the fishes, or /talk wall to speak to a wall.
+ get: Pickup an item, eg /get chair to pickup a chair, or /get stilettos to pickup a pair of shoes.
+ drop: Drop an item you have picked up, eg, /drop chair to drop the chair you are holding, or /drop microphone to drop a microphone
+ kick: Kick something, eg, /kick wall to break your toes, or /kick ball to boot the ball across the room
+ go: Head in a direction, eg /go North to head north, or /go West because life is peaceful there
+ examine: Take a closer look at something, eg /examine wall to search for secret buttons, or /examine floor to research types of carpet.
+
 commands:
   - name: help
     actions:
@@ -59,6 +68,11 @@ rooms:
      id: entry
      state:
        lightOn: false
+     exits:
+       S: The way you came in, it has locked behind you, and despite your best efforts, it will not open.
+       N: There appears to be a door here. 
+       E: ""
+       W: ""
      commands:
        -  name: go
           actions:
@@ -90,9 +104,6 @@ rooms:
                user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. Your friend **{friendname}** looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
             -  condition: room.state.lightOn==true
                user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. There is a door to the north. Your friend {friendname} looks terrified. Have you tried talking to her?
-       - name: exits
-         actions:
-           - user: The door you came in is to the south. It has locked behind you, and despite your best efforts, it will not open. There is another door to the north. This is a basement, so there are no windows. The floor is firm, and you have no shovel. You are much too short to reach the ceiling. Your options are limited.
 
      items:
        - name: '{friendname}'
@@ -216,6 +227,11 @@ rooms:
     id: morsecode
     state:
      lightOn: true
+    exits:
+     S: The door you came in through. Much like the door in the first room, it has now locked behind you. You see no way to open it.
+     N: A much heavier looking door.
+     E: ""
+     W: "" 
     commands:
       - name: go
         actions:
@@ -246,11 +262,6 @@ rooms:
             user: There is a **walkie talkie** in the northeast corner. How long must that have been here?
           - condition: room.state.lightOn==true
             user: You notice several scraps of paper on the floor in the corners of the room. You can /go in a direction (ne, nw, se, sw) to take a closer look.
-      - name: exits
-        aliases:
-          - exit
-        actions:
-          - user: The door you came in is to the south. Much like the first door, it has now locked behind you. There is a heavier looking door to the north.
 
     items:
       - name: '{friendname}'
@@ -557,7 +568,11 @@ rooms:
     id: classroomstorage
     state:
       lightOn: true
-
+    exits:
+     S: The door you came in through. Much like the doors in the first two rooms, it has now locked behind you. It is really very very shut.
+     N: An even heavier looking door.
+     E: ""
+     W: ""
     commands:
       - name: go
         actions:
@@ -587,12 +602,6 @@ rooms:
             user: This just seems to be a room full of assorted leftovers from classrooms, mostly broken **desks** and **chairs**. Some of them look pretty old.
           - condition: room.state.lightOn==true
             user: There’s not much of interest here. Mostly just broken desks and chairs that accumulated over the years. There is {flashlight-color} **flashlight** on the floor.
-
-      - name: exits
-        aliases:
-          - exit
-        actions:
-          - user: The door you came in is to the south. Much like the first two doors, it has now locked behind you. There is another heavier looking door to the north, similar to the one you just came through.
 
     items:
     
@@ -734,7 +743,7 @@ rooms:
                -  condition: items.flashlight.heldBy!={id}
                   user: You can't use that, because you are not holding it, try /get flashlight
                   room: '{name} pokes at the flashlight aimlessly.'
-               -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}==""'
+               -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                   user: You switch off the flashlight.
                   room: '{name} turns the flashlight off.'
                   do:
@@ -799,7 +808,11 @@ rooms:
 
   - name: GO TITANS!
     id: bigroom
-
+    exits:
+     S: The door you came in through. It's locked, there is no going back. Ever.
+     N: ""
+     E: A brave looking door, that appears to be very strong, and enjoys long walks in the forest at weekends. It is also locked.
+     W: ""
     commands:
       - name: go
         actions:
@@ -825,12 +838,6 @@ rooms:
           - look
         actions:
           - user: This must be the athletic department’s storage room. There’s a rack of partially deflated **basketballs**, a table of old **yearbooks**, and the old baseball field’s **scoreboard** is hanging on the north wall with several well-used **bats** on the ground under it. A **globe** that probably doesn’t even have the right countries on it sits on a student **desk** with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
-
-      - name: exits
-        aliases:
-          - exit
-        actions:
-          - user: The door you came in is to the south. No point in going back. Another door is on the east wall. There are no windows because, well, it’s a basement.
 
     items:
       - name: '{friendname}'
@@ -1019,7 +1026,11 @@ rooms:
 
   - name: The Science and Social Studies Room
     id: skeleton
-
+    exits:
+     S: ""
+     N: ""
+     E: ""
+     W: The door you came in via. It's locked. No suprises there. Total fire hazard that, but I guess old dusty basements don't really meet code.
     commands:
       - name: go
         actions:
@@ -1046,13 +1057,6 @@ rooms:
         actions:
           - user: This might be the creepiest room yet. It’s barely lit, but it doesn’t matter, because it looks like the only thing here is an old plastic **skeleton** from the science lab.
           - user: Oh, hey. There's a **flashlight** here, too. Very thoughtful of someone to leave a trail of those all over the basement.
-
-      - name: exits
-        aliases:
-          - exit
-        actions:
-          - user: The door you came in is to the west. And other than that… you seem to be very trapped.
-
 
     items:
       - name: '{friendname}'
@@ -1191,7 +1195,11 @@ rooms:
     id: riddle
     state:
          lightOn: true
-
+    exits:
+     S: You came from this direction. But the route is now blocked by a magical force field that is emitting a gentle hum in the key of F Minor. No... wait... it's just another locked door.
+     N: ""
+     E: ""
+     W: ""
     commands:
        - name: go
          actions:
@@ -1220,12 +1228,6 @@ rooms:
              user: '"So there’s really a vault," {friendname} gasps. "This proves it. And those kids got out." \n\n\n\n"It seems that to find the tunnel, we first have to find a riddle in the darkest corner of the basement, and answer it correctly," you say. \n\n\n\n"Easy peasy," {friendname} jokes sarcastically. "Except why would we have to turn off the light to hear a sound?"\n\n\n\nThis is the smallest room yet, and it doesn’t even seem to be used as storage. In fact, the only thing you see is a light **switch** on the wall.  \n\n\n\nThe hidden doorway slides shut behind you. You are now truly, officially trapped. \n\n\n\nThere’s a light **switch** on the wall. And nothing else in the room.'
            - condition: room.state.lightOn==false
              user: Try looking in each direction and see if you can find where the sound is coming from.
-
-       - name: exits
-         aliases:
-           - exit
-         actions:
-           - user: The door you came in is to the south.
 
     items:
        - name: '{friendname}'
@@ -1600,7 +1602,11 @@ rooms:
     state:
        lightOn: false
       ## in this room, false light means barely lit, true light is after they pull the chain on the bulb
-
+    exits:
+     S: ""
+     N: ""
+     E: ""
+     W: ""
     commands:
        - name: go
          actions:
@@ -1628,11 +1634,6 @@ rooms:
            - look
          actions:
            - user: You stand up to look around and quickly find that the ceiling is rather low when you bump your head on it. Some bits of the bricks crumble to the floor. You can touch both walls by holding your arms out to the side. They feel unremarkable. A light glows to the north.
-       - name: exits
-         aliases:
-           - exit
-         actions:
-           - user: Good luck.
 
     items:
        - name: '{friendname}'
@@ -1810,7 +1811,11 @@ rooms:
     state:
          lightOn: false
      ## in this room, false light means barely lit, true light is after they pull the chain on the bulb
-
+    exits:
+     S: A wide open door with a sign saying "Cake this way". Except this isn't portal, and the cake is a lie. Just like this door. There is no exit in this direction.
+     N: There is no exit in this direction. None. 
+     E: No way out this direction either.
+     W: There is a mouse hole on this wall, if you can borrow Ant Man's suit, or if you know Alice from Wonderland, this might be an option. Otherwise no exit in this direction.
     commands:
        - name: go
          actions:
@@ -1836,13 +1841,6 @@ rooms:
            - look
          actions:
            - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken chandelier barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead flowers all over the marble floor, and every wall is covered in very old paintings in fancy gold frames. Only one chair is upright, and there is a napkin on it.
-
-       - name: exits
-         aliases:
-           - exit
-         actions:
-           - user: There must be one, right?
-
 
     items:
        - name: '{friendname}'
