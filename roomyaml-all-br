@@ -813,6 +813,9 @@ rooms:
 
   - name: GO TITANS!
     id: bigroom
+    state:
+      foundDateOne: false
+      foundDateTwo: false
     exits:
      S: The door you came in through. It's locked, there is no going back. Ever.
      N: ""
@@ -941,8 +944,17 @@ rooms:
               - user: You pick up a yearbook and look through its pages. Hairstyles were weird in the 80s. But knowing that probably won’t get you out of here. Try looking at another yearbook.
               - user: You pick up a yearbook and marvel at the fact that people have been signing yearbooks "2 good + 2 be = 4 gotten" since the beginning of time. Those aren’t the numbers you need though. Try looking at another yearbook.
               - user: You pick up a yearbook and flip to the athletics section. If only they’d spent as much time in practice as they did on their spirit week outfits, some team at this school might have won a game. Surely if you look at another yearbook, you’ll find evidence of a win?
-              - user: Apparently they didn’t just lose all the time! The Titans won on March 12, 2008.
+              - condition: room.state.foundDateTwo==false
+                user: Apparently they didn’t just lose all the time! The Titans won on March 12, 2008.
                 room: '{name} picks up a yearbook and learns something interesting.'
+                do:                   
+                  - set room.state.foundDateOne=true
+              - condition: room.state.foundDateTwo==true
+                user: 'Apparently they didn’t just lose all the time! The Titans won on March 12, 2008.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"'
+                room: '{name} picks up a yearbook and announces that the Titans won on March 12, 2008.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"''
+                do:                   
+                  - set room.state.foundDateOne=true
+
 
       - name: scoreboard
         commands:
@@ -952,7 +964,7 @@ rooms:
           - name: use
             actions:
               - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
-              - room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
+                room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
 
       - name: cord
         commands:
@@ -967,8 +979,16 @@ rooms:
         commands:
           - name: get
             actions:
-              - user: You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.
+              - condition: room.state.foundDateOne==false
+                user: You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.
                 room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.'
+                do:                   
+                  - set room.state.foundDateTwo=true
+              - condition: room.state.foundDateOne==true
+                user: 'You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"'
+                room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"''
+                do:                   
+                  - set room.state.foundDateTwo=true
 
       - name: spider
         commands:
@@ -985,25 +1005,22 @@ rooms:
               - user: I don't know what spider you're talking about.
               - user: I don't know the word "spider."
 
-      ## Goal: display the following text to the room when both the ticket and yearbook have been identified.
-      ## "We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."
-
-      ## "And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."
-
-      ## Seeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"
-
-      ## If that's a no-go, lmk and I'll rewrite.
-
       - name: globe
         aliases:
           - world
         commands:
           - name: examine
             actions:
-              - user: You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.
-              - room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.'
+              - condition: room.state.foundDateOne==false && room.state.foundDateTwo==false
+                user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria……...6\n\n\n\nBelarus…….19\n\n\n\nEgypt………..8\n\n\n\nItaly………...12\n\n\n\nMorocco…….7\n\n\n\nNorway…….200\n\n\n\nRomania…….3\n\n\n\nSpain………...5\n\n\n\nUkraine……..16'
+              - condition: room.state.foundDateOne==false && room.state.foundDateTwo==true
+                user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria……...6\n\n\n\nBelarus…….19\n\n\n\nEgypt………..8\n\n\n\nItaly………...12\n\n\n\nMorocco…….7\n\n\n\nNorway…….200\n\n\n\nRomania…….3\n\n\n\nSpain………...5\n\n\n\nUkraine……..16' 
+              - condition: room.state.foundDateOne==true && room.state.foundDateTwo==false
+                user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria……...6\n\n\n\nBelarus…….19\n\n\n\nEgypt………..8\n\n\n\nItaly………...12\n\n\n\nMorocco…….7\n\n\n\nNorway…….200\n\n\n\nRomania…….3\n\n\n\nSpain………...5\n\n\n\nUkraine……..16'
+              - condition: room.state.foundDateOne==true && room.state.foundDateTwo==true
+                user: 'The fragile globe cracks, and a piece of paper falls out. It says:\n\n\n\n CLUE: Dates of two wins, 1st letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n5-16-1976 3-12-2008'
+                room: '{name} appears to have broken the globe. Oops. But a piece of paper fell out that says: \n\n\n\nCLUE: Dates of two wins, 1st letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n5-16-1976  3-12-2008'                user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria……...6\n\n\n\nBelarus…….19\n\n\n\nEgypt………..8\n\n\n\nItaly………...12\n\n\n\nMorocco…….7\n\n\n\nNorway…….200\n\n\n\nRomania…….3\n\n\n\nSpain………...5\n\n\n\nUkraine……..16'
 
-      ## need to create two states: before dates found and after dates found
 
       - name: keypad
         commands:
@@ -2001,7 +2018,7 @@ rooms:
            - name: get
              actions:
                - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
-               - room: '{USER removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
+                 room: '{USER removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
 
        - name: painting 7
          commands:
