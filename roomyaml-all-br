@@ -1218,7 +1218,7 @@ rooms:
           - name: examine
             actions:
               - condition: room.state.foundFootprints==false
-                user: 'You glance over at the north wall, and you think you see a hint of something there, but... there's more to do in this room before you can take a closer look.'
+                user: 'You glance over at the north wall, and you think you see a hint of something there, but... there’s more to do in this room before you can take a closer look.'
               - condition: room.state.foundFootprints==true
                 user: Footprints yes found
                 room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.'
