@@ -136,7 +136,7 @@ rooms:
            - name: talk
              actions:
                - user: The door listens thoughtfully to your words; however, it remains very, very shut.
-           -it sh name: examine
+           - name: examine
              aliases:
                - look
              actions:
