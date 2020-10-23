@@ -1,21 +1,26 @@
 ##variables to edit for each class
 
 vars:
-    schoolname: SHADOWMAN MIDDLE SCHOOL
-    friendname: GABRIELLA
-    subject: SCIENCE
-    townname: RALEIGH
-    adultname: PAULA WEIGEL
-    child-first-name: LISA
-    describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS
-    flashlight-color: BLUE
-    walkie-talkie: THE WALKIE TALKIE IS A BIG, BLACK BRICK WITH AN OBVIOUS SPEAKER ON THE FRONT AND A SIMPLE ON/OFF SWITCH ON TOP.
-    wall-things: SOMEONE HAS SCRAWLED "MR. JONES IS THE BEST MATH TEACHER EVER!" WHAT A KIND GRAFFITI ARTIST.
-    wall-things2: THERE'S A WORLD MAP POSTER THAT HAS THE USSR, AND HALF OF THE AFRICAN CONTINENT JUST SAYS "FRENCH WEST AFRICA." YOU REALIZE YOUR SCHOOL MIGHT HAVE BEEN AROUND LONGER THAN YOU THOUGHT.
-    floor: HOW IS THERE STICKY BUBBLEGUM ON THE FLOOR WHEN IT DOESN'T SEEM LIKE ANYONE'S BEEN DOWN HERE IN CENTURIES?
-    hospital-name: TUOMEY REGIONAL HOSPITAL
-    basketballs: A RUSTY SILVER RACK HOLDS HALF A DOZEN BASKETBALLS, NONE OF WHICH WILL BOUNCE. ONE IS JUST A FLAT ORANGE PANCAKE.
-    spider: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
+    schoolname: St Miriam's Finishing School for Girls
+    friendname: Gabriellalala
+    subject: science
+    townname: Shadyville
+    adultname: Ruth Suehle
+    child-first-name: Hannah
+    describe-walls: Every room has the same cold cinder block walls.
+    flashlight-color: blue
+    walkie-talkie: The walkie talkie is a big, black brick with an obvious speaker on the front and a simple on/off switch on top.
+    wall-things: Someone has scrawled "Mr. Jones is the best math teacher ever!" What a kind graffiti artist.
+    wall-things2: There's a world map poster that has the USSR, and half of the African continent just says "French West Africa." You realize your school might have been around longer than you thought.
+    floor: How is there sticky bubblegum on the floor when it doesn't seem like anyone's been down here in centuries?
+    hospital-name: Tuomey Regional Hospital
+    basketballs: A rusty silver rack holds half a dozen basketballs, none of which will bounce. One is just a flat orange pancake.
+    spider: A tiny spiny orb weaver is chilling out in his web. What a great place for a spider to live undisturbed.
+
+commands:
+  - name: help
+    actions:
+      - user: There are a few commands that will help you get out of this basement. Remember to always type a '/' in front of the command and use simple phrases. For example':' \n\n /examine or /look - Used alone, this will look around the room and tell you what you see. Sometimes you will see things differently if you look around again. And perhaps again and again. Used with an object in the room ("/examine book") will take a closer look at that thing.\n\n /use - Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?\n\n /get - Pick up an object. You’ll have to /get cookie before you can /use cookie.\n\n /talk {friendname} - See what {friendname} is thinking right now. To talk to other people playing with you, simply type without a / in front. Everyone in the room will see your message.\n\n /go - Move in the direction specified, such as "/go n" to move north. This is always relative to the center of the room. You do not have to move back to go another direction. You can think of it like "/examine direction", which may reveal to you more than you see with a simple /look or /examine.\n\n /exits - Will tell you where you see ways out of the room. Too bad you’re trapped in a basement without many of them.
 
   - name: get
     aliases:
@@ -71,11 +76,11 @@ rooms:
             - look
           actions:
             -  condition: room.state.lightOn==false
-               user: It is really dark down here. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You're pretty sure there’s a wall behind you because you just got here.
+               user: It is really dark down here. You're pretty sure there’s a wall behind you because you just got here.
             -  condition: room.state.lightOn==false
-               user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light *switch*?
+               user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light switch?
             -  condition: room.state.lightOn==false
-               user: You still can't see anything at all. You feel like there should be a light *switch* though. Try examining the wall.
+               user: You still can't see anything at all. You feel like there should be a light switch though. Try examining the wall.
             -  condition: room.state.lightOn==true
                user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
                room: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
