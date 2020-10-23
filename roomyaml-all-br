@@ -275,7 +275,7 @@ rooms:
             aliases:
               - look
             actions:
-              - user: This door is larger and heavier than the first two. There’s a keypad beside the door.
+              - user: This door is larger and heavier than the first two. There’s a **keypad** beside the door.
           - name: kick
             actions:
               - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
@@ -357,7 +357,7 @@ rooms:
               - condition: walkietalkie.heldBy=={id}
                 user: "You can't get the walkietalkie when it's already in your hands!!"
               - condition: walkietalkie.heldBy!={id} && walkietalkie.heldBy!=nobody
-                user: "It's not polite to try to snatch the walkietalkie from someone else, you could ask them nicely to drop it for you"
+                user: "It's not polite to try to snatch the walkie talkie from someone else, you could ask them nicely to drop it for you"
           - name: drop
             actions:
               - condition: items.walkietalkie.heldBy=={id}
@@ -378,8 +378,8 @@ rooms:
               do:
               - set items.walkietalkie.isOn==false
             - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==false
-              user: You turn the knob on the top of the walkie talkie. The red light illuminates, and the walkie talkie starts beeping a series of short and long tones. It pauses, then repeats the series. —   — — —   ⏺⏺   ⏺
-              room: '{name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series.\n —   — — —   ⏺⏺   ⏺'
+              user: You turn the knob on the top of the walkie talkie. The red light illuminates, and the walkie talkie starts beeping a series of short and long tones. It pauses, then repeats the series. '—&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺'
+              room: '{name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series.\n —&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺'
               do:
               - set items.walkietalkie.isOn==true
           - name: kick
@@ -391,9 +391,12 @@ rooms:
           hidden: false
           heldBy: nobody
         commands:
+        - name: get
+          actions: 
+             - user: There are four scraps of paper in the room spread among the corners. Try to go ne, nw, se, and sw to find and examine them, and then specify which scrap you would like to get.
         - name: examine
           actions:
-             - user: There are four scraps of paper in the room spread among the corners. Try to go ne, nw, se, and sw to find them, and then specify which color scrap you would like to look at.
+             - user: There are four scraps of paper in the room spread among the corners. Try to go ne, nw, se, and sw to find and examine them, and then specify which scrap you would like to look at.
 
       - name: redscrap
         aliases:
@@ -466,7 +469,7 @@ rooms:
                 - condition: items.yellowscrap.heldBy==nobody
                   do:
                     - set items.yellowscrap.heldBy={id}
-                  user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\nThen the paper appears to have been ripped at the bottom.
+                  user: It says ':'\n\n⏺ — ⏺ — CLASSROOM\n\n— — THROUGH\n\n— ⏺ — ROOF\n\n— — — UNDER
             - name: drop
               actions:
                 - condition: items.yellowscrap.heldBy=={id}
@@ -512,7 +515,7 @@ rooms:
         commands:
             - name: examine
               actions:
-                - user: The door is locked, and the keypad beside it appears to be the way to open it. Its secrets are in this room.
+                - user: There is a door to your south and a door to your north. Specify which door you would like to examine.
             - name: get
               actions:
                 - user: You didn't bring a screwdriver, so that's not going to happen.
@@ -541,10 +544,10 @@ rooms:
                   user: It looks like it’s expecting a phrase, you should try "/use keypad with the answer"
                 - condition: unmatched
                   user: Nothing happens. That must not have been the right phrase.
-                - condition: '{arg}=="keypad with the answer"'
+                - condition: '{arg}=="with the answer"'
                   user: If the keypad had emotions, it would currently be quite baffled. Use the answer from the puzzle in the room!
                 - condition: '{arg}=="tunnel under the basement"'
-                  user: You press the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.
+                  user: One by one, you press the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.
                   room: '{name} presses the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.'
                   do:
                    - teleportAll nextroomid
@@ -581,9 +584,9 @@ rooms:
           - look
         actions:
           - condition: room.state.lightOn==true
-            user: This just seems to be a room full of assorted leftovers from classrooms, mostly broken desks and chairs. Some of them look pretty old.
+            user: This just seems to be a room full of assorted leftovers from classrooms, mostly broken **desks** and **chairs**. Some of them look pretty old.
           - condition: room.state.lightOn==true
-            user: There’s not much of interest here. Mostly just broken desks and chairs that accumulated over the years. There is {flashlight-color} flashlight on the floor.
+            user: There’s not much of interest here. Mostly just broken desks and chairs that accumulated over the years. There is {flashlight-color} **flashlight** on the floor.
 
       - name: exits
         aliases:
@@ -592,9 +595,25 @@ rooms:
           - user: The door you came in is to the south. Much like the first two doors, it has now locked behind you. There is another heavier looking door to the north, similar to the one you just came through.
 
     items:
+      - name: desk
+        aliases: 
+          - desks
+        commands: 
+          - name: examine
+            user: Mostly they look like the desks you sit at every day. Pretty uninteresting. 
+            
+      - name: chair
+        aliases: 
+          - chairs
+        commands: 
+          - name: examine
+            user: They're down here because they're broken. You should leave them alone. I'm sure there's something more useful in this room to try. Look around again. 
+            
       - name: '{friendname}'
         commands:
           - name: examine
+            aliases: 
+              - look
             actions:
               - user: ' {friendname} mutters, "Seriously. NOT how Morse Code works." But you know if you ask more questions, she’ll spend an hour telling you about the entire history of telecommunications, and you don’t have time for that.'
           - name: talk
@@ -620,13 +639,13 @@ rooms:
             aliases:
               - look
             actions:
-              - user: This door is larger and heavier than the first two. There’s a keypad beside the door.
+              - user: This door is larger and heavier than the first two. There’s a **keypad** beside the door.
           - name: kick
             actions:
               - user: That was unpleasant. For you. The door does not care.
           - name: use
             actions:
-              - user: The door is locked, and the keypad appears to be the way to open it. Its secrets are in this room.
+              - user: The door is locked, and the **keypad** appears to be the way to open it. Its secrets are in this room.
 
       - name: south door
         commands:
@@ -645,6 +664,26 @@ rooms:
             actions:
               - user: "It's locked. You have no key. Perhaps this room has another door?"
 
+      - name: door
+        commands:
+            - name: examine
+              actions:
+                - user: There is a door to your south and a door to your north. Specify which door you would like to examine.
+            - name: get
+              actions:
+                - user: You didn't bring a screwdriver, so that's not going to happen.
+            - name: drop
+              actions:
+                - user: Drop a door? First you'll have to get it.
+            - name: use
+              actions:
+                - user: You attempt to open the door, but it is very, very locked. It stays shut.
+            - name: kick
+              actions:
+                - user: That was unpleasant. For you. The door does not care.
+                - user: Don’t break a toe. You could be down here a while. The door still does not care.
+                - user: This will clearly not be successful. You should stop kicking the door.
+                
       - name: wall
         commands:
           - name: examine
