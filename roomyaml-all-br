@@ -1700,66 +1700,69 @@ rooms:
 
        -  name: flashlight
           state:
-            hidden: true
-            isOn: false
-            heldBy: nobody
+             hidden: true
+             isOn: false
+             heldBy: nobody
           commands:
-            -  name: examine
-               actions:
-                 -  condition: items.flashlight.isOn==false
-                    user: An old dusty flashlight, it appears to be switched off.
-                 -  condition: items.flashlight.isOn==true
-                    user: An old dusty flashlight, it appears to be switched on.                    
-            -  name: get
-               actions:
-                 -  condition: items.flashlight.heldBy==nobody
-                    do:
-                      - set items.flashlight.heldBy={id}
-                    user: You pick up the flashlight.
-                    room: '{name} found a flashlight and picked it up. That might be useful later.'
-            -  name: drop
-               actions:
-                 -  condition: items.flashlight.heldBy=={id}
-                    do:
-                      - set items.flashlight.heldBy=nobody
-                    user: You drop the flashlight
-                    room: '{name} drops the flashlight'
-            -  name: use
-               actions:
-                 - condition: items.flashlight.heldBy!={id}
-                   user: You can't use that, because you are not holding it, try /get flashlight
-                   room: '{name} pokes at the flashlight aimlessly.'
-                 - condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
-                   user: You switch off the flashlight.
-                   room: '{name} turns the flashlight off.'
-                   do:
-                      - set items.flashlight.isOn=false
-                 - condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
-                   user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
-                    room: '{name} turns the flashlight on'
-                    do:
-                      - set items.flashlight.isOn=true
-                 - condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
-                   user: There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.
-                   room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
-                 - condition: items.flashlight.heldBy=={id} && '{arg}=="east wall" || {arg}=="east"'
-                   user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
-                   room: '{name} shines the light towards the east wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
-                 - condition: items.flashlight.heldBy=={id} && '{arg}=="west wall" || {arg}=="west"'
-                   user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
-                   room: '{name} shines the light towards the west wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
-                 - condition: items.flashlight.heldBy=={id} && '{arg}=="south wall" || {arg}=="south"'
-                   user: That way lies the BEEP. Let’s not think of it again.
-                 - condition: items.flashlight.heldBy=={id} && '{arg}=="floor"'
-                   user: 'You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V'
-                   room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
-                 - condition: items.flashlight.heldBy=={id} && '{arg}=="ceiling"'
-                   user: You shine the flashlight on the ceiling. Someone has scribbled "Back to square one" on it.
-                   room: '{name} shines the flashlight at the ceiling. Someone has scribbled "Back to square one" on it.'
-            - name: kick
+           -  name: examine
               actions:
-                -  user: You attempt to kick the flashlight, why would you do that! why!
-                -  user: You flail wildly toward the torch wih your foot, and miss.
+               -  condition: items.flashlight.isOn==false
+                  user: An old dusty flashlight, it appears to be switched off.
+                  room: '{name} examines the flashlight.'
+               -  condition: items.flashlight.isOn==true
+                  user: An old dusty flashlight, it appears to be switched on.
+                  room: '{name} examines the flashlight.'
+           -  name: get
+              actions:
+               -  condition: items.flashlight.heldBy==nobody
+                  do:
+                    - set items.flashlight.heldBy={id}
+                  user: You pick up the flashlight.
+                  room: '{name} found a flashlight and picked it up.'
+           -  name: drop
+              actions:
+               -  condition: items.flashlight.heldBy=={id}
+                  do:
+                    - set items.flashlight.heldBy=nobody
+                  user: You drop the flashlight
+                  room: '{name} drops the flashlight'
+           -  name: use
+              actions:
+               -  condition: items.flashlight.heldBy!={id}
+                  user: You can't use that, because you are not holding it, try /get flashlight
+                  room: '{name} pokes at the flashlight aimlessly.'
+               -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
+                  user: You switch off the flashlight.
+                  room: '{name} turns the flashlight off.'
+                  do:
+                    - set items.flashlight.isOn=false
+               -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
+                  user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
+                  room: '{name} turns the flashlight on'
+                  do:
+                    - set items.flashlight.isOn=true
+               -  condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
+                  user: 'There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
+                  room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
+               -  condition: '{arg}=="east" || {arg}=="e" && items.flashlight.heldBy=={id}'
+                  user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
+                  room: '{name} shines the light towards the east wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
+               -  condition: '{arg}=="west" || {arg}=="w" && items.flashlight.heldBy=={id}'
+                  user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
+                  room: '{name} shines the light towards the west wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
+               -  condition: '{arg}=="south" || {arg}=="s" && items.flashlight.heldBy=={id}'
+                  user: That way lies the BEEP. Let’s not think of it again.
+                  room: '{name} shines the flashlight on the south wall. You are unpleasantly reminded of the incessant BEEP.'
+               -  condition: '{arg}=="floor" && items.flashlight.heldBy=={id}'
+                  user: 'You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V'
+                  room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
+               -  condition: '{arg}=="ceiling" && items.flashlight.heldBy=={id}'
+                  user: You shine the flashlight on the ceiling. Someone has scribbled "Back to square one" on it.
+                  room: '{name} shines the flashlight at the ceiling. Someone has scribbled "Back to square one" on it.'
+           -  name: kick
+              actions:
+               -  user: You attempt to kick the flashlight, why would you do that! why!
+               -  user: You flail wildly toward the torch wih your foot, and miss.
 
        - name: bulb
          aliases:
