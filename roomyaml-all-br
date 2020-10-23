@@ -1300,12 +1300,12 @@ rooms:
            - name: use
              actions:
              - condition: room.state.lightOn==true
-               user: 'You turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it’s coming from.'
-               room: '{name} turns out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it’s coming from.'
+               user: 'You turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it is coming from.'
+               room: '{name} turns out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it is coming from.'
                do:
                  - set room.state.lightOn=false
              - condition: room.state.lightOn==false
-               user: 'The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.  Listen in each direction to see if you can figure out where it’s coming from.'
+               user: 'The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.  Listen in each direction to see if you can figure out where it is coming from.'
 
        - name: north
          aliases:
