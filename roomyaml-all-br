@@ -1049,6 +1049,8 @@ rooms:
 
   - name: The Science and Social Studies Room
     id: skeleton
+    state:
+      foundFootprints: false
     exits:
      S: ""
      N: ""
@@ -1181,8 +1183,10 @@ rooms:
                    user: You shine the flashlight on the south wall. Just wall. Wall, wall, wall.
                    room: '{name} shines the flashlight on the south wall. Just wall. Wall, wall, wall.'
                 -  condition: 'items.flashlight.heldBy=={id} && {arg}=="floor"'
-                   user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
+                   user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the **north wall**? Perhaps you should take a closer look at that wall.'
                    room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the **north wall**? Perhaps you should take a closer look at that wall.'
+                   do:
+                     - set room.state.foundFootprints=true
                 -  condition: 'items.flashlight.heldBy=={id} && {arg}=="ceiling"'
                    user: 'You shine the flashlight at the ceiling. That might be exactly the opposite of where you want to shine it.'
                    room: 'A yellow circle waves around the ceiling as {name} shines a flashlight at it.'
@@ -1212,12 +1216,13 @@ rooms:
         commands:
           - name: examine
             actions:
-            ## needs the condition of working only after footprints are found
-            - user: 'You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n[{townname}]--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
+            - condition: room.state.foundFootprints==false
+              user: 'You glance over at the north wall, and you think you see a hint of something there, but... there's more to do in this room before you can take a closer look.
+            - condition: room.state.foundFootprints==true
+              user: 'You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n[{townname}]--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
               room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\n\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
-
-      ## Choices here: Either examining the north wall is the last task to be done, or we can add a /use doorway. Since we haven't had a "doorway" so far, it seems unlikely they'd do it by accident, but not impossible.
-
+              do:
+               - teleportAll riddle
 
 
 ## Room 6 -- almost the tunnel
