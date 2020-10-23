@@ -1019,7 +1019,8 @@ rooms:
                 user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria……...6\n\n\n\nBelarus…….19\n\n\n\nEgypt………..8\n\n\n\nItaly………...12\n\n\n\nMorocco…….7\n\n\n\nNorway…….200\n\n\n\nRomania…….3\n\n\n\nSpain………...5\n\n\n\nUkraine……..16'
               - condition: room.state.foundDateOne==true && room.state.foundDateTwo==true
                 user: 'The fragile globe cracks, and a piece of paper falls out. It says:\n\n\n\n CLUE: Dates of two wins, 1st letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n5-16-1976 3-12-2008'
-                room: '{name} appears to have broken the globe. Oops. But a piece of paper fell out that says: \n\n\n\nCLUE: Dates of two wins, 1st letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n5-16-1976  3-12-2008'                user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria...6\n\n\n\nBelarus...19\n\n\n\nEgypt...8\n\n\n\nItaly...12\n\n\n\nMorocco...7\n\n\n\nNorway...200\n\n\n\nRomania...3\n\n\n\nSpain...5\n\n\n\nUkraine...16'
+                room: '{name} appears to have broken the globe. Oops. But a piece of paper fell out that says: \n\n\n\nCLUE: Dates of two wins, 1st letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n5-16-1976  3-12-2008'                
+                user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria...6\n\n\n\nBelarus...19\n\n\n\nEgypt...8\n\n\n\nItaly...12\n\n\n\nMorocco...7\n\n\n\nNorway...200\n\n\n\nRomania...3\n\n\n\nSpain...5\n\n\n\nUkraine...16'
 
 
       - name: keypad
