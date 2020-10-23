@@ -1829,22 +1829,6 @@ rooms:
                       - set items.phone.heldBy=nobody
                     user: You put the phone back in the hole in the floor.
                     room: '{name} puts the phone back in the hole in the floor.'
-##            -  name: use
-##               actions:
-##                 - condition: items.phone.heldBy!={id}
-##                   user: You can't use the phone, because you're not holding it. Try "/get phone" first.
-##                   room: '{name} pokes at the phone aimlessly.'
-##                 - condition: '{arg}=="" && items.phone.heldBy=={id}'
-##                   user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
-##                 - condition:  '{arg}=="star" && items.phone.heldBy=={id}'
-##                   user: 'Your call cannot be completed as dialed. Nothing happens.'
-##                   user: 'Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.'
-## this one doesn't work. What does yaml think a * should be?                  
-## - condition: 'items.phone.heldBy=={id} && {arg}=="*"' 
-## user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
-                 - condition:  '{arg}=="7827" && items.phone.heldBy=={id}'
-                   user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
-                   room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.\n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
 
        - name: star
          aliases:
