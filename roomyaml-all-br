@@ -90,7 +90,7 @@ rooms:
             - look
           actions:
             -  condition: room.state.lightOn==false
-               user: 'It is really, really dark down here. You’re pretty sure there’s a **wall** behind you because you just got here.'
+               user: 'It is really dark down here. You’re pretty sure there’s a **wall** behind you because you just got here.'
             -  condition: room.state.lightOn==false
                user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light **switch**?
             -  condition: room.state.lightOn==false
