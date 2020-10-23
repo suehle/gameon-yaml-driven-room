@@ -1044,7 +1044,8 @@ rooms:
         aliases:
           - look
         actions:
-          - user: This might be the creepiest room yet. It’s barely lit, but it doesn’t matter, because it looks like the only thing here is an old plastic skeleton from the science lab.
+          - user: This might be the creepiest room yet. It’s barely lit, but it doesn’t matter, because it looks like the only thing here is an old plastic **skeleton** from the science lab.
+          - user: Oh, hey. There's a **flashlight** here, too. Very thoughtful of someone to leave a trail of those all over the basement.
 
       - name: exits
         aliases:
@@ -1089,7 +1090,7 @@ rooms:
         commands:
           - name: examine
             actions:
-              - user: You take the top off the skeleton’s head and find the plastic brain is an unnaturally bright shade of pink. Along the line between the right and left hemispheres, there’s a message. On one side, "What makes more as you take them." On the other, "Follow." What might that mean? Don’t forget to use the tools you have.
+              - user: You take the top off the skeleton’s head and find the plastic **brain** is an unnaturally bright shade of pink. Along the line between the right and left hemispheres, there’s a message. On one side, "What makes more as you take them." On the other, "Follow." What might that mean? Don’t forget to use the tools you have.
           - name: kick
             actions:
               - user: No. Just no.
@@ -1097,7 +1098,6 @@ rooms:
             actions:
               - user: You spend several minutes examining the brain. You memorize the locations of the frontal and parietal lobe. The temporal and occipital lobe. The encephalic trunk and cerebellum. You consider going to medical school. Then you remember you need to get out of this basement first.
 
-## do they still have the flashlight, or do we need to drop another one in this room?
       -  name: flashlight
          state:
            hidden: true
@@ -1131,31 +1131,27 @@ rooms:
                 -  condition: 'items.flashlight.heldBy!={id}'
                    user: "You can't use that, because you are not holding it, try /get flashlight"
                    room: '{name} pokes at the flashlight aimlessly.'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                    user: 'You switch off the flashlight.'
                    room: '{name} turns the flashlight off.'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
+                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
                    user: 'Hey, the flashlight works! And it’s shining in your eyes. Remember, you need to specify what you want to use the flashlight on (eg, "/use flashlight east wall"). You can also shine it at the floor or ceiling.'
                    room: '{name} turns the flashlight on'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="north" || {arg}=="n"'
+                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="north" || {arg}=="n"'
                    user: 'You shine the flashlight on the north wall. You thought you saw a hint of something there, but... hmm. Maybe not.'
                    room: '{name} shines the flashlight on the north wall. You thought you saw a hint of something there, but... hmm. Maybe not'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="east" || {arg}=="e"'
+                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="east" || {arg}=="e"'
                    user: You shine the flashlight on the east wall. It looks like a wall.
                    room: '{name} shines the flashlight on the east wall. It looks like a wall.'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="west" || {arg}=="w"'
+                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="west" || {arg}=="w"'
                    user: You shine the flashlight on the west wall. The door you came in is quite shiny. But locked. And there’s no keypad on this side.
                    room:  '{name} shines the flashlight on the west wall. The door you came in is quite shiny. But locked. And there’s no keypad on this side.'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="south" || {arg}=="s"'
+                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="south" || {arg}=="s"'
                    user: You shine the flashlight on the south wall. Just wall. Wall, wall, wall.
                    room: '{name} shines the flashlight on the south wall. Just wall. Wall, wall, wall.'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="floor"'
+                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="floor"'
                    user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
-                   room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the north wall?'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}=="ceiling"'
-                   user: You shine the flashlight on the ceiling. You find nothing.
-                   room: '{name} shines the flashlight at the ceiling.'
-           -  name: kick
+                   room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the **north wall**
               actions:
                 -  user: You attempt to kick the flashlight, why would you do that! why!
                 -  user: You flail wildly toward the torch wih your foot, and miss.
@@ -1182,8 +1178,8 @@ rooms:
           - name: examine
             actions:
             ## needs the condition of working only after footprints are found
-            - user: You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMissing Teens Found\n\nApril 22, 1979\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.
-              room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\n\n\nMissing Teens Found\n\nApril 22, 1979\n\n\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\n\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
+            - user: 'You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n[{townname}]--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
+              room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\n\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
 
       ## Choices here: Either examining the north wall is the last task to be done, or we can add a /use doorway. Since we haven't had a "doorway" so far, it seems unlikely they'd do it by accident, but not impossible.
 
@@ -1221,7 +1217,7 @@ rooms:
            - look
          actions:
            - condition: room.state.lightOn==true
-             user: '"So there’s really a vault," {friendname} gasps. "This proves it. And those kids got out." \n\n\n\n"It seems that to find the tunnel, we first have to find a riddle in the darkest corner of the basement, and answer it correctly," you say. \n\n\n\n"Easy peasy," {friendname} jokes sarcastically. "Except why would we have to turn off the light to hear a sound?"\n\n\n\nThis is the smallest room yet, and it doesn’t even seem to be used as storage. In fact, the only thing you see is a light switch on the wall.  \n\n\n\nThe hidden doorway slides shut behind you. You are now truly, officially trapped. \n\n\n\nThere’s a light switch on the wall. And nothing else in the room.'
+             user: '"So there’s really a vault," {friendname} gasps. "This proves it. And those kids got out." \n\n\n\n"It seems that to find the tunnel, we first have to find a riddle in the darkest corner of the basement, and answer it correctly," you say. \n\n\n\n"Easy peasy," {friendname} jokes sarcastically. "Except why would we have to turn off the light to hear a sound?"\n\n\n\nThis is the smallest room yet, and it doesn’t even seem to be used as storage. In fact, the only thing you see is a light **switch** on the wall.  \n\n\n\nThe hidden doorway slides shut behind you. You are now truly, officially trapped. \n\n\n\nThere’s a light **switch** on the wall. And nothing else in the room.'
            - condition: room.state.lightOn==false
              user: Try looking in each direction and see if you can find where the sound is coming from.
 
