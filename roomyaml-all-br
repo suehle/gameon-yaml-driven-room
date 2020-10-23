@@ -1660,7 +1660,7 @@ rooms:
        - name: go
          actions:
            - condition: '{arg}=="north" || {arg}=="n"'
-             user: At the other end of what you’re now certain must be the tunnel you were looking for, a bare light **bulb** hangs from the ceiling, barely glowing. There is a flashlight on the floor.
+             user: At the other end of what you’re now certain must be the tunnel you were looking for, a bare light **bulb** hangs from the ceiling, barely glowing. There is a **flashlight** on the floor.
            - condition: '{arg}=="east" || {arg}=="e"'
              user: You can barely turn around, let alone move in that direction!
            - condition: '{arg}=="west" || {arg}=="w"'
@@ -1754,8 +1754,8 @@ rooms:
                   user: That way lies the BEEP. Let’s not think of it again.
                   room: '{name} shines the flashlight on the south wall. You are unpleasantly reminded of the incessant BEEP.'
                -  condition: '{arg}=="floor" && items.flashlight.heldBy=={id}'
-                  user: 'You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V'
-                  room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
+                  user: 'You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\nR  K  B  A  P\n\nB  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V'
+                  room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\nR  K  B  A  P\n\nB  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
                -  condition: '{arg}=="ceiling" && items.flashlight.heldBy=={id}'
                   user: You shine the flashlight on the ceiling. Someone has scribbled "Back to square one" on it.
                   room: '{name} shines the flashlight at the ceiling. Someone has scribbled "Back to square one" on it.'
@@ -1803,7 +1803,7 @@ rooms:
               - name: use
                 actions:
                   - user: You lift the tile and find a shiny silver flip phone resting in a hole under the floor. It looks ancient, but maybe it still works?
-                    room: '{name} has pulled up a loose tile and is now looking at a hole in the floor. There is an old flip phone resting inside it.'
+                    room: '{name} has pulled up a loose tile and is now looking at a hole in the floor. There is an old flip **phone** resting inside it.'
 
        - name: phone
          aliases:
@@ -1811,11 +1811,11 @@ rooms:
          commands:
               - name: get
                 actions:
-                  - condition: 'items.phone.heldBy==nobody'
-                    do:
-                     - set items.phone.heldBy={id}
-                    user: You pick up the phone.
-                    room: '{name} picked up the phone.'
+                  -  condition: items.phone.heldBy==nobody
+                     do:
+                      - set items.phone.heldBy={id}
+                     user: You pick up the phone.
+                     room: '{name} found a phone in the floorand picked it up.'
               - name: drop
                 actions:
                   - condition: 'items.phone.heldBy=={id}'
