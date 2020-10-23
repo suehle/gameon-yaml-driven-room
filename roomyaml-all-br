@@ -1660,12 +1660,13 @@ rooms:
        - name: go
          actions:
            - condition: '{arg}=="north" || {arg}=="n"'
-             user: At the other end of what you’re now certain must be the tunnel you were looking for, a bare light **bulb** hangs from the ceiling, barely glowing.
+             user: At the other end of what you’re now certain must be the tunnel you were looking for, a bare light **bulb** hangs from the ceiling, barely glowing. There is a flashlight on the floor.
            - condition: '{arg}=="east" || {arg}=="e"'
              user: You can barely turn around, let alone move in that direction!
            - condition: '{arg}=="west" || {arg}=="w"'
              user: You can barely turn around, let alone move in that direction!
-           - condition: '{arg}=="south" || {arg}=="s" && room.state.lightOn==true'
+           - condition: '{arg}=="south" || {arg}=="s"'
+## should be '{arg}=="south" || {arg}=="s" && room.state.lightOn==true' but it wasn't working
              user: You’re back at the end of the tunnel where you came in. Tired of solving puzzles, you stand silently, wondering whether you’ll ever get out. In the silence, you think you hear a light rumble under your feet? Is it... under the **floor**?
            - condition: '{arg}=="northeast" || {arg}=="ne"'
              user: This tunnel is reall too small to worry about the corners.
@@ -1707,36 +1708,38 @@ rooms:
                actions:
                  -  condition: items.flashlight.isOn==false
                     user: An old dusty flashlight, it appears to be switched off.
-                    room: '{name} examines the flashlight.'
                  -  condition: items.flashlight.isOn==true
-                    user: An old dusty flashlight, it appears to be switched on.
-                    room: '{name} examines the flashlight.'
+                    user: An old dusty flashlight, it appears to be switched on.                    
             -  name: get
                actions:
-                 -  condition: 'items.flashlight.heldBy==nobody'
+                 -  condition: items.flashlight.heldBy==nobody
                     do:
-                      - 'set items.flashlight.heldBy={id}'
+                      - set items.flashlight.heldBy={id}
                     user: You pick up the flashlight.
-                    room: '{name} found a flashlight and picked it up.'
+                    room: '{name} found a flashlight and picked it up. That might be useful later.'
             -  name: drop
                actions:
-                 -  condition: 'items.flashlight.heldBy=={id}'
+                 -  condition: items.flashlight.heldBy=={id}
                     do:
                       - set items.flashlight.heldBy=nobody
                     user: You drop the flashlight
                     room: '{name} drops the flashlight'
-            - name: use
-              actions:
-                 - condition: 'items.flashlight.heldBy!={id}'
-                   user: You can't use that, because you are not holding it, try /get flashlight
-                   room: '{name} pokes at the flashlight aimlessly.'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
-                   user: You switch off the flashlight.
-                   room: '{name} turns the flashlight off.'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
-                   user: Hey, the flashlight works! And it’s shining in your eyes. Remember, you need to specify what you want to use the flashlight on (eg, "/use flashlight east wall"). You can also shine it in a direction, at the floor, or at the ceiling.
-                   room: '{name} turns the flashlight on'
-                 - condition: items.flashlight.heldBy=={id} && '{arg}=="north wall" || {arg}=="north"'
+            -  name: use
+               actions:
+                 -  condition: items.flashlight.heldBy!={id}
+                    user: You can't use that, because you are not holding it, try /get flashlight
+                    room: '{name} pokes at the flashlight aimlessly.'
+                 -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
+                    user: You switch off the flashlight.
+                    room: '{name} turns the flashlight off.'
+                    do:
+                      - set items.flashlight.isOn=false
+                 -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
+                    user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
+                    room: '{name} turns the flashlight on'
+                    do:
+                      - set items.flashlight.isOn=true
+                 - condition: condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
                    user: There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.
                    room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
                  - condition: items.flashlight.heldBy=={id} && '{arg}=="east wall" || {arg}=="east"'
