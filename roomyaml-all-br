@@ -5,10 +5,10 @@ vars:
     friendname: GABRIELLA
     subject: SCIENCE
     townname: RALEIGH
-    adultname: PAULA WEIGEL
-    child-first-name: LISA
+    adultname: RUTH SUEHLE
+    child-first-name: HANNAH
     describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS.
-    flashlight-color: BLUE
+    flashlight-color: TEAL
     walkie-talkie: THE WALKIE TALKIE IS A BIG, BLACK BRICK WITH AN OBVIOUS SPEAKER ON THE FRONT AND A SIMPLE ON/OFF SWITCH ON TOP.
     wall-things: SOMEONE HAS SCRAWLED "MR. JONES IS THE BEST MATH TEACHER EVER!" WHAT A KIND GRAFFITI ARTIST.
     wall-things2: THERE'S A WORLD MAP POSTER THAT HAS THE USSR, AND HALF OF THE AFRICAN CONTINENT JUST SAYS "FRENCH WEST AFRICA." YOU REALIZE YOUR SCHOOL MIGHT HAVE BEEN AROUND LONGER THAN YOU THOUGHT.
@@ -2060,7 +2060,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: This was probably supposed to be a person, but none of the facial features are in quite the right place.You read the card beside the painting'"'\n\n             BUST OF A WOMAN (Dora Maar)\n\n             Pablo Picasso\n\n             1944\n\n             oil on canvas
+               - user: 'This was probably supposed to be a person, but none of the facial features are in quite the right place.You read the card beside the painting:\n\nBUST OF A WOMAN (Dora Maar)\n\nPablo Picasso\n\n1944\n\noil on canvas'
            - name: get
              actions:
                - user: It would be unwise to cut the painting apart to try to put the eyes where they belong. You put the painting back.
@@ -2069,7 +2069,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? You read the card beside the painting'"'\n\nTHE PEASANT DANCE\n\nPeter Bruegel the Elder\n\nc. 1567\n\noil on panel
+               - user: 'A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? You read the card beside the painting: \n\nTHE PEASANT DANCE\n\nPeter Bruegel the Elder\n\nc. 1567\n\noil on panel'
            - name: get
              actions:
                - user: Holding the painting up and dancing with the figures is briefly satisfying, but gets you no closer to the exit. You put the painting back.
@@ -2078,7 +2078,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: Some purple water lilies float in a vaguely watery blue scene. You read the card beside the painting'"'\n\n           WATER-LILIES\n\n            Claude Monet\n\n            c. 1916-17\n\n            oil on canvas
+               - user: 'Some purple water lilies float in a vaguely watery blue scene. You read the card beside the painting:\n\nWATER-LILIES\n\nClaude Monet\n\nc. 1916-17\n\noil on canvas'
            - name: get
              actions:
                - user: This would look great on your bedroom wall, but you’d have to explain where you got it. Oh well. You put the painting back.
@@ -2087,7 +2087,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user:  One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting'"'\n\n          FIN\n\n          Augustus Brooke-Winslow\n\n          c. 1900\n\n          oil on canvas
+               - user:  'One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting: \n\nFIN\n\nAugustus Brooke-Winslow\n\nc. 1900\n\noil on canvas'
            - name: get
              actions:
                - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
@@ -2097,7 +2097,7 @@ rooms:
          commands:
              - name: examine
                actions:
-                 - user: A dozen or so people, many of them wearing yellow hats, are having a tea party. You read the card beside the painting'"'\n\n            LUNCHEON OF THE BOATING PARTY (Le déjeuner des canotiers)\n\n           Pierre-Auguste Renoir\n\n            1881\n\n            oil on canvas \n\n
+                 - user: 'A dozen or so people, many of them wearing yellow hats, are having a tea party. You read the card beside the painting: \n\nLUNCHEON OF THE BOATING PARTY (Le déjeuner des canotiers)\n\nPierre-Auguste Renoir\n\n1881\n\noil on canvas \n\n'
              - name: get
                actions:
                    - user: You wish you had a jaunty yellow hat as well and sigh. You put the painting back.
@@ -2106,7 +2106,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: A man leaning on a cane is addressing a ballroom of ballerinas. You read the card beside the painting'"'\n\n           THE BALLET CLASS (La Classe de danse)\n\n          Edgar Degas\n\n           1871-1874\n\n           oil on canvas
+               - user: 'A man leaning on a cane is addressing a ballroom of ballerinas. You read the card beside the painting: \n\nTHE BALLET CLASS (La Classe de danse)\n\nEdgar Degas\n\n1871-1874\n\noil on canvas'
            - name: get
              actions:
                - user: You attempt a pirouette while holding the painting and land a perfect triple turn, which is amazing, since you’ve never taken a ballet class. You put the painting back and try again. The skill was fleeting.
@@ -2115,7 +2115,7 @@ rooms:
          commands:
              - name: examine
                actions:
-                 - user: A lot of squares, mostly white, some painted red, yellow, or blue. You read the card beside the painting'"'\n\n          VICTORY BOOGIE WOOGIE\n\n          Pieter Cornelis Mondriaan\n\n          1944\n\n          oil and paper on canvas
+                 - user: 'A lot of squares, mostly white, some painted red, yellow, or blue. You read the card beside the painting: \n\nVICTORY BOOGIE WOOGIE\n\nPieter Cornelis Mondriaan\n\n1944\n\noil and paper on canvas'
              - name: get
                actions:
                    - user: You’re pretty sure your kindergartener cousin brought something home last week that looked just like this, so you don’t need another one. You put the painting back.
