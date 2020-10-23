@@ -1837,16 +1837,9 @@ rooms:
                  - condition: items.phone.heldBy!={id}
                    user: You can't use the phone, because you're not holding it. Try "/get phone" first.
                    room: '{name} pokes at the phone aimlessly.'
-                 - condition: '{arg}=="" && items.phone.heldBy=={id} && items.phone.isOn==true'
-                   user: You switch off the phone.
-                   room: '{name} turns the phone off.'
-                   do:
-                      - set items.phone.isOn=false
-                 - condition: '{arg}=="" && items.phone.heldBy=={id} && items.phone.isOn==false'
+                 - condition: '{arg}=="" && items.phone.heldBy=={id}'
                    user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
-                    do:
-                      - set items.phone.isOn=true
-                 - condition:  '{arg}=="" && items.phone.heldBy=={id} && items.phone.isOn==true'
+                 - condition:  '{arg}=="" && items.phone.heldBy=={id}'
                     user: Your call cannot be completed as dialed. Nothing happens.
                     user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.
 ## this one doesn't work. What does yaml think a * should be?                  
