@@ -136,7 +136,7 @@ rooms:
            - name: talk
              actions:
                - user: The door listens thoughtfully to your words; however, it remains very, very shut.
-           - name: examine
+           -it sh name: examine
              aliases:
                - look
              actions:
@@ -146,11 +146,16 @@ rooms:
                - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
            - name: use
              actions:
-                - user: "The door is locked."
-## This door won’t work until everyone agrees they’re ready to move on.
-## Nobody can move along until everyone is ready to move along.
-## (after everyone has done it) {name} successfully unlocks the door. {friendname} goes into the next room, and you follow her.
-
+                - user: Think of this room as training for what's to come. Please ask everyone else in the room if they're ready to leave before you use the door again. 
+                  room: {name} asked to use the door. But we shouldn't move on until everyone is ready leave. If you feel that you know what to do, you've tested commands, and you think you're ready for the real game, tell {name} you're ready to go.
+                - user: Did you ask everyone? Are they all ready to move on? Just double-checking here. 
+                  room: It's almost time to go. If you're not ready to move on, speak up and ask everyone to stop trying to use the door. 
+                - user: Last warning. The next time you attempt to use this door, everyone will be trapped in the basement, and you can't come back here. 
+                - user: You successfully unlock the door. {friendname} goes into the next room, and you follow her.
+                  room: {name} successfully unlocks the door. {friendname} goes into the next room, and you follow her.
+                  do:
+                   - teleportAll morsecode
+                   
        - name: door
          commands:
            - name: examine
@@ -561,7 +566,7 @@ rooms:
                   user: One by one, you press the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.
                   room: '{name} presses the buttons for "TUNNEL UNDER THE BASEMENT" on the keypad beside the door.\n\n"That sounded like Morse Code, but it is definitely not Morse Code," {friendname} says. You don’t care because it worked--the door opens. But a tunnel under the basement? It seems like that’s something someone you know would have mentioned.'
                   do:
-                   - teleportAll nextroomid
+                   - teleportAll classroomstorage
 
 ## Room 3
   - name: Classroom Storage
@@ -802,7 +807,7 @@ rooms:
                   user: 'You type "TITANS TWO WINS" on the keypad beside the door. \n\n\n\n"Like the Greek Titans we learned about in social studies?" {friendname} wonders. \n\n\n\nThe door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.'
                   room: '{name} types "TITANS TWO WINS" on the keypad beside the door.\n\n\n\n "Like the Greek Titans we learned about in social studies?" {friendname} wonders. \n\n\n\nThe door swings open, revealing a much larger room than you’ve seen so far. You walk in to see what’s next. You hope it’s not a Greek Titan, but if it is, you’re hoping for Mnemosyne. You think you remember how to deal with her.'
                   do:
-                   - teleportAll nextroomid                 
+                   - teleportAll bigroom                 
 
 ## Room 4
 
@@ -811,7 +816,7 @@ rooms:
     exits:
      S: The door you came in through. It's locked, there is no going back. Ever.
      N: ""
-     E: A brave looking door, that appears to be very strong, and enjoys long walks in the forest at weekends. It is also locked.
+     E: A brave looking door, that appears to be very strong, and enjoys long walks in the forest on weekends. It is also locked.
      W: ""
     commands:
       - name: go
@@ -938,7 +943,6 @@ rooms:
               - user: You pick up a yearbook and flip to the athletics section. If only they’d spent as much time in practice as they did on their spirit week outfits, some team at this school might have won a game. Surely if you look at another yearbook, you’ll find evidence of a win?
               - user: Apparently they didn’t just lose all the time! The Titans won on March 12, 2008.
                 room: '{name} picks up a yearbook and learns something interesting.'
-## This last one to the room is meant to only show on the last user response... I'm not sure if that's what will actually happen?
 
       - name: scoreboard
         commands:
@@ -1020,7 +1024,7 @@ rooms:
                 user: Use your brain, indeed! You’d say you’re doing a pretty good job of that so far. What else will you have to do to find a way out of here? You all move on to the next room.
                 room: '{name} enters "BRAIN" on the keypad, and the door swings open. What else will you have to do to find a way out of here? You all move on to the next room.'
                 do:
-                  - teleportAll nextroomid
+                  - teleportAll skeleton
 
   ## Room 5
 
@@ -1030,7 +1034,7 @@ rooms:
      S: ""
      N: ""
      E: ""
-     W: The door you came in via. It's locked. No suprises there. Total fire hazard that, but I guess old dusty basements don't really meet code.
+     W: The door you came in via. It's locked. No suprises there. Total fire hazard, but I guess old dusty basements don't really meet code.
     commands:
       - name: go
         actions:
@@ -1156,6 +1160,7 @@ rooms:
                 -  condition: 'items.flashlight.heldBy=={id} && {arg}=="floor"'
                    user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
                    room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the **north wall**'
+           -  name: kick        
               actions:
                 -  user: You attempt to kick the flashlight, why would you do that! why!
                 -  user: You flail wildly toward the torch wih your foot, and miss.
@@ -1450,7 +1455,7 @@ rooms:
                   user: You press the pawn on the wall. A doorway-sized set of bricks cracks away from the rest of the wall and swings inward to a long, dark space. Could this be the tunnel? All you can see is a light at what seems to be the north end.
                   room: '{name} presses the pawn on the wall. A doorway-sized set of bricks cracks away from the rest of the wall and swings inward to a long, dark space. Could this be the tunnel? All you can see is a light at what seems to be the north end.'
                   do:
-                    - teleportAll nextroomid
+                    - teleportAll tunnel
 
        - name: knight
          commands:
@@ -1684,27 +1689,27 @@ rooms:
                  - condition: 'items.flashlight.heldBy!={id}'
                    user: You can't use that, because you are not holding it, try /get flashlight
                    room: '{name} pokes at the flashlight aimlessly.'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
                    user: You switch off the flashlight.
                    room: '{name} turns the flashlight off.'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
+                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==false
                    user: Hey, the flashlight works! And it’s shining in your eyes. Remember, you need to specify what you want to use the flashlight on (eg, "/use flashlight east wall"). You can also shine it in a direction, at the floor, or at the ceiling.
                    room: '{name} turns the flashlight on'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="north wall" || {arg}=="north"'
+                 - condition: items.flashlight.heldBy=={id} && '{arg}=="north wall" || {arg}=="north"'
                    user: There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.
                    room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="east wall" || {arg}=="east"'
+                 - condition: items.flashlight.heldBy=={id} && '{arg}=="east wall" || {arg}=="east"'
                    user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
                    room: '{name} shines the light towards the east wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="west wall" || {arg}=="west"'
+                 - condition: items.flashlight.heldBy=={id} && '{arg}=="west wall" || {arg}=="west"'
                    user: You shine the light towards the wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.
                    room: '{name} shines the light towards the west wall, but this is a narrow tunnel. The light illuminates a narrow, unremarkable circle on the wall.'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="south wall" || {arg}=="south"'
+                 - condition: items.flashlight.heldBy=={id} && '{arg}=="south wall" || {arg}=="south"'
                    user: That way lies the BEEP. Let’s not think of it again.
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="floor"'
+                 - condition: items.flashlight.heldBy=={id} && '{arg}=="floor"'
                    user: You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them':' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V
                    room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them:'' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
-                 - condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}=="ceiling"'
+                 - condition: items.flashlight.heldBy=={id} && '{arg}=="ceiling"'
                    user: You shine the flashlight on the ceiling. Someone has scribbled "Back to square one" on it.
                    room: '{name} shines the flashlight at the ceiling. Someone has scribbled "Back to square one" on it.'
             - name: kick
@@ -1799,7 +1804,7 @@ rooms:
               - user: You cover your hand in your sleeve and quickly turn the knob. As if shaken by an earthquake, the tunnel wall cracks open.
                 room: '{name} covers their hand in their sleeve and quickly turns the knob. As if shaken by an earthquake, the tunnel wall cracks open.'
                 do:
-                  - teleportAll nextroomid
+                  - teleportAll office
 
 
 
@@ -1812,10 +1817,10 @@ rooms:
          lightOn: false
      ## in this room, false light means barely lit, true light is after they pull the chain on the bulb
     exits:
-     S: A wide open door with a sign saying "Cake this way". Except this isn't portal, and the cake is a lie. Just like this door. There is no exit in this direction.
+     S: A wide open door with a sign saying "Cake this way". Except as game fans know, the cake is a lie. Just like this door. There is no exit in this direction.
      N: There is no exit in this direction. None. 
      E: No way out this direction either.
-     W: There is a mouse hole on this wall, if you can borrow Ant Man's suit, or if you know Alice from Wonderland, this might be an option. Otherwise no exit in this direction.
+     W: There is a mouse hole on this wall. If you know Alice, the one who visited Wonderland, this might be an option. Otherwise no exit in this direction.
     commands:
        - name: go
          actions:
