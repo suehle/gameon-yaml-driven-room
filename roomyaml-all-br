@@ -354,9 +354,9 @@ rooms:
                   - set items.walkietalkie.heldBy={id}
                 user: You pick up the walkie talkie. It is not turned on.
                 room: '{name} picked up a walkie talkie.'
-              - condition: walkietalkie.heldBy=={id}
+              - condition: items.walkietalkie.heldBy=={id}
                 user: "You can't get the walkietalkie when it's already in your hands!!"
-              - condition: walkietalkie.heldBy!={id} && walkietalkie.heldBy!=nobody
+              - condition: items.walkietalkie.heldBy!={id} && items.walkietalkie.heldBy!=nobody
                 user: "It's not polite to try to snatch the walkie talkie from someone else, you could ask them nicely to drop it for you"
           - name: drop
             actions:
@@ -600,14 +600,16 @@ rooms:
           - desks
         commands: 
           - name: examine
-            user: Mostly they look like the desks you sit at every day. Pretty uninteresting. 
+            actions:
+              - user: Mostly they look like the desks you sit at every day. Pretty uninteresting. 
             
       - name: chair
         aliases: 
           - chairs
         commands: 
           - name: examine
-            user: They're down here because they're broken. You should leave them alone. I'm sure there's something more useful in this room to try. Look around again. 
+            actions:
+              - user: They're down here because they're broken. You should leave them alone. I'm sure there's something more useful in this room to try. Look around again. 
             
       - name: '{friendname}'
         commands:
