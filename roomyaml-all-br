@@ -1,21 +1,21 @@
 ##variables to edit for each class
 
 vars:
-    schoolname: St Miriam's Finishing School for Girls
+    schoolname: SHADOWMAN MIDDLE SCHOOL
     friendname: GABRIELLA
-    subject: science
-    townname: Shadyville
-    adultname: Ruth Suehle
-    child-first-name: Hannah
-    describe-walls: Every room has the same cold cinder block walls.
-    flashlight-color: blue
-    walkie-talkie: The walkie talkie is a big, black brick with an obvious speaker on the front and a simple on/off switch on top.
-    wall-things: Someone has scrawled "Mr. Jones is the best math teacher ever!" What a kind graffiti artist.
-    wall-things2: There's a world map poster that has the USSR, and half of the African continent just says "French West Africa." You realize your school might have been around longer than you thought.
-    floor: How is there sticky bubblegum on the floor when it doesn't seem like anyone's been down here in centuries?
-    hospital-name: Tuomey Regional Hospital
-    basketballs: A rusty silver rack holds half a dozen basketballs, none of which will bounce. One is just a flat orange pancake.
-    spider: A tiny spiny orb weaver is chilling out in his web. What a great place for a spider to live undisturbed.
+    subject: SCIENCE
+    townname: RALEIGH
+    adultname: PAULA WEIGEL
+    child-first-name: LISA
+    describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS.
+    flashlight-color: BLUE
+    walkie-talkie: THE WALKIE TALKIE IS A BIG, BLACK BRICK WITH AN OBVIOUS SPEAKER ON THE FRONT AND A SIMPLE ON/OFF SWITCH ON TOP.
+    wall-things: SOMEONE HAS SCRAWLED "MR. JONES IS THE BEST MATH TEACHER EVER!" WHAT A KIND GRAFFITI ARTIST.
+    wall-things2: THERE'S A WORLD MAP POSTER THAT HAS THE USSR, AND HALF OF THE AFRICAN CONTINENT JUST SAYS "FRENCH WEST AFRICA." YOU REALIZE YOUR SCHOOL MIGHT HAVE BEEN AROUND LONGER THAN YOU THOUGHT.
+    floor: HOW IS THERE STICKY BUBBLEGUM ON THE FLOOR WHEN IT DOESN'T SEEM LIKE ANYONE'S BEEN DOWN HERE IN CENTURIES?
+    hospital-name: TUOMEY REGIONAL HOSPITAL
+    basketballs: A RUSTY SILVER RACK HOLDS HALF A DOZEN BASKETBALLS, NONE OF WHICH WILL BOUNCE. ONE IS JUST A FLAT ORANGE PANCAKE.
+    spider: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
 
 commands:
   - name: help
@@ -78,18 +78,18 @@ rooms:
             -  condition: room.state.lightOn==false
                user: It is really dark down here. You're pretty sure there’s a wall behind you because you just got here.
             -  condition: room.state.lightOn==false
-               user: 'Wow, it is super dark. You can’t see a thing. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have you tried to find a light **switch**?'
+               user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light **switch**?
             -  condition: room.state.lightOn==false
-               user: You still can't see anything at all. You feel like there should be a light switch though. Try examining the wall.
+               user: You still can't see anything at all. You feel like there should be a light **switch** though. Try examining the wall.
             -  condition: room.state.lightOn==true
-               user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
-               room: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+               user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it.
+               room: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it.
             -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {friendname} looks terrified. There is a door to the north.
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. Your friend **{friendname}** looks terrified. There is a door to the north.
             -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. Your friend {friendname} looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. Your friend **{friendname}** looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
             -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of newspaper taped to it. There is a door to the north. Your friend {friendname} looks terrified. Have you tried talking to her?
+               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. There is a door to the north. Your friend {friendname} looks terrified. Have you tried talking to her?
        - name: exits
          actions:
            - user: The door you came in is to the south. It has locked behind you, and despite your best efforts, it will not open. There is another door to the north. This is a basement, so there are no windows. The floor is firm, and you have no shovel. You are much too short to reach the ceiling. Your options are limited.
@@ -146,10 +146,10 @@ rooms:
              aliases:
                - look
              actions:
-               - user: Which door? Specify north door or south door.
+               - user: Which door? Specify **north door** or **south door**.
            - name: use
              actions:
-               - user: Which door? Specify north door or south door.
+               - user: Which door? Specify **north door** or **south door**.
 
        - name: south door
          commands:
@@ -174,7 +174,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: It’s a standard cinder block school basement wall. But there is a smoother plate… with a switch in the middle.
+               - user: It’s a standard cinder block school basement wall. But there is a smoother plate… with a **switch** in the middle.
            - name: kick
              actions:
                - user: The wall is firm, as walls generally are. It is not affected by your foot.
@@ -194,12 +194,12 @@ rooms:
            - name: use
              actions:
                - condition: room.state.lightOn==false
-                 user: CLICK. It feels like you turned on the sun. You squint and rub your eyes in the sudden brightness. \n\nFor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
-                 room: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.\n\nor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+                 user: CLICK. It feels like you turned on the sun. You squint and rub your eyes in the sudden brightness. \n\n\n\nFor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+                 room: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.\n\n\n\nFnoor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
                  do:
                   - set room.state.lightOn=true
                - condition: room.state.lightOn==true
-                 user: You're trapped in a locked basement, and you want it to be dark, too!? You should reconsider.
+                 user: You're trapped in a locked basement, and now you want it to be dark, too!? You should reconsider.
 
        - name: chalkboard
          aliases:
@@ -208,8 +208,8 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: You read the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
-                 room: '{name} reads the newspaper article out loud. \n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.'
+               - user: You read the newspaper article out loud. \n\n\n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
+                 room: '{name} reads the newspaper article out loud. \n\n\n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.'
 
 ## Room 2
   - name: BASEMENT CONTINUES
