@@ -1155,7 +1155,7 @@ rooms:
                    room: '{name} shines the flashlight on the south wall. Just wall. Wall, wall, wall.'
                 -  condition: 'items.flashlight.heldBy=={id} && {arg}=="floor"'
                    user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
-                   room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the **north wall**
+                   room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the **north wall**'
               actions:
                 -  user: You attempt to kick the flashlight, why would you do that! why!
                 -  user: You flail wildly toward the torch wih your foot, and miss.
