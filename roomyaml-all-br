@@ -1814,10 +1814,7 @@ rooms:
           commands:
             -  name: examine
                actions:
-                 -  condition: items.phone.isOn==false
                     user: An old, dusty phone. Which for whatever reason, seems to have battery AND signal. They should still make these!
-                 -  condition: items.phone.isOn==true
-                    user: An old, dusty phone. Which for whatever reason, seems to have battery AND signal. They should still make these!                   
             -  name: get
                actions:
                  -  condition: items.phone.heldBy==nobody
@@ -1839,13 +1836,13 @@ rooms:
                    room: '{name} pokes at the phone aimlessly.'
                  - condition: '{arg}=="" && items.phone.heldBy=={id}'
                    user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
-                 - condition:  '{arg}=="" && items.phone.heldBy=={id}'
+                 - condition:  '{arg}=="star" && items.phone.heldBy=={id}'
                    user: 'Your call cannot be completed as dialed. Nothing happens.'
                    user: 'Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.'
 ## this one doesn't work. What does yaml think a * should be?                  
 ## - condition: 'items.phone.heldBy=={id} && {arg}=="*"' 
 ## user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
-                 - condition:  '{arg}=="7827" && items.phone.heldBy=={id} && items.phone.isOn==true'
+                 - condition:  '{arg}=="7827" && items.phone.heldBy=={id}'
                    user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
                    room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.\n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
 
@@ -1900,9 +1897,63 @@ rooms:
          aliases:
            - look
          actions:
-           - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken **chandelier** barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead **flowers** all over the marble floor, and every **wall** is covered in very old paintings in fancy gold frames. Only one **chair** is upright, and there is a napkin on it.
+           - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. Even the **walls** and **corners** are interesting. There’s a broken **chandelier** barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead **flowers** all over the marble floor, and every **wall** is covered in very old paintings in fancy gold frames. Only one **chair** is upright, and there is a napkin on it.
 
     items:
+       - name: north wall
+         commands:
+           - name: examine
+             actions:
+               - user: There are three paintings on the north wall.
+
+       - name: east wall
+         commands:
+           - name: examine
+             actions:
+               - user: There are two paintings on the east wall.
+       - name: west wall
+         commands:
+           - name: examine
+             actions:
+               - user: There are two paintings on the west wall.
+       - name: south wall
+         commands:
+           - name: examine
+             actions:
+               - user: There are two paintings on the south wall, one on either side of the door you came in.
+       - name: northeast corner
+         aliases:
+           - ne
+           - ne corner
+         commands:
+           - name: examine
+             actions:
+               - user: You note what an excellent job someone did on the crown molding at the corner.
+       - name: northwest corner
+         aliases:
+           - nw
+           - nw corner
+         commands:
+           - name: examine
+             actions:
+               - user: The wallpaper seam is peeling a bit at the corner. You consider shoddy workmanship but decide it's probably just age and lack of anyone using or caring about this room.
+       - name: southeast corner
+         aliases:
+           - se
+           - se corner
+         commands:
+           - name: examine
+             actions:
+               - user: A spider crawls away from you down the east wall.
+       - name: southwest corner
+         aliases:
+           - sw
+           - sw corner
+         commands:
+           - name: examine
+             actions:
+               - user: You don't have to stand in the corner. Look around!
+
        - name: '{friendname}'
          commands:
            - name: examine
@@ -1998,7 +2049,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: There are 9 paintings in the room. Going clockwise from the doorway':'  \n\n1. A woman in a medieval-looking red and green dress is watching while a knight fights a dragon.\n\n2. Vikings are sailing towards a castle for a raid. \n\n3. This was probably supposed to be a person, but none of the facial features are in quite the right place.\n\n4. A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? \n\n5. Some purple water lilies float in a vaguely watery blue scene. \n\n6. One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat\n\n7. A dozen or so people, many of them wearing yellow hats, are having a tea party.\n\n8. A man leaning on a cane is addressing a ballroom of ballerinas. \n\n9. A lot of squares, mostly white, some painted red, yellow, or blue. It's hanging diagonally, shaped like a diamond.
+               - user: There are 9 paintings in the room. Going clockwise from the doorway':'  \n\n1. A woman in a medieval-looking red and green dress is watching while a knight fights a dragon.\n\n2. Vikings are sailing towards a castle for a raid. \n\n3. This was probably supposed to be a person, but none of the facial features are in quite the right place.\n\n4. A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? \n\n5. Some purple water lilies float in a vaguely watery blue scene. \n\n6. One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat\n\n7. A dozen or so people, many of them wearing yellow hats, are having a tea party.\n\n8. A man leaning on a cane is addressing a ballroom of ballerinas. \n\n9. A lot of squares, mostly white, some painted red, yellow, or blue. It's hanging diagonally, shaped like a diamond.\n\n If you'd like to take a closer look at any of them, please specify which painting you would like to see, using its number, e.g. "/examine painting 1"
            - name: get
              actions:
                - user: Please specify which painting you would like to get, using its number, e.g. "/get painting 1"
@@ -2007,7 +2058,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: A woman in a medieval-looking red and green dress is watching while a knight fights a dragon. You read the card beside the painting'"'\n\n            SAINT GEORGE AND THE DRAGON\n\n            Paolo Uccello\n\n            c. 1470\n\noil on canvas
+               - user: 'A woman in a medieval-looking red and green dress is watching while a knight fights a dragon. You read the card beside the painting: \n\nSAINT GEORGE AND THE DRAGON\n\nPaolo Uccello\n\nc. 1470\n\noil on canvas'
            - name: get
              actions:
                - user: Good news. The dragon does not come to life. Bad news. Nothing else happens either. You put the painting back.
@@ -2016,7 +2067,7 @@ rooms:
          commands:
            - name: examine
              actions:
-               - user: Vikings are sailing towards a castle for a raid. You read the card beside the painting'"'\n\n             VISITORS FROM OVERSEAS (Übersee-Gäste)\n\n             Nicholas Konstantin Roerich\n\n             1901\n\n             oil on canvas
+               - user: 'Vikings are sailing towards a castle for a raid. You read the card beside the painting:\n\n\n\nVISITORS FROM OVERSEAS (Übersee-Gäste)\n\nNicholas Konstantin Roerich\n\n1901\n\noil on canvas'
            - name: get
              actions:
                - user: They were probably storming the castle because someone stole their art! You put the painting back.
