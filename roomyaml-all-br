@@ -734,7 +734,7 @@ rooms:
                -  condition: items.flashlight.heldBy!={id}
                   user: You can't use that, because you are not holding it, try /get flashlight
                   room: '{name} pokes at the flashlight aimlessly.'
-               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true
+               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}==""'
                   user: You switch off the flashlight.
                   room: '{name} turns the flashlight off.'
                   do:
@@ -896,7 +896,7 @@ rooms:
             aliases:
              - bounce
             actions:
-             - user: You pick up a ball and attempt to dribble. The half-deflated ball drops to the floor with a "thud."``
+             - user: You pick up a ball and attempt to dribble. The half-deflated ball drops to the floor with a "thud."
 
       - name: bats
         aliases:
@@ -998,7 +998,7 @@ rooms:
         commands:
           - name: examine
             actions:
-              - user: This time the keypad has a message with a regular keyboard layout waiting under it. The message reads':'\n\nFIND ANOTHER WORD INSIDE THE HIDDEN WORD. YOU’LL NEED TO USE IT TO GET OUT OF HERE.\n\n_&nbsp;_&nbsp;_&nbsp;_&nbsp;_
+              - user: This time the keypad has a message with a regular keyboard layout waiting under it. The message reads':'\n\nFIND ANOTHER WORD INSIDE THE HIDDEN WORD. YOU’LL NEED TO USE IT TO GET OUT OF HERE.\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-
           - name: use
             actions:
               - condition: unmatched
