@@ -140,7 +140,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: Pretty standard, unlocked school door. You can handle it. Ha. "Handle." I made a door joke.
+               - user: 'Pretty standard, unlocked school door. You can handle it. Ha. "Handle." I made a door joke.'
            - name: kick
              actions:
                - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
