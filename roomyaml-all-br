@@ -960,10 +960,10 @@ rooms:
         commands:
           - name: examine
             actions:
-              - user: You recognize the scoreboard as the one that used to be on the baseball field before the school held a fundraiser to replace it. It’s not plugged in, but you notice the cord is dangling near an outlet.
+              - user: 'You recognize the scoreboard as the one that used to be on the baseball field before the school held a fundraiser to replace it. It’s not plugged in, but you notice the cord is dangling near an outlet.'
           - name: use
             actions:
-              - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
+              - user: 'You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.'
                 room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
 
       - name: cord
