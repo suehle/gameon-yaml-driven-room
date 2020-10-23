@@ -595,22 +595,15 @@ rooms:
           - user: The door you came in is to the south. Much like the first two doors, it has now locked behind you. There is another heavier looking door to the north, similar to the one you just came through.
 
     items:
+    
       - name: desk
-        aliases: 
+        aliases:
           - desks
-        commands: 
+        commands:
           - name: examine
             actions:
               - user: Mostly they look like the desks you sit at every day. Pretty uninteresting. 
-            
-      - name: chair
-        aliases: 
-          - chairs
-        commands: 
-          - name: examine
-            actions:
-              - user: They're down here because they're broken. You should leave them alone. I'm sure there's something more useful in this room to try. Look around again. 
-            
+                
       - name: '{friendname}'
         commands:
           - name: examine
