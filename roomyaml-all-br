@@ -1724,8 +1724,8 @@ rooms:
                  - condition: items.flashlight.heldBy=={id} && '{arg}=="south wall" || {arg}=="south"'
                    user: That way lies the BEEP. Let’s not think of it again.
                  - condition: items.flashlight.heldBy=={id} && '{arg}=="floor"'
-                   user: You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them':' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V
-                   room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them:'' \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
+                   user: 'You shine the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V\n\nC  E  A  Y  K\n\nO  A  U  O  V'
+                   room: '{name} shines the flashlight towards the floor, which is made up of square tiles. \n\nThe entire tunnel is only 5 tiles wide. Five rows of tiles have letters on them: \n\nL  J  O  K  O\n\n                R  K  B  A  P\n\n                B  P  O  M  V \n\nC  E  A  Y  K\n\nO  A  U  O  V'
                  - condition: items.flashlight.heldBy=={id} && '{arg}=="ceiling"'
                    user: You shine the flashlight on the ceiling. Someone has scribbled "Back to square one" on it.
                    room: '{name} shines the flashlight at the ceiling. Someone has scribbled "Back to square one" on it.'
