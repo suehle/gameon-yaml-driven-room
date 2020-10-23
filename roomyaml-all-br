@@ -1726,20 +1726,20 @@ rooms:
                     room: '{name} drops the flashlight'
             -  name: use
                actions:
-                 -  condition: items.flashlight.heldBy!={id}
-                    user: You can't use that, because you are not holding it, try /get flashlight
-                    room: '{name} pokes at the flashlight aimlessly.'
-                 -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
-                    user: You switch off the flashlight.
-                    room: '{name} turns the flashlight off.'
-                    do:
+                 - condition: items.flashlight.heldBy!={id}
+                   user: You can't use that, because you are not holding it, try /get flashlight
+                   room: '{name} pokes at the flashlight aimlessly.'
+                 - condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
+                   user: You switch off the flashlight.
+                   room: '{name} turns the flashlight off.'
+                   do:
                       - set items.flashlight.isOn=false
-                 -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
-                    user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
+                 - condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
+                   user: Hey, the flashlight works! And it’s shining in your eyes. You can look at the walls by specifying the direction (e.g. "/use flashlight west") or on the floor or ceiling
                     room: '{name} turns the flashlight on'
                     do:
                       - set items.flashlight.isOn=true
-                 - condition: condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
+                 - condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
                    user: There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.
                    room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
                  - condition: items.flashlight.heldBy=={id} && '{arg}=="east wall" || {arg}=="east"'
@@ -1859,7 +1859,7 @@ rooms:
 
     state:
          lightOn: false
-     ## in this room, false light means barely lit, true light is after they pull the chain on the bulb
+         
     exits:
      S: A wide open door with a sign saying "Cake this way". Except as game fans know, the cake is a lie. Just like this door. There is no exit in this direction.
      N: There is no exit in this direction. None. 
@@ -1889,7 +1889,7 @@ rooms:
          aliases:
            - look
          actions:
-           - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken chandelier barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead flowers all over the marble floor, and every wall is covered in very old paintings in fancy gold frames. Only one chair is upright, and there is a napkin on it.
+           - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken **chandelier** barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead **flowers** all over the marble floor, and every **wall** is covered in very old paintings in fancy gold frames. Only one **chair** is upright, and there is a napkin on it.
 
     items:
        - name: '{friendname}'
