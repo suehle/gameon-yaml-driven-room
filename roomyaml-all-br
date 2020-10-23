@@ -1158,10 +1158,10 @@ rooms:
                 -  condition: 'items.flashlight.heldBy!={id}'
                    user: "You can't use that, because you are not holding it, try /get flashlight"
                    room: '{name} pokes at the flashlight aimlessly.'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
+                -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==true'
                    user: 'You switch off the flashlight.'
                    room: '{name} turns the flashlight off.'
-                -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
+                -  condition: '{arg}=="" && items.flashlight.heldBy=={id} && items.flashlight.isOn==false'
                    user: 'Hey, the flashlight works! And it’s shining in your eyes. Remember, you need to specify what you want to use the flashlight on (eg, "/use flashlight east wall"). You can also shine it at the floor or ceiling.'
                    room: '{name} turns the flashlight on'
                 -  condition: 'items.flashlight.heldBy=={id} && {arg}=="north" || {arg}=="n"'
