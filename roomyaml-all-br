@@ -1834,14 +1834,12 @@ rooms:
                     user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
                   - condition: 'items.phone.heldBy=={id}'
                     user: The phone is already on. To dial a number, enter "/use phone" followed by the digits you would like to press.
-                  ## I'm pretty sure having required picking up the phone is going to make this unmatched fail.
-                  - condition: unmatched
                     user: Your call cannot be completed as dialed. Nothing happens.
                   - condition: unmatched
                     user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.
                   - condition: '{arg}=="*"'
                     user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
-                  - condition: '{arg}=="7827"'
+                  - condition: 'items.phone.heldBy=={id} && {arg}=="7827"'
                     user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
                     room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.\n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
 
@@ -1850,7 +1848,10 @@ rooms:
             - handle
             - door handle
          commands:
-            - name: user
+            - name: examine
+              actions: 
+              - user: It looks pretty hot, but I think it's safe to /use.
+            - name: use
               actions:
               - user: You cover your hand in your sleeve and quickly turn the knob. As if shaken by an earthquake, the tunnel wall cracks open.
                 room: '{name} covers their hand in their sleeve and quickly turns the knob. As if shaken by an earthquake, the tunnel wall cracks open.'
@@ -2105,7 +2106,7 @@ rooms:
                - user:  'One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting: \n\nFIN\n\nAugustus Brooke-Winslow\n\nc. 1900\n\noil on canvas'
            - name: get
              actions:
-               - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
+               - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric **keypad** on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
                  room: '{USER removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
 
        - name: painting 7
@@ -2142,16 +2143,12 @@ rooms:
                  - user: This one looks like a pretty normal keypad with the numbers 0-9.
              - name: use
                actions:
-                 - user: I don't know what numbers you would like to use on the keypad.
                  - condition: unmatched
+                   user: I don't know what numbers you would like to use on the keypad.
                    user: The keypad beeps an angry sound at you and flashes a red light. Try another number?
-                 - condition: unmatched
                    user: The keypad beeps an angry sound at you and flashes a red light. You know, if it takes you three seconds to enter a guess, it will take you less than 9 hours to guess all possible combinations. Try another number?
-                 - condition: unmatched
                    user: The keypad beeps an angry sound at you and flashes a red light. I think you need the mother’s age and the daughter’s age. So four digits. Try another number?
-                 - condition: unmatched
                    user: "Clue: Over the hill, under a quarter. (In case you weren’t sure, the keypad indeed beeps and flashes a red light.)"
-                 - condition: unmatched
                    user: Keep at it. You’ll get there! (In case you weren’t sure, the keypad indeed beeps and flashes a red light.)
                  - condition: '{arg}=="with the right answer"'
                    user: You can't get out of here that easily!
