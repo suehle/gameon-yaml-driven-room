@@ -76,7 +76,7 @@ rooms:
             - look
           actions:
             -  condition: room.state.lightOn==false
-               user: It is really dark down here. You're pretty sure there’s a wall behind you because you just got here.
+               user: It is really dark down here. You're pretty sure there’s a **wall** behind you because you just got here.
             -  condition: room.state.lightOn==false
                user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light **switch**?
             -  condition: room.state.lightOn==false
@@ -1793,7 +1793,6 @@ rooms:
            - look
          actions:
            - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken chandelier barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead flowers all over the marble floor, and every wall is covered in very old paintings in fancy gold frames. Only one chair is upright, and there is a napkin on it.
-           - room: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. There’s a broken chandelier barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead flowers all over the marble floor, and every wall is covered in very old paintings in fancy gold frames. Only one chair is upright, and there is a napkin on it.
 
        - name: exits
          aliases:
