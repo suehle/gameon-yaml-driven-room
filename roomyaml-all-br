@@ -1806,6 +1806,10 @@ rooms:
                     room: '{name} has pulled up a loose tile and is now looking at a hole in the floor. There is an old flip **phone** resting inside it.'
 
        - name: phone
+         state:
+            hidden: true
+            isOn: false
+            heldBy: nobody
          aliases:
               - flip phone
          commands:
