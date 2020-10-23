@@ -757,8 +757,8 @@ rooms:
                   user: You shine the flashlight on the south wall. The door you came through is there. No use going back, though. Escape can only lie ahead.
                   room: '{name} shines the flashlight on the south wall. The door you came through is there. No use going back, though. Escape can only lie ahead.'
                -  condition: '{arg}=="floor" && items.flashlight.heldBy=={id}'
-                  user: 'You shine the flashlight at the floor. {FLOOR}'
-                  room: '{name} shines the flashlight at the floor. {FLOOR}'
+                  user: 'You shine the flashlight at the floor. {floordescription}'
+                  room: '{name} shines the flashlight at the floor. {floordescription}'
                -  condition: '{arg}=="ceiling" && items.flashlight.heldBy=={id}'
                   user: You shine the flashlight on the ceiling. You find nothing.
                   room: '{name} shines the flashlight at the ceiling.'
