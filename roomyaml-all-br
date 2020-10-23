@@ -1818,7 +1818,7 @@ rooms:
                   -  condition: items.phone.heldBy==nobody
                      do:
                       - set items.phone.heldBy={id}
-                     user: You pick up the phone.
+                     user: You pick up the dusty old phone.
                      room: '{name} found a phone in the floorand picked it up.'
               - name: drop
                 actions:
@@ -1835,14 +1835,13 @@ rooms:
                     user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
                   - condition: 'items.phone.heldBy=={id}'
                     user: The phone is already on. To dial a number, enter "/use phone" followed by the digits you would like to press.
-                  ## I'm pretty sure having required picking up the phone is going to make this unmatched fail.
-                  - condition: unmatched
+                  - condition: 'items.phone.heldBy=={id} && arg="star"'
                     user: Your call cannot be completed as dialed. Nothing happens.
-                  - condition: unmatched
                     user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.
-                  - condition: '{arg}=="*"'
+## this one doesn't work. What does yaml think a * should be?                  
+                  - condition: 'items.phone.heldBy=={id} && {arg}=="*"' 
                     user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
-                  - condition: '{arg}=="7827"'
+                  - condition: 'items.phone.heldBy=={id} && {arg}=="7827"'
                     user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
                     room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.\n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
        - name: star
