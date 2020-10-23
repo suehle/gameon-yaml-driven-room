@@ -1650,7 +1650,7 @@ rooms:
     id: tunnel
     state:
        lightOn: false
-      ## in this room, false light means barely lit, true light is after they pull the chain on the bulb
+      ## in this room, "false" light means barely lit, true light is after they pull the chain on the bulb
     exits:
      S: ""
      N: ""
@@ -1660,15 +1660,13 @@ rooms:
        - name: go
          actions:
            - condition: '{arg}=="north" || {arg}=="n"'
-             user: At the other end of what you’re now certain must be the tunnel you were looking for, a bare light bulb hangs from the ceiling, barely glowing.
+             user: At the other end of what you’re now certain must be the tunnel you were looking for, a bare light **bulb** hangs from the ceiling, barely glowing.
            - condition: '{arg}=="east" || {arg}=="e"'
              user: You can barely turn around, let alone move in that direction!
            - condition: '{arg}=="west" || {arg}=="w"'
              user: You can barely turn around, let alone move in that direction!
-           - condition: '{arg}=="south" || {arg}=="s" && room.state.lightOn==false'
-             user: You really would rather never go back to the room with that BEEP ever again. And if you’re in the tunnel, you must be close to the vault, right?
            - condition: '{arg}=="south" || {arg}=="s" && room.state.lightOn==true'
-             user: You’re back at the end of the tunnel where you came in. Tired of solving puzzles, you stand silently, wondering whether you’ll ever get out. In the silence, you think you hear a light rumble under your feet?
+             user: You’re back at the end of the tunnel where you came in. Tired of solving puzzles, you stand silently, wondering whether you’ll ever get out. In the silence, you think you hear a light rumble under your feet? Is it... under the **floor**?
            - condition: '{arg}=="northeast" || {arg}=="ne"'
              user: This tunnel is reall too small to worry about the corners.
            - condition: '{arg}=="northwest" || {arg}=="nw"'
@@ -1682,7 +1680,7 @@ rooms:
          aliases:
            - look
          actions:
-           - user: You stand up to look around and quickly find that the ceiling is rather low when you bump your head on it. Some bits of the bricks crumble to the floor. You can touch both walls by holding your arms out to the side. They feel unremarkable. A light glows to the north.
+           - user: You stand up to look around and quickly find that the ceiling is rather low when you bump your head on it. Some bits of the bricks crumble to the floor. You can touch both walls by holding your arms out to the side. They feel unremarkable. A light glows to the north. I don't know where you can **go** from here, but it's worth a try. Pick a direction.
 
     items:
        - name: '{friendname}'
@@ -1698,7 +1696,6 @@ rooms:
                 - user: Hey! Kicking your friend is not going to get you out of here.
                 - user: Stop that. It isn’t helping you.
 
-       ## do they still have the flashlight, or do we need to drop another one in this room?
 
        -  name: flashlight
           state:
@@ -1778,7 +1775,7 @@ rooms:
               aliases:
                 - look
               actions:
-                - user: You lie down and press your ear to the floor. The closer you get to the wall, the louder the rumbling gets. On the first one in the corner, you’re sure you hear some sort of vibration. You notice the floor appears to be built out of tiles, maybe you should examine one?
+                - user: You lie down and press your ear to the floor. The closer you get to the wall, the louder the rumbling gets. On the first **tile** in the southwest corner, you’re sure you hear some sort of vibration. You notice the floor appears to be built out of tiles, maybe you should examine one?
                   room: '{name} is lying down on the floor. Perhaps they have an idea?'
             - name: use
               actions:
