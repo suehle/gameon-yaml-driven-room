@@ -243,10 +243,9 @@ rooms:
           - condition: room.state.lightOn==true
             user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. \n\nYou wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
           - condition: room.state.lightOn==true
-            user: There is a walkie talkie in the northeast corner. How long must that have been here?
+            user: There is a **walkie talkie** in the northeast corner. How long must that have been here?
           - condition: room.state.lightOn==true
-            user: You notice several scraps of paper on the floor in the corners of the room.
-      ##I think we need to tie some direction here, but right now they're just named scrap1 scrap2 etc and don't know where they are.
+            user: You notice several scraps of paper on the floor in the corners of the room. You can /go in a direction (ne, nw, se, sw) to take a closer look.
       - name: exits
         aliases:
           - exit
@@ -339,8 +338,11 @@ rooms:
         commands:
           - name: examine
             actions:
-              - condition: items.walkietalkie.isOn==false
-                user: '{walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it.'
+              - condition: items.walkietalkie.isOn==false && items.walkietalkie.heldBy==nobody
+                user: '{walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it. You can /get it if you want.'
+                room: '{name} found a walkie talkie on the floor and seems to be staring at it.'
+              - condition: items.walkietalkie.isOn==false && items.walkietalkie.heldBy=={id}
+                user: '{walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it. Maybe you should /use it.'
                 room: '{name} found a walkie talkie on the floor and seems to be staring at it.'
               - condition: items.walkietalkie.isOn==true
                 user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
