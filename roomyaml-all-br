@@ -146,12 +146,12 @@ rooms:
                - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
            - name: use
              actions:
-                - user: Think of this room as training for what's to come. Please ask everyone else in the room if they're ready to leave before you use the door again. 
+                - user: 'Think of this room as training for what's to come. Please ask everyone else in the room if they're ready to leave before you use the door again.'
                   room: '{name} asked to use the door. But we shouldn't move on until everyone is ready leave. If you feel that you know what to do, you've tested commands, and you think you're ready for the real game, tell {name} you're ready to go.'
-                - user: Did you ask everyone? Are they all ready to move on? Just double-checking here. 
-                  room: It's almost time to go. If you're not ready to move on, speak up and ask everyone to stop trying to use the door. 
-                - user: Last warning. The next time you attempt to use this door, everyone will be trapped in the basement, and you can't come back here. 
-                - user: You successfully unlock the door. {friendname} goes into the next room, and you follow her.
+                - user: 'Did you ask everyone? Are they all ready to move on? Just double-checking here.'
+                  room: 'It's almost time to go. If you're not ready to move on, speak up and ask everyone to stop trying to use the door.'
+                - user: 'Last warning. The next time you attempt to use this door, everyone will be trapped in the basement, and you can't come back here.'
+                - user: 'You successfully unlock the door. {friendname} goes into the next room, and you follow her.'
                   room: '{name} successfully unlocks the door. {friendname} goes into the next room, and you follow her.'
                   do:
                    - teleportAll morsecode
