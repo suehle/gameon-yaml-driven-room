@@ -1266,8 +1266,8 @@ rooms:
          actions:
            - condition: room.state.lightOn==true
              user: '"So there’s really a vault," {friendname} gasps. "This proves it. And those kids got out." \n\n\n\n"It seems that to find the tunnel, we first have to find a riddle in the darkest corner of the basement, and answer it correctly," you say. \n\n\n\n"Easy peasy," {friendname} jokes sarcastically. "Except why would we have to turn off the light to hear a sound?"\n\n\n\nThis is the smallest room yet, and it doesn’t even seem to be used as storage. In fact, the only thing you see is a light **switch** on the wall.  \n\n\n\nThe hidden doorway slides shut behind you. You are now truly, officially trapped. \n\n\n\nThere’s a light **switch** on the wall. And nothing else in the room.'
-           - condition: room.state.lightOn==false
-             user: Try looking in each direction and see if you can find where the sound is coming from.
+           - condition: 'room.state.lightOn==false && {arg}==""'
+             user: Try /examine in each direction and see if you can find where the sound is coming from.
 
     items:
        - name: '{friendname}'
@@ -1305,15 +1305,16 @@ rooms:
            - name: use
              actions:
              - condition: room.state.lightOn==true
-               user: You turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.
-               room: '{name} turns out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the northwest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP.'
+               user: You turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it's coming from.
+               room: '{name} turns out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it's coming from.'
                do:
                  - set room.state.lightOn=false
              - condition: room.state.lightOn==false
-               user: The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.
-       ## Will the room see anything on the second user output? And what happens if they keep using the switch?
+               user: The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.  Listen in each direction to see if you can figure out where it's coming from.
 
        - name: north
+         aliases:
+           - n
          commands:
            - name: examine
              aliases:
@@ -1324,6 +1325,8 @@ rooms:
                   user: The beeping grows louder.
 
        - name: east
+         aliases: 
+           - e
          commands:
            - name: examine
              aliases:
@@ -1331,9 +1334,11 @@ rooms:
                - listen
              actions:
                -  condition: room.state.lightOn==false
-                  user: The beeping is fading. You seem to be walking away from it.
+                  user: The beeping fades on this side of the room.
 
        - name: south
+         aliases:
+           - s
          commands:
            - name: examine
              aliases:
@@ -1341,9 +1346,11 @@ rooms:
                - listen
              actions:
                -  condition: room.state.lightOn==false
-                  user: The beeping is fading. You seem to be walking away from it.
+                  user: The beeping fades on this side of the room.
 
        - name: west
+         aliases: 
+           - w
          commands:
            - name: examine
              aliases:
@@ -1351,9 +1358,11 @@ rooms:
                - listen
              actions:
                -  condition: room.state.lightOn==false
-                  user: The beeping grows louder.
+                  user: The beeping grows louder here.
 
        - name: northeast
+         aliases: 
+           - ne
          commands:
            - name: examine
              aliases:
@@ -1361,9 +1370,11 @@ rooms:
                - listen
              actions:
                -  condition: room.state.lightOn==false
-                  user: The beeping is somewhat louder, but you’re not quite close to it yet.
+                  user: The beeping is somewhat louder, but this isn't quite the right spot.
 
        - name: southwest
+         aliases:
+           - sw
          commands:
            - name: examine
              aliases:
@@ -1371,9 +1382,11 @@ rooms:
                - listen
              actions:
                -  condition: room.state.lightOn==false
-                  user: The beeping is somewhat louder, but you’re not quite close to it yet.
+                  user: The beeping is somewhat louder, but this isn't quite the right spot.
 
        - name: southeast
+         aliases: 
+           - se
          commands:
            - name: examine
              aliases:
@@ -1384,6 +1397,8 @@ rooms:
                   user: You don’t even hear the beeping anymore and are growing tired of being in the dark. What did that news article say about how the last teens got out?
 
        - name: northwest
+         aliases:
+           - nw
          commands:
            - name: examine
              aliases:
@@ -1391,7 +1406,7 @@ rooms:
                - listen
              actions:
                -  condition: room.state.lightOn==false
-                  user: As you get to the corner, the beeping is clearly coming from inside the wall.
+                  user: As you get to the darkest corner of the room, the beeping is clearly coming from inside the wall. Try examining the **northwest corner** more closely. Perhaps even in the dark, you'll be able to see something.
 
        - name: north wall
          commands:
@@ -1471,8 +1486,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user: You notice a small crack between the bricks and pull out a long piece of rolled up paper. A sliver of light peeks out of the crack where the paper had been. It says':'\n\n\n\nWE ARE A GROUP OF EIGHT\n\nWE PROTECT THE KING IN EVERY BATTLE\n\nWE ARE CONSIDERED WEAK, BUT IF WE MOVE AHEAD\n\nWE NEVER TURN BACK. WHO ARE WE?
-
+                  user: You notice a small crack between the bricks and pull out a long piece of rolled up paper. A sliver of light peeks out of the crack where the paper had been. It says':'\n\n\n\nWE ARE A GROUP OF EIGHT\n\nWE PROTECT THE KING IN EVERY BATTLE\n\nWE ARE CONSIDERED WEAK, BUT IF WE MOVE AHEAD\n\nWE NEVER TURN BACK. WHO ARE WE?\n\n\n\nYou look around the room and notice something different about the bricks in these wall. Try to take a closer look at each one by indicating its direction, for example, "/examine south wall"
 
        - name: pawn
          commands:
@@ -1637,7 +1651,7 @@ rooms:
 
    ## Room 6 -- actually the tunnel
 
-  - name: The tunnel
+  - name: THE TUNNEL
     id: tunnel
     state:
        lightOn: false
