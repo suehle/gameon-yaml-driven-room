@@ -2,7 +2,7 @@
 
 vars:
     schoolname: St Miriam's Finishing School for Girls
-    friendname: Gabriellalala
+    friendname: GABRIELLA
     subject: science
     townname: Shadyville
     adultname: Ruth Suehle
@@ -78,7 +78,7 @@ rooms:
             -  condition: room.state.lightOn==false
                user: It is really dark down here. You're pretty sure there’s a wall behind you because you just got here.
             -  condition: room.state.lightOn==false
-               user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light **switch**?
+               user: 'Wow, it is super dark. You can’t see a thing. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have you tried to find a light **switch**?'
             -  condition: room.state.lightOn==false
                user: You still can't see anything at all. You feel like there should be a light switch though. Try examining the wall.
             -  condition: room.state.lightOn==true
