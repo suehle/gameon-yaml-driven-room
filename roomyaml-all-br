@@ -734,7 +734,7 @@ rooms:
                -  condition: items.flashlight.heldBy!={id}
                   user: You can't use that, because you are not holding it, try /get flashlight
                   room: '{name} pokes at the flashlight aimlessly.'
-               -  condition: items.flashlight.heldBy=={id} && items.flashlight.isOn==true && '{arg}==""'
+               -  condition: 'items.flashlight.heldBy=={id} && items.flashlight.isOn==true && {arg}==""'
                   user: You switch off the flashlight.
                   room: '{name} turns the flashlight off.'
                   do:
