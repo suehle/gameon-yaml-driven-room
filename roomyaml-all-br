@@ -1806,29 +1806,41 @@ rooms:
                     room: '{name} has pulled up a loose tile and is now looking at a hole in the floor. There is an old flip **phone** resting inside it.'
 
        -  name: phone
-          state:
-            hidden: true
-            heldBy: nobody
           aliases:
-            - flip phone
+              - flip phone
           commands:
-            -  name: examine
-               actions:
-                    user: An old, dusty phone. Which for whatever reason, seems to have battery AND signal. They should still make these!
-            -  name: get
-               actions:
-                 -  condition: items.phone.heldBy==nobody
+              - name: get
+                actions:
+                  - condition: 'items.phone.heldBy==nobody'
                     do:
-                      - set items.phone.heldBy={id}
+                     - set items.phone.heldBy={id}
                     user: You pick up the phone.
-                    room: '{name} found a phone and picked it up.'
-            -  name: drop
-               actions:
-                 -  condition: items.phone.heldBy=={id}
+                    room: '{name} picked up the phone.'
+              - name: drop
+                actions:
+                  - condition: 'items.phone.heldBy=={id}'
                     do:
                       - set items.phone.heldBy=nobody
                     user: You put the phone back in the hole in the floor.
-                    room: '{name} puts the phone back in the hole in the floor.'
+                    room: '{name} put the phone back in the hole in the floor.'
+              - name: use
+                actions:
+                  - condition: 'items.phone.heldBy!={id}'
+                    user: You can't use the phone, because you're not holding it. Try "/get phone" first.
+                  - condition: 'items.phone.heldBy=={id}'
+                    user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
+                  - condition: 'items.phone.heldBy=={id}'
+                    user: The phone is already on. To dial a number, enter "/use phone" followed by the digits you would like to press.
+                  ## I'm pretty sure having required picking up the phone is going to make this unmatched fail.
+                  - condition: unmatched
+                    user: Your call cannot be completed as dialed. Nothing happens.
+                  - condition: unmatched
+                    user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.
+                  - condition: '{arg}=="*"'
+                    user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
+                  - condition: '{arg}=="7827"'
+                    user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
+                    room: '{name} pressed some numbers on the phone. The tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a star shape, and they’re glowing.\n\n\n\n{friendname} touches the glowing star with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?'
 
        - name: star
          aliases:
