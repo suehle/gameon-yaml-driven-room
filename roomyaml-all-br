@@ -15,7 +15,7 @@ vars:
     floordescription: HOW IS THERE STICKY BUBBLEGUM ON THE FLOOR WHEN IT DOESN'T SEEM LIKE ANYONE'S BEEN DOWN HERE IN CENTURIES?
     hospital-name: TUOMEY REGIONAL HOSPITAL
     basketballs: A RUSTY SILVER RACK HOLDS HALF A DOZEN BASKETBALLS, NONE OF WHICH WILL BOUNCE. ONE IS JUST A FLAT ORANGE PANCAKE.
-    spider: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
+    spiderdescription: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
 
 commanddescriptions:
  use: Use an item, eg /use door to open it, or /use radio to switch the radio on or off, or /use button to push the button.
@@ -994,7 +994,7 @@ rooms:
         commands:
           - name: examine
             actions:
-              - user: '{spider}'
+              - user: '{spiderdescription}'
           - name: get
             actions:
               - user: The spider is perfectly content in her web. Why don't you leave her alone?
