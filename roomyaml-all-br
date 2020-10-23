@@ -1802,7 +1802,7 @@ rooms:
                   - user: The floor tile where the rumbling is loudest seems to be loose. You should try to /use it.
               - name: use
                 actions:
-                  - user: You lift the tile and find a shiny silver flip phone resting in a hole under the floor. It looks ancient, but maybe it still works?
+                  - user: You lift the tile and find a shiny silver flip **phone** resting in a hole under the floor. It looks ancient, but maybe it still works?
                     room: '{name} has pulled up a loose tile and is now looking at a hole in the floor. There is an old flip **phone** resting inside it.'
 
        - name: phone
