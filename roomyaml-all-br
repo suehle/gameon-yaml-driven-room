@@ -90,7 +90,7 @@ rooms:
             - look
           actions:
             -  condition: room.state.lightOn==false
-               user: It is really dark down here. You're pretty sure there’s a **wall** behind you because you just got here.
+               user: 'It is really, really dark down here. You’re pretty sure there’s a **wall** behind you because you just got here.'
             -  condition: room.state.lightOn==false
                user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light **switch**?
             -  condition: room.state.lightOn==false
@@ -1183,6 +1183,9 @@ rooms:
                 -  condition: 'items.flashlight.heldBy=={id} && {arg}=="floor"'
                    user: 'You shine the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. You shine the light along the path of the footprints, and they seem to lead… right into the north wall?'
                    room: '{name} shines the flashlight at the floor. In the dust beside {friendname}’s footprints, there is another set. {name} shines the light along the path of the footprints, and they seem to lead… right into the **north wall**? Perhaps you should take a closer look at that wall.'
+                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="ceiling"'
+                   user: 'You shine the flashlight at the ceiling. That might be exactly the opposite of where you want to shine it.'
+                   room: 'A yellow circle waves around the ceiling as {name} shines a flashlight at it.'
            -  name: kick        
               actions:
                 -  user: You attempt to kick the flashlight, why would you do that! why!
