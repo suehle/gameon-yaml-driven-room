@@ -5,7 +5,8 @@ vars:
     friendname: GABRIELLA
     subject: SCIENCE
     townname: RALEIGH
-    adultname: RUTH SUEHLE
+    adultname: JANE SMITH
+    adultname2: SALLY JONES
     child-first-name: HANNAH
     describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS.
     flashlight-color: TEAL
@@ -293,7 +294,7 @@ rooms:
               - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
           - name: use
             actions:
-              - user: The door is locked, and the keypad appears to be the way to open it. Its secrets are in this room.
+              - user: The door is locked, and the **keypad** appears to be the way to open it. Its secrets are in this room.
 
 
       - name: south door
@@ -358,7 +359,7 @@ rooms:
                 room: '{name} found a walkie talkie on the floor and seems to be staring at it.'
               - condition: items.walkietalkie.isOn==true
                 user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
-                room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
+                room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series.\n\n —&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺
           - name: get
             actions:
               - condition: items.walkietalkie.heldBy==nobody
@@ -539,7 +540,7 @@ rooms:
         commands:
             - name: examine
               actions:
-                - user: There is a door to your south and a door to your north. Specify which door you would like to examine.
+                - user: There is a **north door** and a **south door*. Specify which door you would like to examine.
             - name: get
               actions:
                 - user: You didn't bring a screwdriver, so that's not going to happen.
@@ -581,6 +582,7 @@ rooms:
     id: classroomstorage
     state:
       lightOn: true
+      wallLit: false
     exits:
      S: The door you came in through. Much like the doors in the first two rooms, it has now locked behind you. It is really very very shut.
      N: An even heavier looking door.
@@ -769,9 +771,12 @@ rooms:
                -  condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
                   user: You shine the flashlight on the north wall. {wall-things}
                   room: '{name} shines the flashlight on the north wall. {wall-things}'
-               -  condition: '{arg}=="east" || {arg}=="e" && items.flashlight.heldBy=={id}'
-                  user: 'You shine the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H&nbsp;&nbsp;VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.'
-                  room: '{name} shines the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H&nbsp;&nbsp;VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\n\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library projector from the 90s.'
+               -  condition: '{arg}=="east" || {arg}=="e" && items.flashlight.heldBy=={id} && room.state.wallLit=false'
+                  user: 'You shine the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H&nbsp;&nbsp;VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library **projector** from the 90s.'
+                  room: '{name} shines the flashlight on the east wall. In childlike handwriting, someone has scrawled, "YOU H&nbsp;&nbsp;VE TO GO IN TO GET OUT."\n\n\n\nYou shiver at the vaguely ominous message. "Go in where?!" {friendname} wonders out loud. "A tunnel, maybe? Or the vault?"\n\n\n\nYou wonder if the other teens wrote this. And what happened to them afterwards. {friendname} is also startled and trips over an old library **projector** from the 90s.'
+               -  condition: '{arg}=="east" || {arg}=="e" && items.flashlight.heldBy=={id} && room.state.wallLit=true'
+                  user: 'Now with the projector showing the full message, you can see that it tells you, "YOU HAVE TO GO IN TO GET OUT."\n\n\n\n {friendname} wonders out loud, "Does that mean the vault? Or is there a maybe a tunnel here?"'
+                  room: '{name} shines the flashlight on the east wall. Now with the projector showing the full message, you can see that it tells you, "YOU HAVE TO GO IN TO GET OUT."\n\n\n\n {friendname} wonders out loud, "Does that mean the vault? Or is there a maybe a tunnel here?"'
                -  condition: '{arg}=="west" || {arg}=="w" && items.flashlight.heldBy=={id}'
                   user: You shine the flashlight on the west wall. {wall-things2}
                   room: '{name} shines the flashlight on the west wall. {wall-things2}'
@@ -793,9 +798,11 @@ rooms:
          commands:
           -  name: examine
              actions:
-               - user: 'You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19   20 23 15   23 9 14 19\n\nCLUE: The letter that lights up = 1'
-                 room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19   20 23 15   23 9 14 19\n\nCLUE... The letter that lights up = 1'
-                 
+               - user: 'You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE: The letter that lights up = 1'
+                 room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE... The letter that lights up = 1'
+                 do:                   
+                  - set room.state.wallLit=true
+                  
       - name: keypad
         state:
             hidden: true
@@ -853,7 +860,7 @@ rooms:
         aliases:
           - look
         actions:
-          - user: This must be the athletic department’s storage room. There’s a rack of partially deflated **basketballs**, a table of old **yearbooks**, and the old baseball field’s **scoreboard** is hanging on the north wall with several well-used **bats** on the ground under it. A **globe** that probably doesn’t even have the right countries on it sits on a student **desk** with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
+          - user: This must be the athletic department’s storage room. There’s a rack of partially deflated **basketballs**, a table of old **yearbooks**, and the old baseball field’s **scoreboard** is hanging on the north wall with several well-used **bats** on the ground under it. A **globe** that probably doesn’t even have the right countries on it sits on a student desk with a hopelessly bent leg. \n\n\n\n"Oh, of course," {friendname} says. "Titans as in our mascot. Except they never win, so that seems unlikely. Even so, I’ll miss their games."\n\n\n\nEveryone knows {friendname}’s leaving soon, but you mostly forget because you don’t want to think about it. If you think about it, that makes it real, and you don’t want it to be real. Her mom needs a new job, and there are no jobs for doctors in town since {hospital-name} closed.
 
     items:
       - name: '{friendname}'
@@ -891,9 +898,26 @@ rooms:
               - user: With every room, the doors look thicker and harder to open. It’s starting to look like someone really didn’t want people poking around down here. There’s a **keypad** beside the door.
               - user: The door is locked, and the **keypad** appears to be the way to open it. Its secrets are in this room. Or in the world.
 
+
+      - name: desk
+        aliases:
+          - desks
+        commands:
+          - name: kick
+            actions:
+              - user: You kick a broken desk, and it clatters to the floor. 
+                room: A loud banging noise echoes through the room! Oh. It looks like {name} kicked a broken desk, and it fell to the floor. 
+          - name: examine
+            actions:
+              - user: You take a closer look at the desk with the bent leg. It's in bad shape, but the **globe** on it is interesting.
+              
       - name: wall
         aliases:
           - walls
+          - north wall
+          - south wall
+          - east wall
+          - west wall
         commands:
           - name: kick
             actions:
@@ -901,6 +925,9 @@ rooms:
           - name: examine
             actions:
               - user: Indeed, this wall is much like other walls. Vertical, perpendicular to the ground. Wall-tastic in every way.
+              - user: Perfectly serving its purpose as a wall, this wall meets two other walls at the corners. 
+              - user: Four right angles. A flat plane. This is what walls look like. Quite nice. 
+              - user: You wonder if the wall is also looking at you. Nah.
 
       - name: basketballs
         aliases:
@@ -958,8 +985,8 @@ rooms:
                 do:                   
                   - set room.state.foundDateOne=true
               - condition: room.state.foundDateTwo==true
-                user: 'Apparently they didn’t just lose all the time! The Titans won on March 12, 2008.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"'
-                room: '{name} picks up a yearbook and announces that the Titans won on March 12, 2008.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"'
+                user: 'Apparently they didn’t just lose all the time! The Titans won on March 12, 2008.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "We found two dates. What’s so special about 1976 and 2008?"'
+                room: '{name} picks up a yearbook and announces that the Titans won on March 12, 2008.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "We found two dates. What’s so special about 1976 and 2008?"\n\n\n\nWho in the **world** knows?'
                 do:                   
                   - set room.state.foundDateOne=true
 
@@ -984,7 +1011,11 @@ rooms:
       - name: ticket
         aliases:
           - stub
+          - ticket stub
         commands:
+          - name: examine 
+            actions:
+              - user: That seems useful. Maybe you should try to **/get** it.
           - name: get
             actions:
               - condition: room.state.foundDateOne==false
@@ -993,8 +1024,8 @@ rooms:
                 do:                   
                   - set room.state.foundDateTwo=true
               - condition: room.state.foundDateOne==true
-                user: 'You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"'
-                room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "What’s so special about 1976 and 2008?"'
+                user: 'You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "We've found two dates. What’s so special about 1976 and 2008?"'
+                room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "We've found two dates. What’s so special about 1976 and 2008?" \n\n\n\nWho in the **world** knows?'
                 do:                   
                   - set room.state.foundDateTwo=true
 
@@ -1013,9 +1044,13 @@ rooms:
               - user: I don't know what spider you're talking about.
               - user: I don't know the word "spider."
 
+
+      - name: world
+        commands:
+          - name: examine
+            actions: There's not exactly a whole world in this room. It would need to be a very large room to hold a planet, wouldn't it? But there is a model of one, isn't there? Hmmm...
+            
       - name: globe
-        aliases:
-          - world
         commands:
           - name: examine
             actions:
@@ -1026,8 +1061,8 @@ rooms:
               - condition: room.state.foundDateOne==true && room.state.foundDateTwo==false
                 user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria……...6\n\n\n\nBelarus…….19\n\n\n\nEgypt………..8\n\n\n\nItaly………...12\n\n\n\nMorocco…….7\n\n\n\nNorway…….200\n\n\n\nRomania…….3\n\n\n\nSpain………...5\n\n\n\nUkraine……..16'
               - condition: room.state.foundDateOne==true && room.state.foundDateTwo==true
-                user: 'The fragile globe cracks, and a piece of paper falls out. It says:\n\n\n\n CLUE: Dates of two wins, 1st letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n5-16-1976 3-12-2008'
-                room: '{name} appears to have broken the globe. Oops. But a piece of paper fell out that says: \n\n\n\nCLUE: Dates of two wins, 1st letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n5-16-1976  3-12-2008'                
+                user: 'The fragile globe cracks, and a piece of paper falls out. It says:\n\n\n\n CLUE: Dates of two wins, first letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\nRememebr, the dates you have found are 5-16-1976 and 3-12-2008'
+                room: '{name} appears to have broken the globe. Oops. But a piece of paper fell out that says: \n\n\n\nCLUE: Dates of two wins, first letter only\n\n\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\nRememebr, the dates you have found are 5-16-1976 and 3-12-2008'                
               - condition: room.state.foundDateOne==true && room.state.foundDateTwo==true
                 user: 'There are numbers written on some of the countries. You rotate the globe slowly and make notes. \n\n\n\nAustria...6\n\n\n\nBelarus...19\n\n\n\nEgypt...8\n\n\n\nItaly...12\n\n\n\nMorocco...7\n\n\n\nNorway...200\n\n\n\nRomania...3\n\n\n\nSpain...5\n\n\n\nUkraine...16'
 
@@ -1043,6 +1078,8 @@ rooms:
                 user: The keypad wants you to enter a word, but not that one. Think… a word you find inside the hidden word.
               - condition: unmatched
                 user: It seems likely that what you need is a five-letter word.
+              - condition: unmatched
+                user: Try writing down all the five-letter words you can make with the word you found in the room. Surely one of them will work.                
               - condition: unmatched
                 user: Hmmm. What is a five-letter word for something you’ll need to use to get out of here that you can make from a word hidden in this room?
               - condition: '{arg}=="with the answer"'
@@ -1088,8 +1125,8 @@ rooms:
         aliases:
           - look
         actions:
-          - user: This might be the creepiest room yet. It’s barely lit, but it doesn’t matter, because it looks like the only thing here is an old plastic **skeleton** from the science lab.
-          - user: Oh, hey. There's a **flashlight** here, too. Very thoughtful of someone to leave a trail of those all over the basement.
+          - user: This might be the creepiest room yet. It’s barely lit, but it doesn’t matter, because it looks like the only thing here is an old plastic **skeleton** from the science lab. Take a **/look** around
+          - user: Oh, hey. There's a **flashlight** in this room, too. Very thoughtful of someone to leave a trail of those all over the basement. Take a **/look** around and see what else you see. 
 
     items:
       - name: '{friendname}'
@@ -1120,7 +1157,7 @@ rooms:
               - user: The skeleton rattles in an unsettling fashion, but it does not kick back. This is just a skeleton. It's not haunted. (What a relief.)
           - name: examine
             actions:
-              - user: The skeleton may be plastic, but it makes quite a racket when you shake it. Behind its eyes, you can see a plastic brain model.
+              - user: The skeleton may be plastic, but it makes quite a racket when you shake it. Behind its eyes, you can see a plastic **brain** model.
                 room: '{name} rattles the skeleton. The noise does not make this room less creepy.'
 
       - name: brain
@@ -1313,7 +1350,7 @@ rooms:
                do:
                  - set room.state.lightOn=false
              - condition: room.state.lightOn==false
-               user: 'The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.  Listen in each direction to see if you can figure out where it is coming from.'
+               user: 'The switch no longer works. The rooms remains dark, and you can still hear that BEEP BEEP BEEP.  Listen in each of the 8 directions to see if you can figure out where it is coming from.'
 
        - name: north
          aliases:
@@ -1489,8 +1526,9 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user: You notice a small crack between the bricks and pull out a long piece of rolled up paper. A sliver of light peeks out of the crack where the paper had been. It says':'\n\n\n\nWE ARE A GROUP OF EIGHT\n\nWE PROTECT THE KING IN EVERY BATTLE\n\nWE ARE CONSIDERED WEAK, BUT IF WE MOVE AHEAD\n\nWE NEVER TURN BACK. WHO ARE WE?\n\n\n\nYou look around the room and notice something different about the bricks in these wall. Try to take a closer look at each one by indicating its direction, for example, "/examine south wall"
-
+                  user: You notice a small crack between the bricks and pull out a long piece of rolled up paper. A sliver of light peeks out of the crack where the paper had been. It says:\n\n\n\nWE ARE A GROUP OF EIGHT\n\nWE PROTECT THE KING IN EVERY BATTLE\n\nWE ARE CONSIDERED WEAK, BUT IF WE MOVE AHEAD\n\nWE NEVER TURN BACK. WHO ARE WE?\n\n\n\nYou put the paper back and then look around the room and notice something different about the bricks in these walls. Try to take a closer look at each one by indicating its direction, for example, "/examine east wall" or "/examine southeast corner"
+                  room: It looks like {name} found something in the northwest corner. 
+                  
        - name: pawn
          commands:
            - name: examine
@@ -1908,6 +1946,13 @@ rooms:
            - user: This room looks different from the rest of the basement. It reminds you of the waiting area in your mom’s office, except what it would look like if nobody had visited it in a few decades. Even the **walls** and **corners** are interesting. There’s a broken **chandelier** barely hanging on to the ceiling with one bulb flickering on and off, wrought-iron chairs overturned, dead **flowers** all over the marble floor, and every **wall** is covered in very old paintings in fancy gold frames. Only one **chair** is upright, and there is a napkin on it.
 
     items:
+       - name: corner
+         commands:
+           - name: examine
+             actions:
+               - user: If you'd like to take a closer look at a corner of the room, try to /go in that direction. For example, "/go se"
+
+
        - name: north wall
          commands:
            - name: examine
@@ -2044,7 +2089,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: It says':' \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"
+               - user: It says: \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"
            - name: use
              actions:
                - user: Do you need to blow your nose? If you use this napkin, no one else will be able to see the puzzle! Or at least they won’t want to…
@@ -2057,7 +2102,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: There are 9 paintings in the room. Going clockwise from the doorway':'  \n\n1. A woman in a medieval-looking red and green dress is watching while a knight fights a dragon.\n\n2. Vikings are sailing towards a castle for a raid. \n\n3. This was probably supposed to be a person, but none of the facial features are in quite the right place.\n\n4. A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? \n\n5. Some purple water lilies float in a vaguely watery blue scene. \n\n6. One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat\n\n7. A dozen or so people, many of them wearing yellow hats, are having a tea party.\n\n8. A man leaning on a cane is addressing a ballroom of ballerinas. \n\n9. A lot of squares, mostly white, some painted red, yellow, or blue. It's hanging diagonally, shaped like a diamond.\n\n If you'd like to take a closer look at any of them, please specify which painting you would like to see, using its number, e.g. "/examine painting 1"
+               - user: There are 9 paintings in the room. Going clockwise from the doorway:  \n\n1. A woman in a medieval-looking red and green dress is watching while a knight fights a dragon.\n\n2. Vikings are sailing towards a castle for a raid. \n\n3. This was probably supposed to be a person, but none of the facial features are in quite the right place.\n\n4. A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? \n\n5. Some purple water lilies float in a vaguely watery blue scene. \n\n6. One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat\n\n7. A dozen or so people, many of them wearing yellow hats, are having a tea party.\n\n8. A man leaning on a cane is addressing a ballroom of ballerinas. \n\n9. A lot of squares, mostly white, some painted red, yellow, or blue. It's hanging diagonally, shaped like a diamond.\n\n If you'd like to take a closer look at any of them, please specify which painting you would like to see, using its number, e.g. "/examine painting 1"
            - name: get
              actions:
                - user: Please specify which painting you would like to get, using its number, e.g. "/get painting 1"
@@ -2115,7 +2160,7 @@ rooms:
            - name: get
              actions:
                - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric **keypad** on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
-                 room: '{USER removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
+                 room: '{name} removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
 
        - name: painting 7
          commands:
@@ -2159,5 +2204,5 @@ rooms:
                    user: 'Keep at it. You’ll get there! (In case you weren’t sure, the keypad indeed beeps and flashes a red light.)'
                    user: '"Clue: Over the hill, under a quarter. (In case you weren’t sure, the keypad indeed beeps and flashes a red light.)"'
                  - condition: '{arg}=="5115"'
-                   user: You carefully enter "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.
-                   room: '{name} enters "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {ADULT NAME 2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.'
+                   user: You carefully enter "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {adultname2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.
+                   room: '{name} enters "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {adultname2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.'
