@@ -2083,6 +2083,7 @@ rooms:
              actions:
                - user: You make yourself a spoopy bouquet.
 
+
        - name: napkin
          commands:
            - name: examine
