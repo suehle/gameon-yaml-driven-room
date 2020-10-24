@@ -1025,7 +1025,7 @@ rooms:
                   - set room.state.foundDateTwo=true
               - condition: room.state.foundDateOne==true
                 user: 'You pull an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "We’ve found two dates. What’s so special about 1976 and 2008?"'
-                room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "We’ve found two dates. What’s so special about 1976 and 2008?"'
+                room: '{name} pulls an old ticket stub out of the scoreboard. It’s from May 16, 1976.\n\n\n\n"We need to get out of here," you say. "Before we end up like…" Your throat tightens. You think of the article about the other kids. "We just need to get out of here NOW."\n\n\n\n"And what? Wait for me to move?" {friendname} paces back and forth, sounding desperate. "This is our only chance to find the vault."\n\n\n\nSeeing limited options, you agree. "Fine." You think for a moment. "We’ve found two dates. What’s so special about 1976 and 2008?"\n\n\n\nWho in the **world** knows?'
                 do:                   
                   - set room.state.foundDateTwo=true
 
@@ -2089,7 +2089,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: 'It says: \n\n\n\nNME&nbsp;&nbsp;&nbsp;NME&nbsp;&nbsp;&nbsp;NME\n\nNME&nbsp;&nbsp;&nbsp;I AM&nbsp;&nbsp;&nbsp;NME\n\nNME&nbsp;&nbsp;&nbsp;NME&nbsp;&nbsp;&nbsp;NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"'
+               - user: 'It says: \n\n\n\nNME   NME   NME\n\nNME   I AM   NME\n\nNME   NME   NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"'
            - name: use
              actions:
                - user: Do you need to blow your nose? If you use this napkin, no one else will be able to see the puzzle! Or at least they won’t want to…
