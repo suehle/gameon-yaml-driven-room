@@ -96,14 +96,8 @@ rooms:
             -  condition: room.state.lightOn==false
                user: You still can't see anything at all. You feel like there should be a light **switch** though. Try examining the wall.
             -  condition: room.state.lightOn==true
-               user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it.
-               room: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it.
-            -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. Your friend **{friendname}** looks terrified. There is a door to the north.
-            -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. Your friend **{friendname}** looks terrified. There is a door to the north. Have you tried looking at that newspaper article?
-            -  condition: room.state.lightOn==true
-               user: There are a lot of dusty books lying around. There’s a chalkboard with a worn scrap of **newspaper** taped to it. There is a door to the north. Your friend {friendname} looks terrified. Have you tried talking to her?
+               user: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it. Your friend **{friendname}** looks terrified. There is a door to the north.
+               room: The basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it. Your friend **{friendname}** looks terrified. There is a **door** to the north.
 
      items:
        - name: '{friendname}'
@@ -210,8 +204,8 @@ rooms:
            - name: use
              actions:
                - condition: room.state.lightOn==false
-                 user: CLICK. It feels like you turned on the sun. You squint and rub your eyes in the sudden brightness. \n\n\n\nFor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
-                 room: CLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.\n\n\n\nFnoor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of newspaper taped to it.
+                 user: CLICK. It feels like you turned on the sun. You squint and rub your eyes in the sudden brightness. \n\n\n\nFor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it.
+                 room: Oh good, {name} used the light switch. \n\n\nCLICK. It feels like someone turned on the sun. You squint and rub your eyes in the sudden brightness. {name} is standing by a light switch.\n\n\n\nFor your whole life, you’ve heard a story that your school, {schoolname}, was a secret bank during the Depression of the 1930s. Before you graduate from 8th grade, you and one of your best friends, {friendname}, are determined to find it. And that’s how you ended up here, locked in the school’s basement in pitch darkness during spring break.\n\nYou didn’t bring your phone, and there’s no wifi or cell service anyway. You’ll have to work together to get out of here. \n\nThe basement is filled with random classroom leftovers. Most of it looks pretty dusty. You wonder how long it’s been since anyone was down here. There’s a chalkboard with a worn scrap of **newspaper** taped to it.
                  do:
                   - set room.state.lightOn=true
                - condition: room.state.lightOn==true
@@ -249,7 +243,9 @@ rooms:
             user: Oh, look! A wall! It's not much help.
           - condition: '{arg} == "south" || {arg} == "s"'
             user: Door still locked behind you. They rarely magically unlock themselves. Today will be no different.
-          - condition: '{arg} == "northeast" || {arg} == "ne"'
+          - condition: '{arg} == "northeast" || {arg} == "ne" && items.walkietalkie.heldBy==nobody'
+            user: There is a walkie talkie on the floor in the corner.
+          - condition: '{arg} == "northeast" || {arg} == "ne" && items.walkietalkie.heldBy==somebody'
             user: There is a walkie talkie on the floor in the corner.
           - condition: '{arg} == "northwest" || {arg} == "nw"'
             user: There is a red scrap of paper on the floor.
@@ -262,11 +258,11 @@ rooms:
           - look
         actions:
           - condition: room.state.lightOn==true
-            user: More cinder block walls. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. \n\nYou wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.
+            user: More cinder block **walls**. That feels familiar. The light switch in the last room must have turned on all the lights in the basement rooms. \n\nYou wonder how the students from 1979 felt. And what they did. Did they get out? It seems like that would be a useful thing for someone to have taught you in history class.  If you **/look** around more, you might find other things.
+          - condition: room.state.lightOn==true && items.walkietalkie.heldBy==nobody
+            user: There is a **walkie talkie** in the northeast corner. How long must that have been here? If you **/look** around more, you might find other things, too.
           - condition: room.state.lightOn==true
-            user: There is a **walkie talkie** in the northeast corner. How long must that have been here?
-          - condition: room.state.lightOn==true
-            user: You notice several scraps of paper on the floor in the corners of the room. You can /go in a direction (ne, nw, se, sw) to take a closer look.
+            user: You notice several **scraps** of paper on the floor in the corners of the room. You can **/go** in a direction (**ne**, **nw**, **se**, **sw**) to take a closer look. Or if you **/look** around more, you might find other things, too.
 
     items:
       - name: '{friendname}'
@@ -409,14 +405,17 @@ rooms:
         commands:
         - name: get
           actions: 
-             - user: There are four scraps of paper in the room spread among the corners. Try to go ne, nw, se, and sw to find and examine them, and then specify which scrap you would like to get.
+             - user: There are four **scraps** of paper in the room spread among the corners. Try to **go** ne, nw, se, and sw to find and examine them, and then specify which scrap you would like to get.
         - name: examine
           actions:
-             - user: There are four scraps of paper in the room spread among the corners. Try to go ne, nw, se, and sw to find and examine them, and then specify which scrap you would like to look at.
+             - user: There are four **scraps** of paper in the room spread among the corners. Try to **go** ne, nw, se, and sw to find and examine them, and then specify which scrap you would like to look at.
 
       - name: redscrap
         aliases:
           - red scrap
+          - red paper
+          - red scrap of paper
+          - red piece of paper
         state:
           hidden: false
           heldBy: nobody
@@ -431,7 +430,7 @@ rooms:
            - condition: items.redscrap.heldBy==nobody
              do:
                - 'set items.redscrap.heldBy={id}'
-             user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD
+             user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop red scrap**
         - name: drop
           actions:
             - condition: items.redscrap.heldBy=={id}
@@ -446,6 +445,9 @@ rooms:
       - name: bluescrap
         aliases:
           - blue scrap
+          - blue paper
+          - blue scrap of paper
+          - blue piece of paper
         state:
            hidden: false
            heldBy: nobody
@@ -458,7 +460,7 @@ rooms:
                 - condition: items.bluescrap.heldBy==nobody
                   do:
                     - set items.bluescrap.heldBy={id}
-                  user: It says':'\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE
+                  user: It says':'\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop blue scrap**
             - name: drop
               actions:
                 - condition: items.bluescrap.heldBy=={id}
@@ -473,6 +475,9 @@ rooms:
       - name: yellowscrap
         aliases:
           - yellow scrap
+          - yellow paper
+          - yellow scrap of paper
+          - yellow piece of paper          
         state:
              hidden: false
              heldBy: nobody
@@ -485,7 +490,7 @@ rooms:
                 - condition: items.yellowscrap.heldBy==nobody
                   do:
                     - set items.yellowscrap.heldBy={id}
-                  user: It says ':'\n\n⏺ — ⏺ — CLASSROOM\n\n— — THROUGH\n\n— ⏺ — ROOF\n\n— — — UNDER
+                  user: It says ':'\n\n⏺ — ⏺ — CLASSROOM\n\n— — THROUGH\n\n— ⏺ — ROOF\n\n— — — UNDER\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop yelllow scrap**
             - name: drop
               actions:
                 - condition: items.yellowscrap.heldBy=={id}
@@ -500,6 +505,9 @@ rooms:
       - name: greenscrap
         aliases:
             - green scrap
+            - green paper
+            - green scrap of paper
+            - green piece of paper            
         state:
              hidden: false
              heldBy: nobody
@@ -512,7 +520,7 @@ rooms:
                 - condition: items.greenscrap.heldBy==nobody
                   do:
                     - set items.greenscrap.heldBy={id}
-                  user: It says':'\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n
+                  user: It says':'\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop green scrap**
             - name: drop
               actions:
                 - condition: items.greenscrap.heldBy=={id}
