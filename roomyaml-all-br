@@ -2089,7 +2089,7 @@ rooms:
              aliases:
                - look
              actions:
-               - user: It says: \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"
+               - user: 'It says: \n\n\n\nNME&nbsp;&nbsp;&nbsp;NME&nbsp;&nbsp;&nbsp;NME\n\nNME&nbsp;&nbsp;&nbsp;I AM&nbsp;&nbsp;&nbsp;NME\n\nNME&nbsp;&nbsp;&nbsp;NME&nbsp;&nbsp;&nbsp;NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"'
            - name: use
              actions:
                - user: Do you need to blow your nose? If you use this napkin, no one else will be able to see the puzzle! Or at least they won’t want to…
