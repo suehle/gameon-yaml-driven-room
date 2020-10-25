@@ -747,6 +747,9 @@ rooms:
 
       - name: south door
         commands:
+          - name: get
+            actions: 
+              - user: How do you think you would carry it even if you could get it? 
           - name: talk
             actions:
               - user: The door listens thoughtfully to your words; however, it remains very, very locked.
@@ -764,6 +767,9 @@ rooms:
 
       - name: door
         commands:
+            - name: talk
+              actions: 
+                - user: '"Knock knock," you say. No one answers. 
             - name: examine
               actions:
                 - user: There is a door to your south and a door to your north. Specify which door you would like to examine.
@@ -784,6 +790,12 @@ rooms:
                 
       - name: wall
         commands:
+          - name: get
+            actions: 
+              - user: Your options are limited. Are you going to take it apart brick by brick? You didn't even bring a sledgehammer. There's got to be a better way out of here.
+          - name: use
+            actions: 
+              - user: 'You lean on the wall and say, "Hey! my name is Russ!" You’re a walrus.'
           - name: examine
             aliases:
               - look
@@ -867,12 +879,26 @@ rooms:
 
       -  name: projector
          commands:
-          -  name: examine
-             actions:
+          - name: get
+            actions: 
+              - user: You don't need to get it. Just take a closer /look.
+          - name: kick
+            actions: 
+              - user: Oh, you don't want to do that. If it rolls away, you might not find the secret message you're looking for. HINT HINT. 
+          - name: use
+            actions: 
                - user: 'You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE: The letter that lights up = 1'
                  room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE... The letter that lights up = 1'
                  do:                   
                   - set room.state.wallLit=true
+          - name: talk
+            actions: 
+              - user: The projector gives you information by... well, projecting. Try to /use it.
+          - name: examine
+             aliases:
+               - look
+             actions:
+               - user: The projector has a power switch on it. It's plugged in, but turned off. Try to /use it.
                   
       - name: keypad
         state:
