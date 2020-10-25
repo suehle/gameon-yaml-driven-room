@@ -2472,7 +2472,18 @@ rooms:
 
        - name: painting 1
          commands:
+           - name: talk
+             actions: 
+               - user: You offer to save the woman from the dragon, but the knight has everything under control. 
+           - name: kick
+             actions: 
+               - user: Uccello pieces are worth millions of dollars. What are you thinking?!
+           - name: use
+             actions: 
+               - user: You use art by looking at it.               
            - name: examine
+             aliases:
+               - look
              actions:
                - user: 'A woman in a medieval-looking red and green dress is watching while a knight fights a dragon. You read the card beside the painting: \n\nSAINT GEORGE AND THE DRAGON\n\nPaolo Uccello\n\nc. 1470\n\noil on canvas'
            - name: get
@@ -2481,7 +2492,18 @@ rooms:
 
        - name: painting 2
          commands:
+           - name: talk
+             actions: 
+               - user: Unfortunately, this game does not have the character set for Old Norse, leaving you unable to communicate with the Vikings.
+           - name: kick
+             actions: 
+               - user: You must purchase the painting before you can kick it. Unfortunately, the painting is not for sale.
+           - name: use
+             actions: 
+               - user: You use art by looking at it.                
            - name: examine
+             aliases:
+               - look
              actions:
                - user: 'Vikings are sailing towards a castle for a raid. You read the card beside the painting:\n\n\n\nVISITORS FROM OVERSEAS (Übersee-Gäste)\n\nNicholas Konstantin Roerich\n\n1901\n\noil on canvas'
            - name: get
@@ -2490,7 +2512,18 @@ rooms:
 
        - name: painting 3
          commands:
+           - name: talk
+             actions: 
+               - user: The artist seems to have forgotten to paint vocal cords. Your conversation is very one-sided.
+           - name: kick
+             actions: 
+               - user: Picasso paintings are among the most frequently sold for millions of dollars. As much as $179 million! What are you thinking?!
+           - name: use
+             actions: 
+               - user: You use art by looking at it.               
            - name: examine
+             aliases:
+               - look
              actions:
                - user: 'This was probably supposed to be a person, but none of the facial features are in quite the right place.You read the card beside the painting:\n\nBUST OF A WOMAN (Dora Maar)\n\nPablo Picasso\n\n1944\n\noil on canvas'
            - name: get
@@ -2499,7 +2532,18 @@ rooms:
 
        - name: painting 4
          commands:
+           - name: talk
+             actions: 
+               - user: 'You start a rousing round of "Baby Shark," but alas, nobody in the Renaissance has ever heard the song, so they don't join in.'
+           - name: kick
+             actions: 
+               - user: This thing is nearly 500 years old, and for all you know, this is a haunted basement. Do you want to think that through?
+           - name: use
+             actions: 
+               - user: You use art by looking at it.                
            - name: examine
+             aliases:
+               - look
              actions:
                - user: 'A village of Renaissance-era peasants are dancing, eating, and drinking. Perhaps a party? You read the card beside the painting: \n\nTHE PEASANT DANCE\n\nPeter Bruegel the Elder\n\nc. 1567\n\noil on panel'
            - name: get
@@ -2508,7 +2552,18 @@ rooms:
 
        - name: painting 5
          commands:
+           - name: talk
+             actions: 
+               - user: 'You ask the painting, "What comes next? AaBbCcDdE" It is not amused.'
+           - name: kick
+             actions: 
+               - user: Is it because you're more of a *Manet* fan?
+           - name: use
+             actions: 
+               - user: You use art by looking at it.                
            - name: examine
+             aliases:
+               - look
              actions:
                - user: 'Some purple water lilies float in a vaguely watery blue scene. You read the card beside the painting:\n\nWATER-LILIES\n\nClaude Monet\n\nc. 1916-17\n\noil on canvas'
            - name: get
@@ -2517,8 +2572,19 @@ rooms:
 
        - name: painting 6
          commands:
+           - name: talk
+             actions: 
+               - user: I don't think you should interrupt them.
+           - name: kick
+             actions: 
+               - user: Kicking paintings is not how you appreciate art.
+           - name: use
+             actions: 
+               - user: You use art by looking at it.                
            - name: examine
-             actions:
+               aliases:
+               - look
+               actions:
                - user:  'One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting: \n\nFIN\n\nAugustus Brooke-Winslow\n\nc. 1900\n\noil on canvas'
            - name: get
              actions:
@@ -2527,7 +2593,18 @@ rooms:
 
        - name: painting 7
          commands:
+             - name: talk
+               actions: 
+                 - user: You didn't bring a yellow hat. They won't listen.
+             - name: kick
+               actions: 
+                 - user: A Renoir unrecognized for what it was sold for only $700 in 2016. This is a known Renoir. What are you thinking?!
+             - name: use
+               actions: 
+                 - user: You use art by looking at it.                
              - name: examine
+               aliases:
+                 - look
                actions:
                  - user: 'A dozen or so people, many of them wearing yellow hats, are having a tea party. You read the card beside the painting: \n\nLUNCHEON OF THE BOATING PARTY (Le déjeuner des canotiers)\n\nPierre-Auguste Renoir\n\n1881\n\noil on canvas \n\n'
              - name: get
@@ -2536,7 +2613,18 @@ rooms:
 
        - name: painting 8
          commands:
+           - name: talk
+             actions: 
+               - user: Shhh! No talking in ballet class!
+           - name: kick
+             actions:
+               - user: Pricing Degas paintings is tough, but it's probably eight figures. What are you thinking?!
+           - name: use
+             actions: 
+               - user: You use art by looking at it.                
            - name: examine
+             aliases:
+               - look
              actions:
                - user: 'A man leaning on a cane is addressing a ballroom of ballerinas. You read the card beside the painting: \n\nTHE BALLET CLASS (La Classe de danse)\n\nEdgar Degas\n\n1871-1874\n\noil on canvas'
            - name: get
@@ -2545,7 +2633,18 @@ rooms:
 
        - name: painting 9
          commands:
+             - name: talk
+               actions: 
+                 - user: You attempt to speak to the squares, but unfortunately, you are fluent only in Triangle and Octagon.
+             - name: kick
+               actions: 
+                 - user: A Mondrian painting sold for $50 million in 2015. What are you thinking?!
+             - name: use
+               actions: 
+                 - user: You use art by looking at it.                
              - name: examine
+               aliases:
+                 - look
                actions:
                  - user: 'A lot of squares, mostly white, some painted red, yellow, or blue. You read the card beside the painting: \n\nVICTORY BOOGIE WOOGIE\n\nPieter Cornelis Mondriaan\n\n1944\n\noil and paper on canvas'
              - name: get
