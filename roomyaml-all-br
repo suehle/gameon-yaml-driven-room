@@ -722,6 +722,31 @@ rooms:
               - user: Hey! Kicking your friend is not going to get you out of here.
               - user: Stop that. It isn't helping anyone.
 
+      - name: door
+        state:
+             hidden: true
+        commands:
+            - name: talk 
+              actions: 
+                - user: There is a **north door** and a **south door**. Which door would you like to fruitlessly chat with?
+            - name: examine
+              actions:
+                - user: There is a **north door** and a **south door**. Specify which door you would like to examine.
+            - name: get
+              actions:
+                - user: You didn't bring a screwdriver, so that's not going to happen.
+            - name: drop
+              actions:
+                - user: Drop a door? First you'll have to get it.
+            - name: use
+              actions:
+                - user: You attempt to open the door, but it is very, very locked. It stays shut.
+            - name: kick
+              actions:
+                - user: That was unpleasant. For you. The door does not care.
+                - user: Don’t break a toe. You could be down here a while. The door still does not care.
+                - user: This will clearly not be successful. You should stop kicking the door.
+
       - name: north door
         commands:
           - name: talk
@@ -938,6 +963,7 @@ rooms:
     state:
       foundDateOne: false
       foundDateTwo: false
+      scoreboardOn: false
     exits:
      S: The door you came in through. It's locked, there is no going back. Ever.
      N: ""
@@ -983,9 +1009,32 @@ rooms:
              - user: Hey! Kicking your friend is not going to get you out of here.
              - user: Stop that. It isn’t helping you.
 
+      - name: door
+        state:
+             hidden: true
+        commands:
+            - name: talk 
+              actions: 
+                - user: There is a **south door** and an **east door**. Which door would you like to fruitlessly chat with?
+            - name: examine
+              actions:
+                - user: There is a **south door** and an **east door**. Specify which door you would like to examine.
+            - name: get
+              actions:
+                - user: You didn't bring a screwdriver, so that's not going to happen.
+            - name: drop
+              actions:
+                - user: Drop a door? First you'll have to get it.
+            - name: use
+              actions:
+                - user: You attempt to open the door, but it is very, very locked. It stays shut.
+            - name: kick
+              actions:
+                - user: That was unpleasant. For you. The door does not care.
+                - user: Don’t break a toe. You could be down here a while. The door still does not care.
+                - user: This will clearly not be successful. You should stop kicking the door.
+                
       - name: south door
-        aliases:
-          - door
         commands:
           - name: examine
             aliases: 
@@ -1007,12 +1056,10 @@ rooms:
               - user: What’s your goal here?
 
       - name: east door
-        aliases:
-          - door
         commands:
           - name: use
             actions: 
-              - user: 'You can’t use the door until you've used the **keypad**.'
+              - user: 'You can’t use the door until you’ve used the **keypad**.'
           - name: get
             actions: 
               - user: How? How exactly do you propose you get the door?
@@ -1152,13 +1199,27 @@ rooms:
 
       - name: scoreboard
         commands:
+          - name: talk
+            actions: 
+              - user: '"Hey, board, what's the score?" you ask. The score is 47-3... in a game that presumably has been paused for quite some time.’
+          - name: get
+            actions: 
+              - user: This thing is way too heavy for you to even consider attempting to remove from the wall.
+          - name: kick
+            actions: 
+              - user: 'You’ll be much more successful if you simply /use the scoreboard.'              
           - name: examine
             actions:
               - user: 'You recognize the scoreboard as the one that used to be on the baseball field before the school held a fundraiser to replace it. It’s not plugged in, but you notice the cord is dangling near an outlet.'
           - name: use
             actions:
-              - user: 'You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.'
+              - condition: room.state.scoreboardOn==false
+                user: 'You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.'
                 room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
+                do:                   
+                  - set room.state.scoreboardOn=true
+              - condition: room.state.scoreboardOn==true
+                user: 'The scoreboard is already plugged in and turned on. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.'
 
       - name: cord
         commands:
