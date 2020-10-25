@@ -1225,7 +1225,8 @@ rooms:
       - name: cord
         commands:
           - name: examine
-            aliases: look
+            aliases: 
+              - look
             actions: 
               - user: 'Pretty ordinary electrical cord. And there’s an outlet on the wall right by it. Why don’t you try to /use it?'
           - name: talk
