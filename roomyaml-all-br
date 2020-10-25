@@ -1572,6 +1572,21 @@ rooms:
              actions:
                - user: 'Use for what, exactly? It’s already being used as a wall.'              
 
+      - name: south wall
+        commands:
+          - name: examine
+            actions:
+              - user: This seems to be just a wall. Nothing interesting to see. Try a different direction.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'              
+
 
       - name: north wall
         commands:
