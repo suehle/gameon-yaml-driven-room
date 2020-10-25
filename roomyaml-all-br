@@ -141,6 +141,9 @@ rooms:
                - user: You pick up a Scots Gaelic textbook and practice saying, "Is toigh leam breacan."
        - name: north door
          commands:
+           - name: get
+             actions: 
+               - user: If you would like to get a door, you should make a trip to the hardware store. 
            - name: talk
              actions:
                - user: The door listens thoughtfully to your words; however, it remains very, very shut.
@@ -166,6 +169,9 @@ rooms:
                    
        - name: door
          commands:
+           - name: get
+             actions: 
+               - user: If you would like to get a door, you should make a trip to the hardware store. 
            - name: examine
              aliases:
                - look
@@ -174,6 +180,9 @@ rooms:
            - name: use
              actions:
                - user: Which door? Specify **north door** or **south door**.
+           - name: talk
+             actions: 
+               - user: 'For just a moment, you thought you heard the door say, "Hi, my name’s Jim." You decide to ignore it.'
 
        - name: south door
          commands:
@@ -205,6 +214,8 @@ rooms:
            - name: talk
              actions:
                - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+               - user: Use for what, exactly? It's already being used as a wall. 
 
        - name: switch
          aliases:
@@ -224,12 +235,24 @@ rooms:
                   - set room.state.lightOn=true
                - condition: room.state.lightOn==true
                  user: You're trapped in a locked basement, and now you want it to be dark, too!? You should reconsider.
+           - name: talk
+             actions: 
+               - user: It only know how to say "click." And only you can make it do that. 
+           - name: kick
+             actions: 
+               - user: You try, but you didn't stretch first, and now you have a charlie horse. 
 
        - name: chalkboard
          aliases:
            - newspaper
            - clipping
          commands:
+           - name: use
+             actions: 
+               - user: I think you want to /examine the newspaper **clipping**. 
+           - name: get
+             actions:
+               - user: I think you want to /examine the newspaper **clipping**. 
            - name: examine
              actions:
                - user: You read the newspaper article out loud. \n\n\n\nSTUDENTS MISSING AFTER FOLLOWING TOWN RUMOR\n\nApril 21, 1979\n\n[{townname}] -- {adultname} is at her wit’s end. Her daughter {child-first-name} has been missing for more than 24 hours. Although she didn’t see {child-first-name} before she left Saturday morning, {child-first-name} left a note stating she was going to find a "secret vault" under {schoolname}. {child-first-name} is one among five teens who have been missing since Saturday morning. Police claim it is too early to comment on the ongoing investigation.
