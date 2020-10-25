@@ -1540,17 +1540,14 @@ rooms:
                 -  user: You attempt to kick the flashlight, why would you do that? Why!
                 -  user: You flail wildly toward the flashlight wih your foot, and miss.
 
-
       - name: south wall
         commands:
           - name: examine
-            aliases: 
-              - look
-            actions:
-              - user: This seems to be just a wall.
+            actions: 
+              - user: Just a wall. Not much interesting to see. Try a different direction.
            - name: kick
              actions:
-               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+               - user: 'The wall is firm, as walls generally are. It is not affected by your foot.'
            - name: talk
              actions:
                - user: 'The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.'
