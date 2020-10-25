@@ -2534,7 +2534,7 @@ rooms:
          commands:
            - name: talk
              actions: 
-               - user: 'You start a rousing round of "Baby Shark," but alas, nobody in the Renaissance has ever heard the song, so they don't join in.'
+               - user: 'You start a rousing round of "Baby Shark," but alas, nobody in the Renaissance has ever heard the song, so they don’t join in.'
            - name: kick
              actions: 
                - user: This thing is nearly 500 years old, and for all you know, this is a haunted basement. Do you want to think that through?
@@ -2557,7 +2557,7 @@ rooms:
                - user: 'You ask the painting, "What comes next? AaBbCcDdE" It is not amused.'
            - name: kick
              actions: 
-               - user: Is it because you're more of a *Manet* fan?
+               - user: 'Is it because you’re more of a *Manet* fan?'
            - name: use
              actions: 
                - user: You use art by looking at it.                
@@ -2568,13 +2568,13 @@ rooms:
                - user: 'Some purple water lilies float in a vaguely watery blue scene. You read the card beside the painting:\n\nWATER-LILIES\n\nClaude Monet\n\nc. 1916-17\n\noil on canvas'
            - name: get
              actions:
-               - user: This would look great on your bedroom wall, but you’d have to explain where you got it. Oh well. You put the painting back.
+               - user: 'This would look great on your bedroom wall, but you’d have to explain where you got it. Oh well. You put the painting back.'
 
        - name: painting 6
          commands:
            - name: talk
              actions: 
-               - user: I don't think you should interrupt them.
+               - user: 'I don’t think you should interrupt them.'
            - name: kick
              actions: 
                - user: Kicking paintings is not how you appreciate art.
@@ -2595,7 +2595,7 @@ rooms:
          commands:
              - name: talk
                actions: 
-                 - user: You didn't bring a yellow hat. They won't listen.
+                 - user: 'You didn’t bring a yellow hat. They won’t listen.'
              - name: kick
                actions: 
                  - user: A Renoir unrecognized for what it was sold for only $700 in 2016. This is a known Renoir. What are you thinking?!
@@ -2618,7 +2618,7 @@ rooms:
                - user: Shhh! No talking in ballet class!
            - name: kick
              actions:
-               - user: Pricing Degas paintings is tough, but it's probably eight figures. What are you thinking?!
+               - user: 'Pricing Degas paintings is tough, but it’s probably eight figures. What are you thinking?!'
            - name: use
              actions: 
                - user: You use art by looking at it.                
