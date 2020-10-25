@@ -1304,9 +1304,9 @@ rooms:
             actions: 
               - user: 'Kick the world? OK. You slam your foot into the floor. It was mildly satisfying. '              
           - name: examine
-             aliases:
+            aliases: 
               - look
-             actions: 
+            actions: 
               - user: There's not exactly a whole world in this room. It would need to be a very large room to hold a planet, wouldn't it? But there is a model of one, isn't there? Hmmm...
             
       - name: globe
