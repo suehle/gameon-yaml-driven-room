@@ -1444,7 +1444,7 @@ rooms:
               - user: The skeleton is so happy you talked to it. Usually it has no body. 
           - name: use
             actions:
-              - user: 'You lift the skeleton’s arm and say, "Hey! Anyone want to hear a skeleton joke? It's humerus."'           
+              - user: 'You lift the skeleton’s arm and say, "Hey! Anyone want to hear a skeleton joke? It’s humerus."'           
           - name: kick
             actions:
               - user: The skeleton rattles in an unsettling fashion, but it does not kick back. This is just a skeleton. It's not haunted. (What a relief.)
