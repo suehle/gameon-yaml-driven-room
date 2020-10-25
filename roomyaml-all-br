@@ -1229,7 +1229,7 @@ rooms:
               - user: 'Pretty ordinary electrical cord. And there’s an outlet on the wall right by it. Why don’t you try to /use it?'
           - name: talk
             actions: 
-              - user: 'You ask the cord, "Aren’t you a rope?" and the cord says, "No, I'm a frayed knot." OK, that joke only works if it actually is made of frayed rope, and it’s a perfectly intact cord. But who are you to complain? You’re the one talking to a cord.'
+              - user: 'You ask the cord, "Aren’t you a rope?" and the cord says, "No, I’m a frayed knot." OK, that joke only works if it actually is made of frayed rope, and it’s a perfectly intact cord. But who are you to complain? You’re the one talking to a cord.'
           - name: get
             actions: 
               - user: 'You don’t need to get the cord before you /use it.'
