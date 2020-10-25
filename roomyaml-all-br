@@ -1065,7 +1065,7 @@ rooms:
               - user: How? How exactly do you propose you get the door?
           - name: talk
             actions: 
-              - user: '"Hello, door," you say. "It must be lovely facing the east, even if you are a basement door and can't see the sunrise." The door ponders the sunrise it will never see and is saddened.'        
+              - user: '"Hello, door," you say. "It must be lovely facing the east, even if you are a basement door and can’t see the sunrise." The door ponders the sunrise it will never see and is saddened.'        
           - name: kick
             actions:
               - user: Your foot hurts, but the door is no worse off.
