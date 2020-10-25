@@ -877,6 +877,7 @@ rooms:
                -  user: You attempt to kick the flashlight, why would you do that! why!
                -  user: You flail wildly toward the torch wih your foot, and miss.
 
+
       -  name: projector
          commands:
           - name: get
@@ -904,6 +905,15 @@ rooms:
         state:
             hidden: true
         commands:
+            - name: kick
+              actions: 
+                - user: Your grand battement could be more grand. You miss the keypad altogether. 
+            - name: talk
+              actions: 
+                - user: This keypad does not accept voice commands. 
+            - name: get
+              actions: 
+                - user: If you rip it off the wall, you might be stuck here forever.
             - name: examine
               actions:
                 - user: 'The keypad beside the door has a display showing blanks:\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;&nbsp;&nbsp;-&nbsp;-&nbsp;-&nbsp;-&nbsp;\n\n\n\n Below it is a standard keyboard on the screen.'
@@ -977,6 +987,20 @@ rooms:
         aliases:
           - door
         commands:
+          - name: examine
+            aliases: 
+              - look
+            actions: 
+              - user: 'That door locked behind you, and there's not even a door knob on this side. You’ll have to find another way out.'
+          - name: talk
+            actions: 
+              - user: What are you hoping the door will say in response?
+          - name: get
+            actions: 
+              - user: 'You can’t even find the hinges. It might as well be part of the wall.'
+          - name: use
+            actions: 
+              - user: 'There’s no door knob on this side. But there is another door in the room.'              
           - name: kick
             actions:
               - user: Your foot hurts, but the door is no worse off.
