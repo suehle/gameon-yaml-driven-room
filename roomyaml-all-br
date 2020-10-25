@@ -9,7 +9,7 @@ vars:
     adultname2: SALLY JONES
     child-first-name: HANNAH
     describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS.
-    flashlight-color: TEAL
+    flashlight-color: a TEAL
     walkie-talkie: THE WALKIE TALKIE IS A BIG, BLACK BRICK WITH AN OBVIOUS SPEAKER ON THE FRONT AND A SIMPLE ON/OFF SWITCH ON TOP.
     wall-things: SOMEONE HAS SCRAWLED "MR. JONES IS THE BEST MATH TEACHER EVER!" WHAT A KIND GRAFFITI ARTIST.
     wall-things2: THERE'S A WORLD MAP POSTER THAT HAS THE USSR, AND HALF OF THE AFRICAN CONTINENT JUST SAYS "FRENCH WEST AFRICA." YOU REALIZE YOUR SCHOOL MIGHT HAVE BEEN AROUND LONGER THAN YOU THOUGHT.
@@ -1010,11 +1010,22 @@ rooms:
         aliases:
           - door
         commands:
+          - name: use
+            actions: 
+              - user: 'You can’t use the door until you've used the **keypad**.'
+          - name: get
+            actions: 
+              - user: How? How exactly do you propose you get the door?
+          - name: talk
+            actions: 
+              - user: '"Hello, door," you say. "It must be lovely facing the east, even if you are a basement door and can't see the sunrise." The door ponders the sunrise it will never see and is saddened.'        
           - name: kick
             actions:
               - user: Your foot hurts, but the door is no worse off.
               - user: What’s your goal here?
           - name: examine
+            aliases: 
+              - look
             actions:
               - user: With every room, the doors look thicker and harder to open. It’s starting to look like someone really didn’t want people poking around down here. There’s a **keypad** beside the door.
               - user: The door is locked, and the **keypad** appears to be the way to open it. Its secrets are in this room. Or in the world.
@@ -1024,6 +1035,15 @@ rooms:
         aliases:
           - desks
         commands:
+          - name: use
+            actions: 
+              - user: 'You can’t use this desk for much, but the **globe** on it looks pretty interesting.'
+          - name: get
+            actions: 
+              - user: 'Eek. Don't try to move this desk. It’s barely standing as it is.'
+          - name: talk
+            actions: 
+              - user: You attempt to ask the desk about the many students it has seen, but all the desk can do is ponder the weight of the world it holds.
           - name: kick
             actions:
               - user: You kick a broken desk, and it clatters to the floor. 
@@ -1040,10 +1060,22 @@ rooms:
           - east wall
           - west wall
         commands:
+          - name: get
+            actions: 
+              - user: 'All in all, it’s just another brick in the wall. Which you cannot get.'
+          - name: use
+            actions: 
+              - user: You lean lazily against the wall.
+                room: '{name} is leaning on a wall for no apparent reason.'
+          - name: talk
+            actions: 
+              - user: Do you often find walls to hold up their end of a conversation?        
           - name: kick
             actions:
               - user: The wall is firm, as walls generally are. It is not affected by your foot.
           - name: examine
+            aliases: 
+              - look
             actions:
               - user: Indeed, this wall is much like other walls. Vertical, perpendicular to the ground. Wall-tastic in every way.
               - user: Perfectly serving its purpose as a wall, this wall meets two other walls at the corners. 
@@ -1054,6 +1086,9 @@ rooms:
         aliases:
           - basketball
         commands:
+          - name: talk
+            actions: 
+              - user: '"Bounce once for yes, twice for no," you tell the ball. Then you remember this is a basketball, not a Magic 8 ball.'        
           - name: examine
             actions:
               - user: '{basketballs} You wonder why they’re even saving these if they’re just going to sit down here collecting dust.'
@@ -1085,6 +1120,9 @@ rooms:
           - name: use
             actions:
               - user: You pick up a bat and try to swing it. It cracks in half. You get a splinter.
+          - name: talk
+            actions: 
+              - user: '"Who’s on first?" you ask. *Yeah, I've never heard that one before,* thinks the bat.'
 
       - name: yearbooks
         aliases:
