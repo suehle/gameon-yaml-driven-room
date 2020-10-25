@@ -215,7 +215,7 @@ rooms:
              actions:
                - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
            - name: use
-               - user: Use for what, exactly? It's already being used as a wall. 
+               - user: 'Use for what, exactly? It’s already being used as a wall.'
 
        - name: switch
          aliases:
