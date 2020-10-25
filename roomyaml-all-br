@@ -1540,11 +1540,10 @@ rooms:
                 -  user: You attempt to kick the flashlight, why would you do that? Why!
                 -  user: You flail wildly toward the flashlight wih your foot, and miss.
 
+
       - name: east wall
         commands:
           - name: examine
-            aliases: 
-              - look
             actions:
               - user: This seems to be just a wall.
            - name: kick
@@ -1555,7 +1554,7 @@ rooms:
                - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
            - name: use
              actions:
-               - user: 'Use for what, exactly? It’s already being used as a wall.'              
+               - user: 'Use for what, exactly? It’s already being used as a wall.'               
 
       - name: west wall
         commands:
