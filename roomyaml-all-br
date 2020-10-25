@@ -792,7 +792,7 @@ rooms:
         commands:
           - name: get
             actions: 
-              - user: 'Your options are limited. Are you going to take it apart brick by brick? You didn't even bring a sledgehammer. There’s got to be a better way out of here.'
+              - user: 'Your options are limited. Are you going to take it apart brick by brick? You didn’t even bring a sledgehammer. There’s got to be a better way out of here.'
           - name: use
             actions: 
               - user: 'You lean on the wall and say, "Hey! My name is Russ!" You’re a walrus.'
