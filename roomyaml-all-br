@@ -581,9 +581,12 @@ rooms:
         state:
              hidden: true
         commands:
+            - name: talk 
+              actions: 
+                - user: There is a **north door** and a **south door**. Which door would you like to fruitlessly chat with?
             - name: examine
               actions:
-                - user: There is a **north door** and a **south door*. Specify which door you would like to examine.
+                - user: There is a **north door** and a **south door**. Specify which door you would like to examine.
             - name: get
               actions:
                 - user: You didn't bring a screwdriver, so that's not going to happen.
@@ -603,6 +606,15 @@ rooms:
         state:
             hidden: true
         commands:
+            - name: kick
+              actions: 
+                - user: Your high kick fails. You'll have to use it with your fingers like everyone else. 
+            - name: get
+              actions: 
+                - user: The keypad has already been gotten, by whomever installed it here. Thanks to them, you may /use it. 
+            - name: talk
+              actions: 
+                - user: 'This is not a new-fangled smart keypad. You’ll have to /use it the old-fashioned way.'
             - name: examine
               actions:
                 - user: The keypad beside the door has buttons with what seem to be an assortment of random words':' \n\nRUN\n\nTUNNEL\n\nGO\n\nCHALKBOARD\n\nCEILING\n\nBASEMENT\n\nTO\n\nESCAPE\n\nCLASSROOM\n\nTHROUGH\n\nROOF\n\nUNDER\n\nA\n\nTHE\n\nFILE CABINET\n\nVAULT
@@ -667,7 +679,23 @@ rooms:
         aliases:
           - desks
         commands:
+          - name: kick
+            actions: 
+              - user: The desk skids two inches away from you and clangs into another desk.
+                room: You hear a loud noise and see that {name} kicked a desk into another one.
+          - name: get
+            actions: 
+              - user: You mightily lift the desk and hold it aloft. Everyone marvels at your strength. You put the desk back down. 
+                room: {name} lifted a desk in the air and put it back down. 
+          - name: use
+            actions: 
+              - user: You use a desk all day at school. Now it's time to use your brain to get out of this basement.
+          - name: talk
+            actions: 
+              - user: Do you often have interesting conversations with furniture? 
           - name: examine
+            aliases:
+              - look
             actions:
               - user: Mostly they look like the desks you sit at every day. Pretty uninteresting. 
 
