@@ -115,6 +115,7 @@ rooms:
              actions:
                - user: Hey! Kicking your friend is not going to get you out of here.
                - user: Stop that. It isn't helping anyone.
+           
        - name: books
          aliases:
             - book
@@ -127,6 +128,17 @@ rooms:
             - name: talk
               actions:
                - user: The books are not good conversationalists. Try a human.
+            - name: kick
+              actions: 
+               - user: Somewhere across town, the school librarian cries out but isn't sure why. 
+            - name: get
+              actions: 
+               - user: You pick up a science book and spend some time studying the periodic table. You realize that the letters J and Q don't appear at all. 
+               - user: You pick up an English textbook and consider a career that involves writing interactive fiction. 
+               - user: You pick up a history book and look for a story about kids trapped in their school basement. Alas, the book covers only the highlights, and no such story is one of them. 
+               - user: 'You pick up a French textbook and memorize the phrase, "J’aimerais m’échapper de ce sous-sol."'
+               - user: You pick up a Spanish textbook and practice saying, "¿Alguien ha encontrado una puerta?"
+               - user: You pick up a Scots Gaelic textbook and practice saying, "Is toigh leam breacan."
        - name: north door
          commands:
            - name: talk
