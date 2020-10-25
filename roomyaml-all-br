@@ -1540,53 +1540,6 @@ rooms:
                 -  user: You attempt to kick the flashlight, why would you do that? Why!
                 -  user: You flail wildly toward the flashlight wih your foot, and miss.
 
-
-      - name: east wall
-        commands:
-          - name: examine
-            actions:
-              - user: This seems to be just a wall.
-           - name: kick
-             actions:
-               - user: The wall is firm, as walls generally are. It is not affected by your foot.
-           - name: talk
-             actions:
-               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
-           - name: use
-             actions:
-               - user: 'Use for what, exactly? It’s already being used as a wall.'               
-
-      - name: west wall
-        commands:
-          - name: examine
-            actions:
-              - user: This seems to be just a wall.
-           - name: kick
-             actions:
-               - user: The wall is firm, as walls generally are. It is not affected by your foot.
-           - name: talk
-             actions:
-               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
-           - name: use
-             actions:
-               - user: 'Use for what, exactly? It’s already being used as a wall.'              
-
-      - name: south wall
-        commands:
-          - name: examine
-            actions:
-              - user: This seems to be just a wall. Nothing interesting to see. Try a different direction.
-           - name: kick
-             actions:
-               - user: The wall is firm, as walls generally are. It is not affected by your foot.
-           - name: talk
-             actions:
-               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
-           - name: use
-             actions:
-               - user: 'Use for what, exactly? It’s already being used as a wall.'              
-
-
       - name: north wall
         commands:
            - name: kick
@@ -1606,6 +1559,53 @@ rooms:
                 user: 'You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n[{townname}]--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
                 room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\n\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
 
+
+      - name: west wall
+        commands:
+          - name: examine
+            actions:
+              - user: This seems to be just a wall.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'  
+               
+               
+      - name: east wall
+        commands:
+          - name: examine
+            actions:
+              - user: This seems to be just a wall.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'  
+               
+               
+      - name: south wall
+        commands:
+          - name: examine
+            actions:
+              - user: This seems to be just a wall.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'  
 
 ## Room 6 -- almost the tunnel
 
