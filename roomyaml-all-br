@@ -991,7 +991,7 @@ rooms:
             aliases: 
               - look
             actions: 
-              - user: 'That door locked behind you, and there's not even a door knob on this side. You’ll have to find another way out.'
+              - user: 'That door locked behind you, and there’s not even a door knob on this side. You’ll have to find another way out.'
           - name: talk
             actions: 
               - user: What are you hoping the door will say in response?
