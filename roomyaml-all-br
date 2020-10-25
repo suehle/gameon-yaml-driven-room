@@ -895,10 +895,10 @@ rooms:
             actions: 
               - user: The projector gives you information by... well, projecting. Try to /use it.
           - name: examine
-             aliases:
-               - look
-             actions:
-               - user: 'The projector has a power switch on it. It’s plugged in, but turned off. Try to /use it.'
+            aliases:
+              - look
+            actions:
+              - user: 'The projector has a power switch on it. It’s plugged in, but turned off. Try to /use it.'
                   
       - name: keypad
         state:
