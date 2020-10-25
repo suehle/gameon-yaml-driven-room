@@ -19,13 +19,14 @@ vars:
     spiderdescription: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
 
 commanddescriptions:
- use: Use an item, eg /use door to open it, or /use radio to switch the radio on or off, or /use button to push the button.
- talk: Communicate with something, eg /talk fish to speak to the fishes, or /talk wall to speak to a wall.
- get: Pickup an item, eg /get chair to pickup a chair, or /get stilettos to pickup a pair of shoes.
+ use: Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?
+ talk: See what {friendname} is thinking right now. You could talk to a wall, but they seldom have much to say in response. To talk to other people playing with you, simply type without a / in front. Everyone in the room will see your message.
+ get: Pick up an object. You’ll have to /get cookie before you can /use cookie.
  drop: Drop an item you have picked up, eg, /drop chair to drop the chair you are holding, or /drop microphone to drop a microphone
  kick: Kick something, eg, /kick wall to break your toes, or /kick ball to boot the ball across the room
- go: Head in a direction, eg /go North to head north, or /go West because life is peaceful there
- examine: Take a closer look at something, eg /examine wall to search for secret buttons, or /examine floor to research types of carpet.
+ go: Move in the direction specified, such as "/go n" to move north. This is always relative to the center of the room. You do not have to move back to go another direction. You can think of it like "/examine direction", which may reveal to you more than you see with a simple /look or /examine.
+ examine: Used alone, this will look around the room and tell you what you see. Sometimes you will see things differently if you look around again. And perhaps again and again. Used with an object in the room ("/examine book") will take a closer look at that thing.
+ exits: Will tell you where you see ways out of the room. Too bad you’re trapped in a basement without many of them.
 
 commands:
   - name: help
@@ -91,7 +92,7 @@ rooms:
             - look
           actions:
             -  condition: room.state.lightOn==false
-               user: 'It is really, really dark down here. You’re pretty sure there’s a **wall** behind you because you just got here.'
+               user: 'It is really dark down here. You’re pretty sure there’s a **wall** behind you because you just got here.'
             -  condition: room.state.lightOn==false
                user: Wow, it is super dark. You can’t see a thing. Have you tried to find a light **switch**?
             -  condition: room.state.lightOn==false
