@@ -1327,7 +1327,18 @@ rooms:
 
       - name: keypad
         commands:
+          - name: get
+            actions:
+              - user: The keypad is firmly affixed to the wall. Perhaps you meant to /use it?
+          - name: kick
+            actions:
+              - user: You try to type with your toes, but everyone asks you to put your shoes back on. 
+          - name: talk
+            actions:
+              - user: I assure you, this school is very old. There are no voice-controlled keypads down here.               
           - name: examine
+            aliases: 
+              - look
             actions:
               - user: This time the keypad has a message with a regular keyboard layout waiting under it. The message reads:\n\nFIND ANOTHER WORD INSIDE THE HIDDEN WORD. YOU’LL NEED TO USE IT TO GET OUT OF HERE.\n\n-&nbsp;-&nbsp;-&nbsp;-&nbsp;-
           - name: use
@@ -1404,16 +1415,41 @@ rooms:
         aliases:
           - door
         commands:
+          - name: use
+            actions:
+              - user: There is no door knob on this side and no keypad. You can't begin to figure out how to use it. 
+          - name: examine
+            aliases:
+              - look
+            actions:
+              - user: 'This is the door you came in. There’s no door knob on this side. As far as you can tell, there is no other way out.'
+          - name: get
+            actions:
+              - user: How are you going to get the door?!
+          - name: talk
+            actions:
+              - user: The door is delighted to hear from you. No one has tried to talk to it in years.               
           - name: kick
             actions:
               - user: What’s your goal here?
 
       - name: skeleton
         commands:
+          - name: get
+            actions:
+              - user: The skeleton is here for everyone to take a look at. Share the skeleton. Perhaps have a closer /look.
+          - name: talk
+            actions:
+              - user: The skeleton is so happy you talked to it. Usually it has no body. 
+          - name: use
+            actions:
+              - user: 'You lift the skeleton’s arm and say, "Hey! Anyone want to hear a skeleton joke? It's humerus."'           
           - name: kick
             actions:
               - user: The skeleton rattles in an unsettling fashion, but it does not kick back. This is just a skeleton. It's not haunted. (What a relief.)
           - name: examine
+            aliases: 
+              - look
             actions:
               - user: The skeleton may be plastic, but it makes quite a racket when you shake it. Behind its eyes, you can see a plastic **brain** model.
                 room: '{name} rattles the skeleton. The noise does not make this room less creepy.'
@@ -1423,6 +1459,12 @@ rooms:
           - name: examine
             actions:
               - user: You take the top off the skeleton’s head and find the plastic **brain** is an unnaturally bright shade of pink. Along the line between the right and left hemispheres, there’s a message. On one side, "What makes more as you take them." On the other, "Follow." What might that mean? Don’t forget to use the tools you have.
+          - name: get
+            actions: 
+              - user: No need to get the brain. You already have one. 
+          - name: talk
+            actions: 
+              - user: '"What do you think?" you ask the brain. "Yes," it replies. Or would, if it could.'
           - name: kick
             actions:
               - user: No. Just no.
