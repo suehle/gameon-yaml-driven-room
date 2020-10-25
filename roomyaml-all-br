@@ -2534,7 +2534,7 @@ rooms:
          commands:
            - name: talk
              actions: 
-               - user: 'You start a rousing round of "Baby Shark," but alas, nobody in the Renaissance has ever heard the song, so they don’t join in.'
+               - user: 'You start a rousing round of "Baby Shark," but alas, nobody in the Renaissance has ever heard the song, so they do not join in.'
            - name: kick
              actions: 
                - user: This thing is nearly 500 years old, and for all you know, this is a haunted basement. Do you want to think that through?
