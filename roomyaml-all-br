@@ -2582,9 +2582,9 @@ rooms:
              actions: 
                - user: You use art by looking at it.                
            - name: examine
-               aliases:
+             aliases:
                - look
-               actions:
+             actions:
                - user:  'One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting: \n\nFIN\n\nAugustus Brooke-Winslow\n\nc. 1900\n\noil on canvas'
            - name: get
              actions:
