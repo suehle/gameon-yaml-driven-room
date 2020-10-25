@@ -682,11 +682,11 @@ rooms:
           - name: kick
             actions: 
               - user: The desk skids two inches away from you and clangs into another desk.
-                room: You hear a loud noise and see that {name} kicked a desk into another one.
+                room: 'You hear a loud noise and see that {name} kicked a desk into another one.'
           - name: get
             actions: 
               - user: You mightily lift the desk and hold it aloft. Everyone marvels at your strength. You put the desk back down. 
-                room: {name} lifted a desk in the air and put it back down. 
+                room: '{name} lifted a desk in the air and put it back down.'
           - name: use
             actions: 
               - user: You use a desk all day at school. Now it's time to use your brain to get out of this basement.
