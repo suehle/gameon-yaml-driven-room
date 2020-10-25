@@ -389,12 +389,12 @@ rooms:
               user: You switch off the walkie talkie. The beeping stops.
               room: '{name} turns the walkie talklie off. The beeping sounds stop.'
               do:
-              - set items.walkietalkie.isOn==false
+              - set items.walkietalkie.isOn=false
             - condition: items.walkietalkie.heldBy=={id} && items.walkietalkie.isOn==false
               user: You turn the knob on the top of the walkie talkie. The red light illuminates, and the walkie talkie starts beeping a series of short and long tones. It pauses, then repeats the series. '—&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺'
               room: '{name} turns the walkie talkie on. It starts beeping a series of short and long tones. It pauses, then repeats the series.\n —&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺'
               do:
-              - set items.walkietalkie.isOn==true
+              - set items.walkietalkie.isOn=true
           - name: kick
             actions:
               - user: You attempt to kick the walkie talkie, but it is small, and you miss.
