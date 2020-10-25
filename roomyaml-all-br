@@ -633,7 +633,7 @@ rooms:
                    - teleportAll classroomstorage
 
 ## Room 3
-  - name: Classroom Storage
+  - name: CLASSROOM STORAGE
     id: classroomstorage
     state:
       lightOn: true
@@ -1221,6 +1221,7 @@ rooms:
               - condition: room.state.scoreboardOn==true
                 user: 'The scoreboard is already plugged in and turned on. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.'
 
+
       - name: cord
         commands:
           - name: examine
@@ -1361,7 +1362,7 @@ rooms:
 
   ## Room 5
 
-  - name: The Science and Social Studies Room
+  - name: THE SCIENCE AND SOCIAL STUDIES ROOM
     id: skeleton
     state:
       foundFootprints: false
@@ -1544,22 +1545,58 @@ rooms:
           - name: examine
             actions:
               - user: This seems to be just a wall.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'              
 
       - name: east wall
         commands:
           - name: examine
             actions:
               - user: This seems to be just a wall.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'              
 
       - name: west wall
         commands:
           - name: examine
             actions:
               - user: This seems to be just a wall.
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'              
 
 
       - name: north wall
         commands:
+           - name: kick
+             actions:
+               - user: The wall is firm, as walls generally are. It is not affected by your foot.
+           - name: talk
+             actions:
+               - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
+           - name: use
+             actions:
+               - user: 'Use for what, exactly? It’s already being used as a wall.'        
           - name: examine
             actions:
               - condition: room.state.foundFootprints==false
@@ -1571,7 +1608,7 @@ rooms:
 
 ## Room 6 -- almost the tunnel
 
-  - name: A Riddle
+  - name: A RIDDLE
     id: riddle
     state:
          lightOn: true
@@ -1635,13 +1672,37 @@ rooms:
                - user: Surely by now you understand that you cannot use a locked door.
            - name: kick
              actions:
-               - user: What’s your goal here?
+               - user: 'You kick it as hard as you can. The door does not budge, but your foot sure hurts.'
+           - name: get
+             actions:
+               - user: There is just no getting this door. 
+           - name: talk
+             actions:
+               - user: The door knows some secrets, but it refuses to tell. 
 
        - name: switch
          aliases:
            - light switch
            - lightswitch
          commands:
+           - name: talk
+             actions: 
+               - user: 'Do you not understand how old this place is? There are no smart bulbs. No smart keypads. No smart anything.'
+           - name: examine
+             aliases: 
+               - look
+             actions: 
+               - user: Looks like a light switch. You are presumably familiar with their appearance.
+           - name: get
+             actions: 
+               - user: You have used a light switch before, right?                 
+           - name: kick
+             actions: 
+               - condition: room.state.lightOn==true
+                 user: 'With a barbaric yawp, you attempt to kick the light switch off. Oddly enough, it works. Dramatic, but successful.\n\n\n\nYou turn out the light. The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it is coming from.'
+                 room: '{name} turns out the light. By kicking it. Strange, but it works.\n\n\n\n The room goes almost completely dark. You can see only faint shadows of the things around you and absolutely nothing in the darkest corner of the room. You realize that you can faintly hear a high-pitched BEEP BEEP BEEP. Listen in each direction to see if you can figure out where it is coming from.'
+                 do:
+                   - set room.state.lightOn=false
            - name: use
              actions:
              - condition: room.state.lightOn==true
@@ -1992,7 +2053,7 @@ rooms:
 
    ## Room 6 -- actually the tunnel
 
-  - name: THE TUNNEL
+  - name: THE TUNNEL! 
     id: tunnel
     state:
        lightOn: false
@@ -2206,7 +2267,7 @@ rooms:
 
 
 
-   ## Room 7 -- The End
+   ## Room 7 -- THE END
 
   - name: The Office
     id: office
