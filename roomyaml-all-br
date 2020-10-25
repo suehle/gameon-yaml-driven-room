@@ -215,6 +215,7 @@ rooms:
              actions:
                - user: The wall briefly considers what you have said but continues to be a wall, unable to reply. Talking to people probably works better.
            - name: use
+             actions:
                - user: 'Use for what, exactly? It’s already being used as a wall.'
 
        - name: switch
@@ -265,7 +266,7 @@ rooms:
      lightOn: true
     exits:
      S: The door you came in through. Much like the door in the first room, it has now locked behind you. You see no way to open it.
-     N: A much heavier looking door.
+     N: A much heavier looking door. It has a keypad beside it.
      E: ""
      W: "" 
     commands:
@@ -317,6 +318,9 @@ rooms:
 
       - name: north door
         commands:
+          - name: get
+            actions: 
+              - user: You shake the door wildly, but it doesn't come off its hinges. 
           - name: talk
             actions:
               - user: The door listens thoughtfully to your words; however, it remains very, very shut.
@@ -335,6 +339,9 @@ rooms:
 
       - name: south door
         commands:
+          - name: get
+            actions: 
+              - user: You attempt to summon your inner superhero and attempt to rip the door off the wall. You do not succeed.
           - name: talk
             actions:
               - user: The door listens thoughtfully to your words; however, it remains very, very locked.
