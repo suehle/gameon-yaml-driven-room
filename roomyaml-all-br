@@ -245,9 +245,9 @@ rooms:
           - condition: '{arg} == "south" || {arg} == "s"'
             user: Door still locked behind you. They rarely magically unlock themselves. Today will be no different.
           - condition: '{arg} == "northeast" || {arg} == "ne" && items.walkietalkie.heldBy==nobody'
-            user: There is a walkie talkie on the floor in the corner.
+            user: There is a **walkie talkie** on the floor in the corner.
           - condition: '{arg} == "northeast" || {arg} == "ne" && items.walkietalkie.heldBy!=nobody'
-            user: There is NOT a walkie talkie on the floor in the corner.
+            user: There was a walkie talkie on the floor in the corner, but someone must be holding it.
           - condition: '{arg} == "northwest" || {arg} == "nw"'
             user: There is a red scrap of paper on the floor.
           - condition: '{arg} == "southeast" || {arg} == "se"'
