@@ -1169,7 +1169,7 @@ rooms:
               - user: You pick up a bat and try to swing it. It cracks in half. You get a splinter.
           - name: talk
             actions: 
-              - user: '"Who’s on first?" you ask. *Yeah, I've never heard that one before,* thinks the bat.'
+              - user: '"Who’s on first?" you ask. *Yeah, I’ve never heard that one before,* thinks the bat.'
 
       - name: yearbooks
         aliases:
