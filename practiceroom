@@ -1,24 +1,5 @@
 ##This is the room we'll show for practice in class. 
 
-##variables to edit for each class
-
-vars:
-    name: SHADOWMAN MIDDLE SCHOOL
-    friendname: GABRIELLA
-    subject: SCIENCE
-    townname: RALEIGH
-    adultname: JANE SMITH
-    adultname2: SALLY JONES
-    child-first-name: HANNAH
-    describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS.
-    flashlight-color: a TEAL
-    walkie-talkie: THE WALKIE TALKIE IS A BIG, BLACK BRICK WITH AN OBVIOUS SPEAKER ON THE FRONT AND A SIMPLE ON/OFF SWITCH ON TOP.
-    wall-things: SOMEONE HAS SCRAWLED "MR. JONES IS THE BEST MATH TEACHER EVER!" WHAT A KIND GRAFFITI ARTIST.
-    wall-things2: THERE'S A WORLD MAP POSTER THAT HAS THE USSR, AND HALF OF THE AFRICAN CONTINENT JUST SAYS "FRENCH WEST AFRICA." YOU REALIZE YOUR SCHOOL MIGHT HAVE BEEN AROUND LONGER THAN YOU THOUGHT.
-    floordescription: HOW IS THERE STICKY BUBBLEGUM ON THE FLOOR WHEN IT DOESN'T SEEM LIKE ANYONE'S BEEN DOWN HERE IN CENTURIES?
-    hospital-name: TUOMEY REGIONAL HOSPITAL
-    basketballs: A RUSTY SILVER RACK HOLDS HALF A DOZEN BASKETBALLS, NONE OF WHICH WILL BOUNCE. ONE IS JUST A FLAT ORANGE PANCAKE.
-    spiderdescription: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
 
 commanddescriptions:
  use: Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?
@@ -66,7 +47,7 @@ commands:
        -  condition: unmatched
           user: Why would you want to kick {arg}???
 
-## Pretend room. Just dropping it here to test
+## Pretend room for using in class
 rooms:
   -  name: WELCOME TO CO.LAB
      id: welcome
@@ -88,6 +69,9 @@ rooms:
                user: There is a green wall to the west.
             -  condition: '{arg}=="south" || {arg}=="s"'
                user: There is a yellow wall to the south.
+            -  condition: '{arg}=="northeast" || {arg}=="ne"'
+               user: This is one corner of the room. There's nothing here. But it's a nice corner, nonetheless.  
+               
        -  name: examine
           aliases:
             - look
@@ -95,7 +79,7 @@ rooms:
             -  condition: room.state.lightOn==false
                user: 'You walk into the room to join the Co.Lab class. But you’re the first one here, and it’s dark. Perhaps there’s a light **switch**?'
             -  condition: room.state.lightOn==true
-               user: The classroom is set up for you to learn about game development! You see **desks** with **computers** on them. 
+               user: The classroom is set up for you to learn about game development! You see **desks** with **computers** on them. Your friend **Andrea** has arrived.
 
      items:
        - name: Andrea
@@ -108,7 +92,32 @@ rooms:
                - user: '"Hey, I have a joke," Andrea says. "What did 0 say to 8?"'
                - user: '"Nice belt."'
            
-           
+       - name: switch
+         aliases:
+           - light switch
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: Looks like a pretty standard light switch. Try to /use it.
+           - name: use
+             actions:
+               - condition: room.state.lightOn==false
+                 user: 'CLICK. The lights are on. Now if we /look again, we’ll see different things. Because... well, because the lights are on, and we can’t see in the dark.'
+                 do:
+                  - set room.state.lightOn=true
+               - condition: room.state.lightOn==true
+                 user: OK, now the lights are off.
+                 do:
+                  - set room.state.lightOn=false
+           - name: talk
+             actions: 
+               - user: It only know how to say "click." And only you can make it do that. 
+           - name: kick
+             actions: 
+               - user: You try, but you didn’t stretch first, and now you have a charlie horse. 
+
        - name: computer
          aliases:
             - computers
@@ -126,6 +135,14 @@ rooms:
               actions:
                - user: 'You log into the computer and develop the greatest video game the world has ever seen. Congratulations!'
 
+       - name: soccer ball
+         aliases:
+            - ball
+         commands:
+            - name: kick
+              actions: 
+                - user: You kick the soccer ball across the room and break a lamp. Oops.
+
        - name: desk
          aliases:
             - desks
@@ -141,7 +158,13 @@ rooms:
                - user: Oh no! If you pick up the desk, the computer will fall off! Best not to do that.
             - name: use
               actions:
-               - user: Wouldn't it be better to /use the **computer** on the desk?
+               - user: 'Wouldn’t it be better to /use the **computer** on the desk?'
+       
+       - name: door
+         commands: 
+           - name: use
+             actions: 
+               - user: Which door? There is a **north door** and an **east door**. I recommend the east door. 
                
        - name: east door
          commands:
@@ -162,3 +185,47 @@ rooms:
            - name: use
              actions:
                 - user: 'You can’t use the door until you unlock it. Perhaps you shuld take a look at the **keypad** next to it.'
+
+       -  name: radio
+          state:
+            hidden: true
+            heldBy: nobody
+          commands:
+              - name: get
+                actions:
+                  - condition: 'items.radio.heldBy==nobody'
+                    do:
+                     - set items.radio.heldBy={id}
+                    user: You pick up the radio.
+                    room: '{name} picked up the radio.'
+              - name: drop
+                actions:
+                  - condition: 'items.radio.heldBy=={id}'
+                    do:
+                      - set items.radio.heldBy=nobody
+                    user: You put the radio back down on the floor.
+              - name: use
+                actions:
+                  - condition: 'items.radio.heldBy!={id}'
+                    user: You can't use the radio, because you're not holding it. Try "/get radio" first.
+                  - condition: 'items.radio.heldBy=={id}'
+                    user: You turn the radio on. It starts playing your favorite song.
+                  - condition: 'items.radio.heldBy=={id}'
+                    user: The radio is already on. To change the station, enter "/use radio" followed by station number. I suggest 91.5.
+                  - condition: unmatched
+                    user: Hmmm... there doesn't seem to be anything on that station but static.
+                  - condition: 'items.radio.heldBy=={id} && {arg}=="91.5"'
+                    user: You tune the radio to 91.5. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
+
+
+       - name: keypad
+         commands:
+             - name: examine
+               actions:
+                 - user: The keypad has all the numbers on it, 0-9. Do you know the code to unlock the door? 
+             - name: use
+               actions:
+                 - condition: unmatched
+                   user: Nope, guess again!
+                 - condition: '{arg}=="1234"'
+                   user: You carefully enter "1234" on the keypad. \n\n\n\nConfetti falls from the ceiling. You have won the game!
