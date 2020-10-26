@@ -1856,7 +1856,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user: There are what seem to be outlines of game pieces on the wall. You see a pawn and a knight.
+                  user: There are what seem to be outlines of game pieces on the wall. You see a **pawn** and a **knight**.
 
        - name: east wall
          commands:
@@ -1865,7 +1865,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user:  There are what seem to be outlines of game pieces on the wall. You see a pair of dice showing two sixes.
+                  user:  There are what seem to be outlines of game pieces on the wall. You see a pair of **dice** showing two sixes.
 
        - name: south wall
          commands:
@@ -1874,7 +1874,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user:  There are what seem to be outlines of game pieces on the wall. You see a rook and a bishop.
+                  user:  There are what seem to be outlines of game pieces on the wall. You see a **rook** and a **bishop**.
 
        - name: west wall
          commands:
@@ -1883,7 +1883,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user:  There are what seem to be outlines of game pieces on the wall. There's a stack of circles that you decide represent marbles.
+                  user:  There are what seem to be outlines of game pieces on the wall. There's a stack of circles that you decide represent **marbles**.
 
        - name: northeast wall
          aliases:
@@ -1894,7 +1894,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user:  There are what seem to be outlines of game pieces on the wall. You see king and queen chess pieces.
+                  user:  There are what seem to be outlines of game pieces on the wall. You see **king** and **queen** chess pieces.
 
        - name: southwest wall
          aliases:
@@ -1905,7 +1905,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user: There are what seem to be outlines of a hand of cards on the wall. They're the A, K, Q, J, and 10 of diamonds.
+                  user: There are what seem to be outlines of a hand of **cards** on the wall. They're the A, K, Q, J, and 10 of diamonds.
 
        - name: southeast wall
          aliases:
@@ -1916,7 +1916,7 @@ rooms:
                - look
              actions:
                -  condition: room.state.lightOn==false
-                  user: There are what seem to be outlines of a two dominoes on the wall. One shows a pair of 1s and the other a pair of 6s.
+                  user: There are what seem to be outlines of a two **dominoes** on the wall. One shows a pair of 1s and the other a pair of 6s.
 
        - name: northwest wall
          aliases:
@@ -2314,6 +2314,7 @@ rooms:
 
     state:
          lightOn: false
+         napkinSeen: false
          
     exits:
      S: A wide open door with a sign saying "Cake this way". Except as game fans know, the cake is a lie. Just like this door. There is no exit in this direction.
@@ -2512,11 +2513,13 @@ rooms:
              aliases:
                - look
              actions:
-               - user: It says':' \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!"
+               - user: It says':' \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!" \n\n\n\nYou should tell the others what you found. Who can solve the puzzle?
            - name: use
              actions:
                - user: Do you need to blow your nose? If you use this napkin, no one else will be able to see the puzzle! Or at least they won’t want to…
-
+                 do:
+                   - set room.state.napkinFound==true
+                   
        - name: paintings
          aliases:
            - painting
@@ -2648,7 +2651,10 @@ rooms:
                - user:  'One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting: \n\nFIN\n\nAugustus Brooke-Winslow\n\nc. 1900\n\noil on canvas'
            - name: get
              actions:
-               - user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric **keypad** on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
+               - condition: room.state.napkinFound==false
+                 user: I feel like you should look around the room a little more before you just start yanking paintings off the wall.
+               - condition: room.state.napkinFound==true
+                 user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric **keypad** on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
                  room: '{name} removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
 
        - name: painting 7
