@@ -2277,14 +2277,15 @@ rooms:
                 actions:
                   - condition: 'items.phone.heldBy!={id}'
                     user: You can't use the phone, because you're not holding it. Try "/get phone" first.
-                  - condition: 'items.phone.heldBy=={id}'
+                  - condition: 'items.phone.heldBy=={id} && {arg}==""'
                     user: You hold your breath and press the power button. After what seems like the longest time in the world (which was probably less than two seconds), the screen lights up. It says, "DIAL STAR"
-                  - condition: 'items.phone.heldBy=={id}'
+                  - condition: 'items.phone.heldBy=={id} && {arg}==""'
                     user: The phone is already on. To dial a number, enter "/use phone" followed by the digits you would like to press.
-                    user: Your call cannot be completed as dialed. Nothing happens.
                   - condition: unmatched
                     user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.
-                  - condition: '{arg}=="*"'
+                  - condition: unmatched
+                    user: Your call cannot be completed as dialed. Nothing happens.
+                  - condition: 'items.phone.heldBy=={id} && {arg}=="*"'
                     user: That is a star, but I’m pretty sure the message said, "DIAL STAR"
                   - condition: 'items.phone.heldBy=={id} && {arg}=="7827"'
                     user: As soon as you dial the number, the tunnel shakes, and the north wall cracks. Some of the cracks appear to be in a hexagon shape, and they’re glowing. \n\n\n\n{friendname} touches the glowing hexagon with one finger and quickly draws her hand back. "It’s hot," she says. "But it looks like a... door handle?
