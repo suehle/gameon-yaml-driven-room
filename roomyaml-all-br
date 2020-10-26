@@ -2282,7 +2282,7 @@ rooms:
                   - condition: 'items.phone.heldBy=={id} && {arg}==""'
                     user: The phone is already on. To dial a number, enter "/use phone" followed by the digits you would like to press.
                   - condition: unmatched
-                    user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word.
+                    user: Have you ever noticed that the numbers on your phone keypad have letters associated with them? You can’t really dial a word. Be sure to use numbers.
                   - condition: unmatched
                     user: Your call cannot be completed as dialed. Nothing happens.
                   - condition: 'items.phone.heldBy=={id} && {arg}=="*"'
