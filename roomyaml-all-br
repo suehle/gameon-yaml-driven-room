@@ -632,7 +632,7 @@ rooms:
                 - user: 'This is not a new-fangled smart keypad. You’ll have to /use it the old-fashioned way.'
             - name: examine
               actions:
-                - user: 'The keypad beside the door has buttons with what seem to be an assortment of random words: \nRUN\nTUNNEL\nGO\nCHALKBOARD\nCEILING\nBASEMENT\nTO\nESCAPE\nCLASSROOM\nTHROUGH\nROOF\nUNDER\n\nA\nTHE\nFILE CABINET\nVAULT'
+                - user: 'The keypad beside the door has 12 buttons with what seem to be an assortment of random words: \nRUN\nTUNNEL\nGO\nCHALKBOARD\nCEILING\nBASEMENT\nTO\nESCAPE\nCLASSROOM\nTHROUGH\nROOF\nUNDER\n\nA\nTHE\nFILE CABINET\nVAULT'
             - name: use
               actions:
                 - condition: '{arg}==""'
@@ -653,6 +653,7 @@ rooms:
     state:
       lightOn: true
       wallLit: false
+      projectorOn: false
     exits:
      S: The door you came in through. Much like the doors in the first two rooms, it has now locked behind you. It is really very very shut.
      N: An even heavier looking door.
@@ -939,7 +940,10 @@ rooms:
             aliases:
               - look
             actions:
-              - user: 'The projector has a power switch on it. It’s plugged in, but turned off. Try to /use it.'
+              - condition: room.state.wallLit==false
+                user: 'The projector has a power switch on it. It’s plugged in, but turned off. Try to /use it.'
+              - condition: room.state.wallLit==true
+              - user: 'The projector has been turned on. You should solve the puzzle it illuminated.'              
                   
       - name: keypad
         state:
