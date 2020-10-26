@@ -2768,7 +2768,7 @@ rooms:
             -  condition: room.state.lightOn==false
                user: 'You walk into the room to join the Co.Lab class. But you’re the first one here, and it’s dark. Perhaps there’s a light **switch**?'
             -  condition: room.state.lightOn==true
-               user: The classroom is set up for you to learn about game development! You see **desks** with **computers** on them. 
+               user: The classroom is set up for you to learn about game development! You see **desks** with **computers** on them. Your friend **Andrea** has arrived.
 
      items:
        - name: Andrea
@@ -2851,7 +2851,7 @@ rooms:
        
        - name: door
          commands: 
-           - name: user
+           - name: use
              actions: 
                - user: Which door? There is a **north door** and an **east door**. I recommend the east door. 
                
@@ -2900,18 +2900,18 @@ rooms:
                   - condition: 'items.radio.heldBy=={id}'
                     user: You turn the radio on. It starts playing your favorite song.
                   - condition: 'items.radio.heldBy=={id}'
-                    user: The radio is already on. To change the station, enter "/use radio" followed by station number.
+                    user: The radio is already on. To change the station, enter "/use radio" followed by station number. I suggest 91.5.
                   - condition: unmatched
                     user: Hmmm... there doesn't seem to be anything on that station but static.
                   - condition: 'items.radio.heldBy=={id} && {arg}=="91.5"'
-                    user: You tune the radio to 91.5 and listen to the news.
+                    user: You tune the radio to 91.5. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
 
 
        - name: keypad
          commands:
              - name: examine
                actions:
-                 - user: The real game would never, ever tell you this, but the secret code for this keypad is 1234. 
+                 - user: The keypad has all the numbers on it, 0-9. Do you know the code to unlock the door? 
              - name: use
                actions:
                  - condition: unmatched
