@@ -2877,7 +2877,6 @@ rooms:
 
        -  name: radio
           state:
-            hidden: true
             heldBy: nobody
           commands:
               - name: get
@@ -2899,7 +2898,7 @@ rooms:
                     user: You can't use the radio, because you're not holding it. Try "/get radio" first.
                   - condition: 'items.radio.heldBy=={id}'
                     user: You turn the radio on. It starts playing your favorite song. To change the station, enter "/use radio" followed by the station id. I suggest WUNC.
-                  - condition: 'items.radio.heldBy=={id} && {arg}=="wunc"'
+                  - condition: '{arg}=="wunc" && items.radio.heldBy=={id}'
                     user: You tune the radio to WUNC. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
 
 
