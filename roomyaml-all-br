@@ -2766,7 +2766,7 @@ rooms:
             - look
           actions:
             -  condition: room.state.lightOn==false
-               user: 'You walk into the room to join the Red Hat Co.Lab class. But you’re the first one here, and it’s dark. Perhaps there’s a light **switch**?'
+               user: 'You walk into the room to join the Co.Lab class. But you’re the first one here, and it’s dark. Perhaps there’s a light **switch**?'
             -  condition: room.state.lightOn==true
                user: The classroom is set up for you to learn about game development! You see **desks** with **computers** on them. Your friend **Andrea** has arrived.
 
@@ -2897,8 +2897,8 @@ rooms:
                   - condition: 'items.radio.heldBy!={id}'
                     user: You can't use the radio, because you're not holding it. Try "/get radio" first.
                   - condition: 'items.radio.heldBy=={id}'
-                    user: You turn the radio on. It starts playing your favorite song. To change the station, enter "/use radio" followed by the station id. I suggest WNYC.
-                  - condition: '{arg}=="wnyc"'
+                    user: You turn the radio on. It starts playing your favorite song. To change the station, enter "/use radio" followed by the station id. I suggest WUNC.
+                  - condition: '{arg}=="WUNC"'
                     user: You tune the radio to WUNC. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
 
 
