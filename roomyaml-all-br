@@ -2398,6 +2398,12 @@ rooms:
 
        - name: spider
          commands:
+           - name: talk
+             actions:
+               - user: You realize you do not have time to wait for the spider to write a message in her web, so you decide to leave her be. 
+           - name: kick
+             actions: 
+               - user: That is not going to be any more successful in here than a real-life attempt to kick a skittering spider.
            - name: examine
              aliases:
                - look
@@ -2409,6 +2415,12 @@ rooms:
 
        - name: chandelier
          commands:
+           - name: kick
+             actions: 
+               - user: If you can levitate, that is something that perhaps you could have shared earlier. Do you have any other superpowers that could be useful here?
+           - name: use
+             actions: 
+               - user: It's already on. Not much else to do with it. 
            - name: examine
              aliases:
                - look
@@ -2422,6 +2434,12 @@ rooms:
          aliases:
            - chair
          commands:
+           - name: kick
+             actions: 
+               - user: Did you not see they are made of IRON? **OW.**
+           - name: get
+             actions:
+               - user: You decide the chairs are much too heavy to bother with.
            - name: examine
              aliases:
                - look
@@ -2433,11 +2451,14 @@ rooms:
 
        - name: flowers
          commands:
+           - name: kick
+             actions: 
+               - user: You kick the dead flowers. Petals scatter about. 
            - name: examine
              aliases:
                - look
              actions:
-               - user: You’re pretty sure they used to be roses? Whatever they are, they’re dead now.
+               - user: 'You’re pretty sure they used to be roses? Whatever they are, they’re dead now.\n\n@)--,--. @)--,--.'
            - name: get
              actions:
                - user: You gather some dead roses from the floor.
