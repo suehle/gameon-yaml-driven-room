@@ -2309,7 +2309,7 @@ rooms:
 
    ## Room 7 -- THE END
 
-  - name: The Office
+  - name: THE OFFICE
     id: office
 
     state:
