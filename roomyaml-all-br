@@ -2514,11 +2514,12 @@ rooms:
                - look
              actions:
                - user: It says':' \n\n\n\nNME     NME    NME\n\nNME    I AM    NME\n\nNME     NME    NME\n\n\n\n"Oh, we did these in English class," {friendname} says. "It’s a word puzzle where there's a phrase or a sentence that we have to figure out. My favorite one said DO12"OR, so it was 'foot in the door,' get it?" {friendname} laughs, then adds, "This must be our final clue!" \n\n\n\nYou should tell the others what you found. Who can solve the puzzle?
+                 do:
+                   - set room.state.napkinSeen=true
            - name: use
              actions:
                - user: Do you need to blow your nose? If you use this napkin, no one else will be able to see the puzzle! Or at least they won’t want to…
-                 do:
-                   - set room.state.napkinSeen=true
+
                    
        - name: paintings
          aliases:
