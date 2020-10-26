@@ -2735,3 +2735,100 @@ rooms:
                  - condition: '{arg}=="5115"'
                    user: You carefully enter "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {adultname2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.
                    room: '{name} enters "5115" on the keypad. \n\n\n\nChimes sound. The door swings open. \n\n\n\nInside the hidden vault are boxes overflowing with silver coins. A pile of gold bricks five feet high lines the back wall. The floor is littered with stacks of hundred dollar bills. And there’s a door leading out the back of the school.\n\n\n\nA note stuck to the wall says, "Take some; leave some. This belongs to all of us."\n\n\n\nYou realize that all those years ago, those five kids faced the same problem {friendname} is, and you know what you must do. The next week, a new article appears in the {townname} Times. \n\n\n\nANONYMOUS DONATION REOPENS COMMUNITY HOSPITAL\n\n\n\n{townname}--After the gift of a large anonymous donation, the community hospital reopened on Monday. It was an emotional event, and many people watched the mayor cut the rubbon with tears in their eyes. One particularly tearful woman, {adultname2}, the mother of Michael (12) and {friendname} (14), was donning her white doctor’s coat for the first time in almost six months. "We were going to have to leave {townname}," she said. "But now, as you can see…" Her face was proud as she gestured to the hospital doors opening behind her. "Lots of people have their jobs back. I’m not the only one."\n\n\n\n\n\nCongratulations on breaking the code! By collaborating to solve the puzzles, you have saved the town hospital, ensured your friend doesn’t have to move away, and safely found your way out of the basement.'
+
+## Pretend room. Just dropping it here to test
+rooms:
+  -  name: WELCOME TO CO.LAB
+     id: welcome
+     state:
+       lightOn: false
+     exits:
+       S: ""
+       N: ""
+       E: There is a door here.
+       W: ""
+     commands:
+       -  name: go
+          actions:
+            -  condition: '{arg}=="north" || {arg}=="n"'
+               user: There is a blue wall to the north. A **soccer ball** is lying on the floor. 
+            -  condition: '{arg}=="east" || {arg}=="e"'
+               user: There is a door on the east wall. A **radio** is sitting on the floor.
+            -  condition: '{arg}=="west" || {arg}=="w"'
+               user: There is a green wall to the west.
+            -  condition: '{arg}=="south" || {arg}=="s"'
+               user: There is a yellow wall to the south.
+       -  name: examine
+          aliases:
+            - look
+          actions:
+            -  condition: room.state.lightOn==false
+               user: 'You walk into the room to join the Co.Lab class. But you’re the first one here, and it’s dark. Perhaps there’s a light **switch**?'
+            -  condition: room.state.lightOn==true
+               user: The classroom is set up for you to learn about game development! You see **desks** with **computers** on them. 
+
+     items:
+       - name: Andrea
+         commands:
+           - name: examine
+             actions:
+               - user: 'Andrea is your friend. She will be your partner in the class today. You could /talk to her.'
+           - name: talk
+             actions:
+               - user: '"Hey, I have a joke," Andrea says. "What did 0 say to 8?"'
+               - user: '"Nice belt."'
+           
+           
+       - name: computer
+         aliases:
+            - computers
+         commands:
+            - name: examine
+              actions:
+                - user: 'There is a powrful computer on the desk waiting for you to create your video game.'
+            - name: talk
+              actions:
+               - user: 'You pick up the mouse and speak into it like a microphone. "Hello, computer!" The computer does not respond.'
+            - name: get
+              actions: 
+               - user: 'You pick up the computer, but then you realize it’s plugged into the wall nearby and better off left on the desk. You put it back down.'
+            - name: use
+              actions:
+               - user: 'You log into the computer and develop the greatest video game the world has ever seen. Congratulations!'
+
+       - name: desk
+         aliases:
+            - desks
+         commands:
+            - name: examine
+              actions:
+                - user: 'It looks like a pretty ordinary student desk. The **computer** on it is much more interesting.'
+            - name: talk
+              actions:
+               - user: The desk remains silent.
+            - name: get
+              actions: 
+               - user: Oh no! If you pick up the desk, the computer will fall off! Best not to do that.
+            - name: use
+              actions:
+               - user: 'Wouldn’t it be better to /use the **computer** on the desk?'
+               
+       - name: east door
+         commands:
+           - name: get
+             actions: 
+               - user: If you wanted to take this door home, you probably should have brought a screwdriver.
+           - name: talk
+             actions:
+               - user: The door listens thoughtfully to your words; however, it remains very, very shut.
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: 'Pretty standard, unlocked school door. You can handle it. Ha. "Handle." I made a door joke.'
+           - name: kick
+             actions:
+               - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
+           - name: use
+             actions:
+                - user: 'You can’t use the door until you unlock it. Perhaps you shuld take a look at the **keypad** next to it.'
