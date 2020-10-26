@@ -653,7 +653,6 @@ rooms:
     state:
       lightOn: true
       wallLit: false
-      projectorOn: false
     exits:
      S: The door you came in through. Much like the doors in the first two rooms, it has now locked behind you. It is really very very shut.
      N: An even heavier looking door.
@@ -929,8 +928,8 @@ rooms:
               - user: Oh, you don't want to do that. If it rolls away, you might not find the secret message you're looking for. HINT HINT. 
           - name: use
             actions: 
-               - user: 'You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE: The letter that lights up = 1'
-                 room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE... The letter that lights up = 1'
+               - user: 'You press the power switch on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN TO GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE: The letter that lights up = 1'
+                 room: '{name} turns on the projector, and it lights up. The letter A now shines in the message on the wall. \n\n\n\nYOU HAVE TO GO IN TO GET OUT. \n\n\n\nUnder it, the projector shines a series of numbers and a message from the transparency that was left on it. \n\n\n\n20 9 20 1 14 19&nbsp;&nbsp;&nbsp;20 23 15&nbsp;&nbsp;&nbsp;23 9 14 19\n\nCLUE... The letter that lights up = 1'
                  do:                   
                   - set room.state.wallLit=true
           - name: talk
@@ -1194,7 +1193,11 @@ rooms:
         aliases:
           - yearbook
           - book
+          - books
         commands:
+          - name: use
+            actions: 
+              - user: Just try to /examine them. You do *not* want to carry these around.
           - name: get
             actions:
               - user: You don't have to get the books. They're heavy. But it would help to /examine a few.
@@ -1259,7 +1262,7 @@ rooms:
               - user: 'You completely miss the cord and kick the air.'              
           - name: use
             actions:
-              - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old ticket stub is sticking out from under the bottom edge. A spider has made a comfortable home in the bottom left corner.
+              - user: You plug in the scoreboard and discover most of the lights still work. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs. Half of an old **ticket** stub is sticking out from under the bottom edge. A **spider** has made a comfortable home in the bottom left corner.
                 room: '{name} plugged in the scoreboard on the north wall, and it lights up. It says {schoolname} TITANS. The score is 47-3 Titans with two strikes and two outs.'
 
       - name: ticket
@@ -1294,6 +1297,15 @@ rooms:
 
       - name: spider
         commands:
+          - name: talk
+            actions:
+              - user: You realize you don't have time to wait for her to write answers in her web, so you move on to another idea. 
+          - name: use
+            actions:
+              - user: The spider considers your request and shakes her head no. 
+          - name: kick
+            actions:
+              - user: That goes about as well as you would expect.
           - name: examine
             actions:
               - user: '{spiderdescription}'
@@ -1330,6 +1342,12 @@ rooms:
             
       - name: globe
         commands:
+          - name: use
+            actions: 
+              - user: Try to /examine it instead. 
+          - name: kick
+            actions: 
+              - user: This is a globe, not a kickball. 
           - name: examine
             actions:
               - condition: room.state.foundDateOne==false && room.state.foundDateTwo==false
@@ -1478,7 +1496,7 @@ rooms:
         commands:
           - name: examine
             actions:
-              - user: You take the top off the skeleton’s head and find the plastic **brain** is an unnaturally bright shade of pink. Along the line between the right and left hemispheres, there’s a message. On one side, "What makes more as you take them." On the other, "Follow." What might that mean? Don’t forget to use the tools you have.
+              - user: 'You take the top off the skeleton’s head and find the plastic brain is an unnaturally bright shade of pink. Along the line between the right and left hemispheres, there’s a message.\n\n\n\nOn one side, "What makes more as you take them." On the other, "Follow."\n\n\n\nWhat might that mean?'
           - name: get
             actions: 
               - user: No need to get the brain. You already have one. 
@@ -1567,8 +1585,10 @@ rooms:
               - condition: room.state.foundFootprints==false
                 user: 'You glance over at the north wall, and you think you see a hint of something there, but... there’s more to do in this room before you can take a closer look.'
               - condition: room.state.foundFootprints==true
-                user: 'You find another news article and read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n[{townname}]--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
+                user: 'You follow the footprints across the floor to the north wall and find another news article. You read it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n[{townname}]--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'
                 room: '{name} examines the north wall, finds another news article, and reads it aloud as a piece of the wall slides aside. A hidden doorway! \n\n\n\n\n\nMISSING TEENS FOUND\n\nApril 22, 1979\n\n\n\n{townname}--After 36 hours of frantic searching, the five missing teens were found walking home on the road from {schoolname}. "We were locked in," said {child-first-name}, an eighth grader at {schoolname}. "We only got out once we found the riddle that led to the tunnel. It was really well-hidden, in the darkest corner of the basement, which is why it took us almost a whole day to find it. We could only find it by turning off the light and listening for a beeping sound. From there, it was easy. Once we got to the vault, there was an exit out of the school.\n\n\n\nSome people believe it is all an elaborate hoax to get out of final exams. But some residents of {townname} believe the teens. They want to try to find the vault again, but the {townname} police claim the vault is only a rumor. Even so, they have locked up all entrances to the school’s basement, claiming potentially fatal danger lies in the depths below. \n\n\n\nPeople are asking about what was in the secret vault, but the five teens are being quiet about it. However, there was a large, anonymous donation made to {townname} to build a new hospital. "The community needs it," the Mayor said. "It will provide hundreds of well-paid jobs, as well as positively influence the health of our community. We are thankful to whomever left it to us." Many {townname} residents suspect the teens found the rumored vault and donated its treasure, but mum’s the word. For now.'        
+                do:
+                  - teleportAll riddle
           - name: kick
             actions:
               - user: 'The wall is firm, as walls generally are. It is not affected by your foot.'
