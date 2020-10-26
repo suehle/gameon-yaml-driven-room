@@ -136,6 +136,8 @@ rooms:
                - user: You pick up a science book and spend some time studying the periodic table. You realize that the letters J and Q don't appear at all. 
                - user: You pick up an English textbook and consider a career that involves writing interactive fiction. 
                - user: You pick up a history book and look for a story about kids trapped in their school basement. Alas, the book covers only the highlights, and no such story is one of them. 
+            - name: use
+              actions:
                - user: 'You pick up a French textbook and memorize the phrase, "J’aimerais m’échapper de ce sous-sol."'
                - user: You pick up a Spanish textbook and practice saying, "¿Alguien ha encontrado una puerta?"
                - user: You pick up a Scots Gaelic textbook and practice saying, "Is toigh leam breacan."
@@ -401,15 +403,20 @@ rooms:
                 user: '{walkie-talkie} It has a red indicator light on top that is currently not glowing with a switch beside it. Maybe you should /use it.'
                 room: '{name} found a walkie talkie on the floor and seems to be staring at it.'
               - condition: items.walkietalkie.isOn==true
-                user: The red light is glowing, and the walkie talkie starts is a series of short and long tones. It pauses, then repeats the series.\n\n —   — — —   ⏺⏺   ⏺
+                user: 'The red light is glowing, and the walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series.\n\n —&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺'
                 room: The walkie talkie is beeping a series of short and long tones. It pauses, then repeats the series.\n\n —&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺
           - name: get
             actions:
-              - condition: items.walkietalkie.heldBy==nobody
+              - condition: items.walkietalkie.heldBy==nobody && items.walkietalkie.isOn==false
                 do:
                   - set items.walkietalkie.heldBy={id}
                 user: You pick up the walkie talkie. It is not turned on.
                 room: '{name} picked up a walkie talkie.'
+              - condition: items.walkietalkie.heldBy==nobody && items.walkietalkie.isOn==true
+                do:
+                  - set items.walkietalkie.heldBy={id}
+                user: 'You pick up the walkie talkie. It is on and repeating the series. \n\n —&nbsp;&nbsp;&nbsp;— — —&nbsp;&nbsp;&nbsp;⏺⏺&nbsp;&nbsp;&nbsp;⏺'
+                room: '{name} picked up a walkie talkie.'                
               - condition: items.walkietalkie.heldBy=={id}
                 user: "You can't get the walkietalkie when it's already in your hands!!"
               - condition: items.walkietalkie.heldBy!={id} && items.walkietalkie.heldBy!=nobody
@@ -468,13 +475,13 @@ rooms:
           aliases: 
           - look
           actions:
-             - user: There is a small red scrap of paper on the floor. If you pick it up, you can read it.
+             - user: There is a small red scrap of paper on the floor. Several of them, in fact, all the same. If you pick one up, you can read it.
         - name: get
           actions:
            - condition: items.redscrap.heldBy==nobody
              do:
                - 'set items.redscrap.heldBy={id}'
-             user: The paper says "LEGEND" at the top. Under that it says':'\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop red scrap**
+             user: 'The paper says "LEGEND" at the top. Under that it says:\n\n— ⏺ ⏺ — RUN\n\n— TUNNEL\n\n— ⏺ GO\n\n⏺ — CHALKBOARD\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop red scrap**.'
         - name: drop
           actions:
             - condition: items.redscrap.heldBy=={id}
@@ -485,6 +492,8 @@ rooms:
           actions:
             - condition: items.redscrap.heldBy!={id}
               user: You can't use that, because you are not holding it.
+            - condition: items.greenscrap.heldBy=={id}
+              user: Not much to do with it, as you've already read it. 
 
       - name: bluescrap
         aliases:
@@ -498,13 +507,13 @@ rooms:
         commands:
             - name: examine
               actions:
-                - user: There is a small blue scrap of paper on the floor. If you pick it up, you can read it.
+                - user: There is a small blue scrap of paper on the floor. Several of them, in fact, all the same. If you pick one up, you can read it.
             - name: get
               actions:
                 - condition: items.bluescrap.heldBy==nobody
                   do:
                     - set items.bluescrap.heldBy={id}
-                  user: It says':'\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop blue scrap**
+                  user: 'It says:\n\n⏺⏺ — CEILING\n\n⏺ BASEMENT\n\n— — ⏺TO\n\n— ⏺ — ⏺ESCAPE\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop blue scrap**.'
             - name: drop
               actions:
                 - condition: items.bluescrap.heldBy=={id}
@@ -515,6 +524,8 @@ rooms:
               actions:
                 - condition: items.bluescrap.heldBy!={id}
                   user: You can't use that, because you are not holding it.
+                - condition: items.greenscrap.heldBy=={id}
+                  user: Not much to do with it, as you've already read it.                   
 
       - name: yellowscrap
         aliases:
@@ -528,13 +539,13 @@ rooms:
         commands:
             - name: examine
               actions:
-                - user: There is a small yellow scrap of paper on the floor. If you pick it up, you can read it.
+                - user: There is a small yellow scrap of paper on the floor. Several of them, in fact, all the same. If you pick one up, you can read it.
             - name: get
               actions:
                 - condition: items.yellowscrap.heldBy==nobody
                   do:
                     - set items.yellowscrap.heldBy={id}
-                  user: It says ':'\n\n⏺ — ⏺ — CLASSROOM\n\n— — THROUGH\n\n— ⏺ — ROOF\n\n— — — UNDER\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop yelllow scrap**
+                  user: 'It says :\n\n⏺ — ⏺ — CLASSROOM\n\n— — THROUGH\n\n— ⏺ — ROOF\n\n— — — UNDER\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop yelllow scrap**.'
             - name: drop
               actions:
                 - condition: items.yellowscrap.heldBy=={id}
@@ -545,6 +556,8 @@ rooms:
               actions:
                 - condition: items.yellowscrap.heldBy!={id}
                   user: You can't use that, because you are not holding it.
+                - condition: items.greenscrap.heldBy=={id}
+                  user: Not much to do with it, as you've already read it.                   
 
       - name: greenscrap
         aliases:
@@ -558,13 +571,13 @@ rooms:
         commands:
             - name: examine
               actions:
-                - user: There is a small green scrap of paper on the floor. If you pick it up, you can read it.
+                - user: There is a small green scrap of paper on the floor. Several of them, in fact, all the same. If you pick one up, you can read it.
             - name: get
               actions:
                 - condition: items.greenscrap.heldBy==nobody
                   do:
                     - set items.greenscrap.heldBy={id}
-                  user: It says':'\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop green scrap**
+                  user: 'It says:\n\n⏺ ⏺ ⏺ A\n\n⏺ ⏺ THE\n\n⏺ ⏺ ⏺ ⏺ FILE CABINET\n\n— — — — VAULT\n\n\n\nIf you would like for someone else to be able to pick this up and read it, **/drop green scrap**.'
             - name: drop
               actions:
                 - condition: items.greenscrap.heldBy=={id}
@@ -575,6 +588,8 @@ rooms:
               actions:
                 - condition: items.greenscrap.heldBy!={id}
                   user: You can't use that, because you are not holding it.
+                - condition: items.greenscrap.heldBy=={id}
+                  user: Not much to do with it, as you've already read it.                   
              
              
       - name: door
@@ -617,7 +632,7 @@ rooms:
                 - user: 'This is not a new-fangled smart keypad. You’ll have to /use it the old-fashioned way.'
             - name: examine
               actions:
-                - user: The keypad beside the door has buttons with what seem to be an assortment of random words':' \n\nRUN\n\nTUNNEL\n\nGO\n\nCHALKBOARD\n\nCEILING\n\nBASEMENT\n\nTO\n\nESCAPE\n\nCLASSROOM\n\nTHROUGH\n\nROOF\n\nUNDER\n\nA\n\nTHE\n\nFILE CABINET\n\nVAULT
+                - user: 'The keypad beside the door has buttons with what seem to be an assortment of random words: \nRUN\nTUNNEL\nGO\nCHALKBOARD\nCEILING\nBASEMENT\nTO\nESCAPE\nCLASSROOM\nTHROUGH\nROOF\nUNDER\n\nA\nTHE\nFILE CABINET\nVAULT'
             - name: use
               actions:
                 - condition: '{arg}==""'
