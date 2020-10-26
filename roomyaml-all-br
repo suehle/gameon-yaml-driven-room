@@ -2648,12 +2648,12 @@ rooms:
              aliases:
                - look
              actions:
-               - user:  'One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting: \n\nFIN\n\nAugustus Brooke-Winslow\n\nc. 1900\n\noil on canvas'
+               - user:  'One soldier is surrounded by many other soldiers, all holding the tips of their swords to his throat. You read the card beside the painting: \nFIN\nAugustus Brooke-Winslow\nc. 1900\noil on canvas'
            - name: get
              actions:
-               - condition: room.state.napkinFound==false
+               - condition: room.state.napkinFound=false
                  user: I feel like you should look around the room a little more before you just start yanking paintings off the wall.
-               - condition: room.state.napkinFound==true
+               - condition: room.state.napkinFound=true
                  user: You see the man surrounded by enemies and remove the painting from the wall. Behind it is a numeric **keypad** on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"
                  room: '{name} removed the painting of the soldier surrounded by enemies. Behind it is a numeric keypad on a small door with a riddle taped to it. It says, "The ages of a mother and her daughter add up to 66. The mother’s age is the daughter’s age reversed. How old are they?"'
 
