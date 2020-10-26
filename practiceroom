@@ -1,0 +1,164 @@
+##This is the room we'll show for practice in class. 
+
+##variables to edit for each class
+
+vars:
+    name: SHADOWMAN MIDDLE SCHOOL
+    friendname: GABRIELLA
+    subject: SCIENCE
+    townname: RALEIGH
+    adultname: JANE SMITH
+    adultname2: SALLY JONES
+    child-first-name: HANNAH
+    describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS.
+    flashlight-color: a TEAL
+    walkie-talkie: THE WALKIE TALKIE IS A BIG, BLACK BRICK WITH AN OBVIOUS SPEAKER ON THE FRONT AND A SIMPLE ON/OFF SWITCH ON TOP.
+    wall-things: SOMEONE HAS SCRAWLED "MR. JONES IS THE BEST MATH TEACHER EVER!" WHAT A KIND GRAFFITI ARTIST.
+    wall-things2: THERE'S A WORLD MAP POSTER THAT HAS THE USSR, AND HALF OF THE AFRICAN CONTINENT JUST SAYS "FRENCH WEST AFRICA." YOU REALIZE YOUR SCHOOL MIGHT HAVE BEEN AROUND LONGER THAN YOU THOUGHT.
+    floordescription: HOW IS THERE STICKY BUBBLEGUM ON THE FLOOR WHEN IT DOESN'T SEEM LIKE ANYONE'S BEEN DOWN HERE IN CENTURIES?
+    hospital-name: TUOMEY REGIONAL HOSPITAL
+    basketballs: A RUSTY SILVER RACK HOLDS HALF A DOZEN BASKETBALLS, NONE OF WHICH WILL BOUNCE. ONE IS JUST A FLAT ORANGE PANCAKE.
+    spiderdescription: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
+
+commanddescriptions:
+ use: Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?
+ talk: See what {friendname} is thinking right now. You could talk to a wall, but they seldom have much to say in response. To talk to other people playing with you, simply type without a / in front. Everyone in the room will see your message.
+ get: Pick up an object. You’ll have to /get cookie before you can /use cookie.
+ drop: Drop an item you have picked up, eg, /drop chair to drop the chair you are holding, or /drop microphone to drop a microphone
+ kick: Kick something, eg, /kick wall to break your toes, or /kick ball to boot the ball across the room
+ go: Move in the direction specified, such as "/go n" to move north. This is always relative to the center of the room. You do not have to move back to go another direction. You can think of it like "/examine direction", which may reveal to you more than you see with a simple /look or /examine.
+ examine: Used alone, this will look around the room and tell you what you see. Sometimes you will see things differently if you look around again. And perhaps again and again. Used with an object in the room ("/examine book") will take a closer look at that thing.
+ exits: Will tell you where you see ways out of the room. Too bad you’re trapped in a basement without many of them.
+
+commands:
+  - name: help
+    actions:
+      - user: There are a few commands that will help you get out of this basement. Remember to always type a '/' in front of the command and use simple phrases. For example':' \n\n /examine or /look - Used alone, this will look around the room and tell you what you see. Sometimes you will see things differently if you look around again. And perhaps again and again. Used with an object in the room ("/examine book") will take a closer look at that thing.\n\n /use - Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?\n\n /get - Pick up an object. You’ll have to /get cookie before you can /use cookie.\n\n /talk {friendname} - See what {friendname} is thinking right now. To talk to other people playing with you, simply type without a / in front. Everyone in the room will see your message.\n\n /go - Move in the direction specified, such as "/go n" to move north. This is always relative to the center of the room. You do not have to move back to go another direction. You can think of it like "/examine direction", which may reveal to you more than you see with a simple /look or /examine.\n\n /exits - Will tell you where you see ways out of the room. Too bad you’re trapped in a basement without many of them.
+
+  - name: get
+    aliases:
+       - take
+       - pickup
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to get, try /get name-of-item
+       -  condition: unmatched
+          user: I'm sorry. I don't know how to get {arg}.
+
+  - name: drop
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to drop, try /drop name-of-item
+       -  condition: unmatched
+          user: I'm sorry. I don't know how to drop {arg}.
+
+  - name: use
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to use, try /use name-of-item
+       -  condition: unmatched
+          user: I'm sorry. I don't know how to use {arg}.
+
+  - name: kick
+    actions:
+       -  condition: '{arg}==""'
+          user: I don't know what you are trying to kick, try /kick name-of-item
+       -  condition: unmatched
+          user: Why would you want to kick {arg}???
+
+## Pretend room. Just dropping it here to test
+rooms:
+  -  name: WELCOME TO CO.LAB
+     id: welcome
+     state:
+       lightOn: false
+     exits:
+       S: ""
+       N: ""
+       E: There is a door here.
+       W: ""
+     commands:
+       -  name: go
+          actions:
+            -  condition: '{arg}=="north" || {arg}=="n"'
+               user: There is a blue wall to the north. A **soccer ball** is lying on the floor. 
+            -  condition: '{arg}=="east" || {arg}=="e"'
+               user: There is a door on the east wall. A **radio** is sitting on the floor.
+            -  condition: '{arg}=="west" || {arg}=="w"'
+               user: There is a green wall to the west.
+            -  condition: '{arg}=="south" || {arg}=="s"'
+               user: There is a yellow wall to the south.
+       -  name: examine
+          aliases:
+            - look
+          actions:
+            -  condition: room.state.lightOn==false
+               user: 'You walk into the room to join the Co.Lab class. But you’re the first one here, and it’s dark. Perhaps there’s a light **switch**?'
+            -  condition: room.state.lightOn==true
+               user: The classroom is set up for you to learn about game development! You see **desks** with **computers** on them. 
+
+     items:
+       - name: Andrea
+         commands:
+           - name: examine
+             actions:
+               - user: 'Andrea is your friend. She will be your partner in the class today. You could /talk to her.'
+           - name: talk
+             actions:
+               - user: '"Hey, I have a joke," Andrea says. "What did 0 say to 8?"'
+               - user: '"Nice belt."'
+           
+           
+       - name: computer
+         aliases:
+            - computers
+         commands:
+            - name: examine
+              actions:
+                - user: 'There is a powrful computer on the desk waiting for you to create your video game.'
+            - name: talk
+              actions:
+               - user: 'You pick up the mouse and speak into it like a microphone. "Hello, computer!" The computer does not respond.'
+            - name: get
+              actions: 
+               - user: 'You pick up the computer, but then you realize it’s plugged into the wall nearby and better off left on the desk. You put it back down.'
+            - name: use
+              actions:
+               - user: 'You log into the computer and develop the greatest video game the world has ever seen. Congratulations!'
+
+       - name: desk
+         aliases:
+            - desks
+         commands:
+            - name: examine
+              actions:
+                - user: 'It looks like a pretty ordinary student desk. The **computer** on it is much more interesting.'
+            - name: talk
+              actions:
+               - user: The desk remains silent.
+            - name: get
+              actions: 
+               - user: Oh no! If you pick up the desk, the computer will fall off! Best not to do that.
+            - name: use
+              actions:
+               - user: Wouldn't it be better to /use the **computer** on the desk?
+               
+       - name: east door
+         commands:
+           - name: get
+             actions: 
+               - user: If you wanted to take this door home, you probably should have brought a screwdriver.
+           - name: talk
+             actions:
+               - user: The door listens thoughtfully to your words; however, it remains very, very shut.
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: 'Pretty standard, unlocked school door. You can handle it. Ha. "Handle." I made a door joke.'
+           - name: kick
+             actions:
+               - user: Congratulations. You kicked a door. The door is unharmed. Your foot has felt better.
+           - name: use
+             actions:
+                - user: 'You can’t use the door until you unlock it. Perhaps you shuld take a look at the **keypad** next to it.'
