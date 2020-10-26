@@ -2758,6 +2758,9 @@ rooms:
                user: There is a green wall to the west.
             -  condition: '{arg}=="south" || {arg}=="s"'
                user: There is a yellow wall to the south.
+            -  condition: '{arg}=="northeast" || {arg}=="ne"'
+               user: This is one corner of the room. There's nothing here. But it's a nice corner, nonetheless.  
+               
        -  name: examine
           aliases:
             - look
@@ -2778,7 +2781,32 @@ rooms:
                - user: '"Hey, I have a joke," Andrea says. "What did 0 say to 8?"'
                - user: '"Nice belt."'
            
-           
+       - name: switch
+         aliases:
+           - light switch
+         commands:
+           - name: examine
+             aliases:
+               - look
+             actions:
+               - user: Looks like a pretty standard light switch. Try to /use it.
+           - name: use
+             actions:
+               - condition: room.state.lightOn==false
+                 user: 'CLICK. The lights are on. Now if we /look again, we’ll see different things. Because... well, because the lights are on, and we can’t see in the dark.'
+                 do:
+                  - set room.state.lightOn=true
+               - condition: room.state.lightOn==true
+                 user: OK, now the lights are off.
+                 do:
+                  - set room.state.lightOn=false
+           - name: talk
+             actions: 
+               - user: It only know how to say "click." And only you can make it do that. 
+           - name: kick
+             actions: 
+               - user: You try, but you didn’t stretch first, and now you have a charlie horse. 
+
        - name: computer
          aliases:
             - computers
@@ -2796,6 +2824,14 @@ rooms:
               actions:
                - user: 'You log into the computer and develop the greatest video game the world has ever seen. Congratulations!'
 
+       - name: soccer ball
+         aliases:
+            - ball
+         commands:
+            - name: kick
+              actions: 
+                - user: You kick the soccer ball across the room and break a lamp. Oops.
+
        - name: desk
          aliases:
             - desks
@@ -2812,6 +2848,12 @@ rooms:
             - name: use
               actions:
                - user: 'Wouldn’t it be better to /use the **computer** on the desk?'
+       
+       - name: door
+         commands: 
+           - name: user
+             actions: 
+               - user: Which door? There is a **north door** and an **east door**. I recommend the east door. 
                
        - name: east door
          commands:
@@ -2832,3 +2874,47 @@ rooms:
            - name: use
              actions:
                 - user: 'You can’t use the door until you unlock it. Perhaps you shuld take a look at the **keypad** next to it.'
+
+       -  name: radio
+          state:
+            hidden: true
+            heldBy: nobody
+          commands:
+              - name: get
+                actions:
+                  - condition: 'items.radio.heldBy==nobody'
+                    do:
+                     - set items.radio.heldBy={id}
+                    user: You pick up the radio.
+                    room: '{name} picked up the radio.'
+              - name: drop
+                actions:
+                  - condition: 'items.radio.heldBy=={id}'
+                    do:
+                      - set items.radio.heldBy=nobody
+                    user: You put the radio back down on the floor.
+              - name: use
+                actions:
+                  - condition: 'items.radio.heldBy!={id}'
+                    user: You can't use the radio, because you're not holding it. Try "/get radio" first.
+                  - condition: 'items.radio.heldBy=={id}'
+                    user: You turn the radio on. It starts playing your favorite song.
+                  - condition: 'items.radio.heldBy=={id}'
+                    user: The radio is already on. To change the station, enter "/use radio" followed by station number.
+                  - condition: unmatched
+                    user: Hmmm... there doesn't seem to be anything on that station but static.
+                  - condition: 'items.radio.heldBy=={id} && {arg}=="91.5"'
+                    user: You tune the radio to 91.5 and listen to the news.
+
+
+       - name: keypad
+         commands:
+             - name: examine
+               actions:
+                 - user: The real game would never, ever tell you this, but the secret code for this keypad is 1234. 
+             - name: use
+               actions:
+                 - condition: unmatched
+                   user: Nope, guess again!
+                 - condition: '{arg}=="1234"'
+                   user: You carefully enter "1234" on the keypad. \n\n\n\nConfetti falls from the ceiling. You have won the game!
