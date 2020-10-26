@@ -2896,10 +2896,10 @@ rooms:
                 actions:
                   - condition: 'items.radio.heldBy!={id}'
                     user: You can't use the radio, because you're not holding it. Try "/get radio" first.
+                  - condition: '{arg}=="wxyz" && items.radio.heldBy=={id}'
+                    user: You tune the radio to WXYZ. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
                   - condition: 'items.radio.heldBy=={id}'
-                    user: You turn the radio on. It starts playing your favorite song. To change the station, enter "/use radio" followed by the station id. I suggest WUNC.
-                  - condition: '{arg}=="wunc"'
-                    user: You tune the radio to WUNC. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
+                    user: You turn the radio on. It starts playing your favorite song. To change the station, enter "/use radio" followed by the station id. I suggest WXYZ.
 
 
        - name: keypad
