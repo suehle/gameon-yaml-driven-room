@@ -2898,11 +2898,9 @@ rooms:
                   - condition: 'items.radio.heldBy!={id}'
                     user: You can't use the radio, because you're not holding it. Try "/get radio" first.
                   - condition: 'items.radio.heldBy=={id}'
-                    user: You turn the radio on. It starts playing your favorite song. To change the station, enter "/use radio" followed by station number. I suggest 91.
-                  - condition: unmatched
-                    user: Hmmm... there doesn't seem to be anything on that station but static.
-                  - condition: 'items.radio.heldBy=={id} && {arg}=="91"'
-                    user: You tune the radio to 91.5. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
+                    user: You turn the radio on. It starts playing your favorite song. To change the station, enter "/use radio" followed by the station id. I suggest WUNC.
+                  - condition: 'items.radio.heldBy=={id} && {arg}=="wunc"'
+                    user: You tune the radio to WUNC. The announcer happens to mention that the code for the keypad to get out of this room is 1234.
 
 
        - name: keypad
