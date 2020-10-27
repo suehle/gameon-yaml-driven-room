@@ -2190,7 +2190,7 @@ rooms:
                   do:
                     - set items.flashlight.isOn=true
                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="wall"'
-                  user: Please choose a direction: n, s, e, w, floor, or ceiling.                    
+                  user: 'Please choose a direction: n, s, e, w, floor, or ceiling.'
                -  condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
                   user: 'There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
                   room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
