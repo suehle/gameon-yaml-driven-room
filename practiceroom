@@ -1,4 +1,6 @@
 ##This is the room we'll show for practice in class. 
+id: practice
+revision: 1.0
 
 
 commanddescriptions:
