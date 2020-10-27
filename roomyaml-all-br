@@ -1,4 +1,6 @@
 ##variables to edit for each class
+id: shadowman
+revision: 1.0
 
 vars:
     schoolname: SHADOWMAN MIDDLE SCHOOL
