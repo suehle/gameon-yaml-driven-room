@@ -1553,6 +1553,8 @@ rooms:
                    room: '{name} turns the flashlight on'
                    do:
                     - set items.flashlight.isOn=true
+                -  condition: 'items.flashlight.heldBy=={id} && {arg}=="wall"'
+                   user: Please choose a direction: n, s, e, w, floor, or ceiling.
                 -  condition: 'items.flashlight.heldBy=={id} && {arg}=="north" || {arg}=="n"'
                    user: 'You shine the flashlight on the north wall. You thought you saw a hint of something there, but... hmm. Maybe not.'
                    room: '{name} shines the flashlight on the north wall. You thought you saw a hint of something there, but... hmm. Maybe not'
@@ -2188,6 +2190,8 @@ rooms:
                   room: '{name} turns the flashlight on'
                   do:
                     - set items.flashlight.isOn=true
+               -  condition: 'items.flashlight.heldBy=={id} && {arg}=="wall"'
+                  user: Please choose a direction: n, s, e, w, floor, or ceiling.                    
                -  condition: '{arg}=="north" || {arg}=="n" && items.flashlight.heldBy=={id}'
                   user: 'There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
                   room: '{name} shines the flashlight towards the north wall. There’s a bare light bulb hanging from the ceiling. The flashlight is much brighter than it is.'
