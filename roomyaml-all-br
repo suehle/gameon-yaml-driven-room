@@ -3,22 +3,22 @@ id: shadowman
 revision: 1.0
 
 vars:
-    schoolname: SHADOWMAN MIDDLE SCHOOL
-    friendname: GABRIELLA
-    subject: SCIENCE
-    townname: RALEIGH
-    adultname: JANE SMITH
-    adultname2: SALLY JONES
-    child-first-name: HANNAH
-    describe-walls: EVERY ROOM HAS THE SAME COLD CINDER BLOCK WALLS.
-    flashlight-color: a TEAL
-    walkie-talkie: THE WALKIE TALKIE IS A BIG, BLACK BRICK WITH AN OBVIOUS SPEAKER ON THE FRONT AND A SIMPLE ON/OFF SWITCH ON TOP.
-    wall-things: SOMEONE HAS SCRAWLED "MR. JONES IS THE BEST MATH TEACHER EVER!" WHAT A KIND GRAFFITI ARTIST.
-    wall-things2: THERE'S A WORLD MAP POSTER THAT HAS THE USSR, AND HALF OF THE AFRICAN CONTINENT JUST SAYS "FRENCH WEST AFRICA." YOU REALIZE YOUR SCHOOL MIGHT HAVE BEEN AROUND LONGER THAN YOU THOUGHT.
-    floordescription: HOW IS THERE STICKY BUBBLEGUM ON THE FLOOR WHEN IT DOESN'T SEEM LIKE ANYONE'S BEEN DOWN HERE IN CENTURIES?
-    hospital-name: TUOMEY REGIONAL HOSPITAL
-    basketballs: A RUSTY SILVER RACK HOLDS HALF A DOZEN BASKETBALLS, NONE OF WHICH WILL BOUNCE. ONE IS JUST A FLAT ORANGE PANCAKE.
-    spiderdescription: A TINY SPINY ORB WEAVER IS CHILLING OUT IN HIS WEB. WHAT A GREAT PLACE FOR A SPIDER TO LIVE UNDISTURBED.
+    schoolname: Scout Academy
+    friendname: Bethany
+    subject: Science
+    townname: Charlottetown
+    adultname: Emma Watson
+    adultname2: Daniel Radcliffe
+    child-first-name: Emily
+    describe-walls: The walls are cracked all the way through, with rivulets of water running down them.
+    flashlight-color: a blue
+    walkie-talkie: The medium-sized walkie talkie is yellow and black with two buttons. One you hold down to talk through and the other to make an annoying beeping.
+    wall-things: An animal poster is on the wall. It shows a jaguar and a zebra. 
+    wall-things2: 'On the wall there is a poster with the words "Escape or Not."'
+    floordescription: The floors are wet but look dry with cracks and mold in between.
+    hospital-name: BrainBeBig Hospital
+    basketballs: The pile of basketballs seems to be deflated and worn out by the sun.
+    spiderdescription: A small, light brown spider sits in its web.
 
 commanddescriptions:
  use: Use this with an object in the room, like "/use book" to read it. If you want to /do/ something with an object try /use even if doesn’t make sense. For example, say "/use cookie" to eat a cookie. If you had a cookie. But you don't. Mmm... a cookie sounds good about now, doesn't it?
